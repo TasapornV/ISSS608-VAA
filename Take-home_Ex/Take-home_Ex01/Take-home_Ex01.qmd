@@ -1,5 +1,5 @@
 ---
-title: "Take-home exercise 01"
+title: "Take-home Exercise 1"
 author: "Tasaporn Visawameteekul"
 date: "15 Jan 2023"
 toc: true
@@ -7,4 +7,5 @@ toc: true
 
 # Task description
 
-Age-sex pyramid is an analytical visualisation commonly used by demographers to reveal the structure of population by gender and age group. In this take-home exercise, you are required to reveal the demographic structure of Singapore at planning area level by using age-sex pyramid method. Instead of plotting a single age-sex pyramid, however, you are required to display nine selected planning areas on a single view by using trellis display (also know as small-multiple plot).
+Age-sex pyramid is an analytical visualization commonly used by demographers to reveal the structure of population by gender and age group. In this take-home exercise, you are required to reveal the demographic structure of Singapore at planning area level by using age-sex pyramid method. Instead of plotting a single age-sex pyramid, however, you are required to display nine selected planning areas on a single view by using trellis display (also know as small-multiple plot).
+

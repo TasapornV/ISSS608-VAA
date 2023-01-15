@@ -7,9 +7,9 @@ Welcome to **ISSS608 Visual Analytics and Applications**. This blog is developed
 This blog contains my journey of creating data visualization beyond default, using R and Tableau. This is part of the ISSS608 course by SMU MITB program, by ***Prof Kam Tin Seong*** from Jan - Apr 2023. I hope you enjoy it!
 
 ::: {layout="[30,-3, 30, -3, 30,-4]"}
-[![In-class exercise](in-class.gif)](https://isss608-ay2022-23t2-tasapornv.netlify.app/hands-on_ex/hands-on_ex01/hands-on_ex01)
+[![In-class exercise](in-class.gif)](https://public.tableau.com/app/profile/tasaporn.visawameteekul6790)
 
-[![Hands-on exercise](hands-on.gif)](https://isss608-ay2022-23t2-tasapornv.netlify.app/hands-on_ex/hands-on_ex01/hands-on_ex01)
+[![Hands-on exercise](hands-on.gif)](../hands-on_ex/hands-on_ex01/hands-on_ex01.html)
 
-[![Take-home exercise](take-home.gif)](https://isss608-ay2022-23t2-tasapornv.netlify.app/hands-on_ex/hands-on_ex01/hands-on_ex01)
+[![Take-home exercise](take-home.gif)](../take-home_ex/take-home_ex01/take-home_ex01.html)
 :::
