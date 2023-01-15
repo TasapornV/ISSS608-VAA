@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.313">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -65,7 +65,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -201,8 +201,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="https://github.com/TasapornV/ISSS608-VAA.git">
+ <span class="menu-text">Github</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../about.html">
@@ -217,15 +217,26 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#task-description" id="toc-task-description" class="nav-link active" data-scroll-target="#task-description">Task description</a></li>
+  <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background">1. Background</a>
+  <ul class="collapse">
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">1.1 Data</a></li>
+  </ul></li>
+  <li><a href="#visualization-design" id="toc-visualization-design" class="nav-link" data-scroll-target="#visualization-design">2. Visualization Design</a></li>
+  <li><a href="#step-by-step-description" id="toc-step-by-step-description" class="nav-link" data-scroll-target="#step-by-step-description">3. Step-by-Step Description</a>
+  <ul class="collapse">
+  <li><a href="#cleaning-the-data" id="toc-cleaning-the-data" class="nav-link" data-scroll-target="#cleaning-the-data">3.1 Cleaning the data</a></li>
+  <li><a href="#creating" id="toc-creating" class="nav-link" data-scroll-target="#creating">3.2 Creating</a></li>
+  </ul></li>
   </ul>
 </nav>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -259,11 +270,83 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="task-description" class="level1">
-<h1>Task description</h1>
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">1. Background</h2>
 <p>Age-sex pyramid is an analytical visualization commonly used by demographers to reveal the structure of population by gender and age group. In this take-home exercise, you are required to reveal the demographic structure of Singapore at planning area level by using age-sex pyramid method. Instead of plotting a single age-sex pyramid, however, you are required to display nine selected planning areas on a single view by using trellis display (also know as small-multiple plot).</p>
+<section id="data" class="level3">
+<h3 class="anchored" data-anchor-id="data">1.1 Data</h3>
+<p>Singapore Residents by Planning Area / Subzone, Age Group, Sex and Type of Dwelling, June 2022 is be used to prepare the analytical visualization. It is available at Department of Statistics, Singapore(SingStat).</p>
+</section>
+</section>
+<section id="visualization-design" class="level2">
+<h2 class="anchored" data-anchor-id="visualization-design">2. Visualization Design</h2>
+</section>
+<section id="step-by-step-description" class="level2">
+<h2 class="anchored" data-anchor-id="step-by-step-description">3. Step-by-Step Description</h2>
+<section id="cleaning-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="cleaning-the-data">3.1 Cleaning the data</h3>
+<table class="table">
+<colgroup>
+<col style="width: 2%">
+<col style="width: 83%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>No.</th>
+<th>Step</th>
+<th>Screenshot</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1.</td>
+<td>Load the origin_destination_bus_SZ_202201.csv file into Tableau Desktop.</td>
+<td><img src="../..\take-home.gif" class="img-fluid" width="193"></td>
+</tr>
+<tr class="even">
+<td>2.</td>
+<td>Load the MP14_SUBZONE_WEB_PL.shp file in Tableau Desktop (for mapping purpose) and drag it next to the csv file.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3.</td>
+<td>Click on the red dotted line between the two files and select the relationships to join both files i.e.&nbsp;Origin_SZ = Subzone N; Destination_SZ = Subzone N</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4.</td>
+<td>From the original visualisation, we know that the data contains Null value. To filter away the Null values, click ‘Filters’ on the top right end corner, click “Add”, and select “Origin Sz”. Click ok.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="creating" class="level3">
+<h3 class="anchored" data-anchor-id="creating">3.2 Creating</h3>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
