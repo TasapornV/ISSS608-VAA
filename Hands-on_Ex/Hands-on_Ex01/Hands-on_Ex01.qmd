@@ -1,6 +1,7 @@
 ---
 title: "Hands-on Exercise 1"
 author: "Tasaporn Visawameteekul"
+toc: true
 ---
 
 Getting Started
