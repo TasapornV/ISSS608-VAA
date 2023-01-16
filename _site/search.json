@@ -25,7 +25,7 @@
     "href": "Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html",
     "title": "Take-home Exercise 1",
     "section": "",
-    "text": "Age-sex pyramid is an analytical visualization commonly used by demographers to reveal the structure of population by gender and age group. In this take-home exercise, you are required to reveal the demographic structure of Singapore at planning area level by using age-sex pyramid method. Instead of plotting a single age-sex pyramid, however, you are required to display nine selected planning areas on a single view by using trellis display (also know as small-multiple plot).\n\n\nSingapore Residents by Planning Area / Subzone, Age Group, Sex and Type of Dwelling, June 2022 is be used to prepare the analytical visualization. It is available at Department of Statistics, Singapore(SingStat)."
+    "text": "Age-sex pyramid is an analytical visualization commonly used by demographers to reveal the structure of population by gender and age group. In this take-home exercise, you are required to\n\nreveal the demographic structure of Singapore at planning area level by using age-sex pyramid method.\ndisplay nine selected planning areas on a single view by using trellis display (also know as small-multiple plot).\n\n\n\nSingapore Residents by Planning Area / Subzone, Age Group, Sex and Type of Dwelling, June 2022 is be used to prepare the analytical visualization. It is available at Department of Statistics, Singapore(SingStat)."
   },
   {
     "objectID": "Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html#cleaning-the-data",
@@ -53,6 +53,13 @@
     "href": "Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html#step-by-step-description",
     "title": "Take-home Exercise 1",
     "section": "3. Step-by-Step Description",
-    "text": "3. Step-by-Step Description\n\n3.1 Cleaning the data\n\n\n\n\n\n\n\n\nNo.\nStep\nScreenshot\n\n\n\n\n1.\nLoad the origin_destination_bus_SZ_202201.csv file into Tableau Desktop.\n\n\n\n2.\nLoad the MP14_SUBZONE_WEB_PL.shp file in Tableau Desktop (for mapping purpose) and drag it next to the csv file.\n\n\n\n3.\nClick on the red dotted line between the two files and select the relationships to join both files i.e. Origin_SZ = Subzone N; Destination_SZ = Subzone N\n\n\n\n4.\nFrom the original visualisation, we know that the data contains Null value. To filter away the Null values, click ‘Filters’ on the top right end corner, click “Add”, and select “Origin Sz”. Click ok.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n3.2 Creating"
+    "text": "3. Step-by-Step Description\n\n3.1 Cleaning the data\n\n\n\n\n\n\n\n\nNo.\nStep\nScreenshot\n\n\n\n\n1.\nLoad the respopagesextod2022.csv file into Tableau Desktop.\n\n\n\n2.\nLoad the MP14_SUBZONE_WEB_PL.shp file in Tableau Desktop (for mapping purpose) and drag it next to the csv file.\n\n\n\n3.\nClick on the red dotted line between the two files and select the relationships to join both files i.e. Origin_SZ = Subzone N; Destination_SZ = Subzone N\n\n\n\n4.\nFrom the original visualisation, we know that the data contains Null value. To filter away the Null values, click ‘Filters’ on the top right end corner, click “Add”, and select “Origin Sz”. Click ok.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n3.2 Creating"
+  },
+  {
+    "objectID": "Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html#reference",
+    "href": "Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html#reference",
+    "title": "Take-home Exercise 1",
+    "section": "4. Reference",
+    "text": "4. Reference\nhttp://www.tarannum.io/2017/02/17/workout-wednesday-week7.html"
   }
 ]
