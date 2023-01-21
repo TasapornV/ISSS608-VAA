@@ -312,10 +312,17 @@ Time = Time / Period</p>
 <h4 class="anchored" data-anchor-id="what-is-the-demographic-breakdown-of-singaporeans-in-the-top-9-most-populous-planning-areas">What is the demographic breakdown of Singaporeans in the top 9 most populous Planning Areas?</h4>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://public.tableau.com/views/Take-home_01_Populationbysub-zone/3x3Trellis?:language=en-US&amp;:display_count=n&amp;:origin=viz_share_link"><img src="final result.png" class="img-fluid figure-img"></a></p>
+<p><a href="https://public.tableau.com/views/Take-home_01_PopulationbyPlanningArea/3x3Trellis?:language=en-US&amp;:display_count=n&amp;:origin=viz_share_link"><img src="final result.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">Design 1 : 3x3 Trellis plot</figcaption><p></p>
 </figure>
 </div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="shape.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>At first glance, the shapes of all 9 selected areas are symmetrical. This reflects the proportional distribution of males and females. However, there are a variety of shapes. Bedok, Jurong West, and Hougang have a similar shape, with a symmetrical small apex that gradually widens and tapers to a smaller base. These 3 regions contain a substantial proportion of residents between the ages of 40-69. While Sengkang and Punggol have a form that widens in the 30-59-year age range, the population in the 20-29-year age group is much smaller.</p>
+<p>This graph also reveals that the senior female population tends to be slightly more than the senior male population.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="final result 2.png" class="img-fluid figure-img"></p>
@@ -404,84 +411,87 @@ Time = Time / Period</p>
 <h4 class="anchored" data-anchor-id="prepare-the-visualization-design-1">2. Prepare the visualization Design 1</h4>
 <p>Now that we have import the cleansed data into Tableau Desktop</p>
 <table class="table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 95%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>No.</th>
 <th>Step</th>
-<th>Screenshot</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>2.1</td>
-<td></td>
-<td><img src=".png" class="img-fluid"><img src="step 6.png" class="img-fluid"></td>
+<td><p><img src="step 6.png" class="img-fluid" width="700"></p>
+<ul>
+<li>We begin by creating the “Total columns” parameter. In our scenario, we wish to generate 3x3 tables with a value of 3 for each column.</li>
+</ul></td>
 </tr>
 <tr class="even">
 <td>2.2</td>
-<td></td>
-<td><img src="step 7.png" class="img-fluid"></td>
+<td><p><img src="step 7.png" class="img-fluid" width="700"></p>
+<ul>
+<li>Create the Calculated Field “Index”, “Column”, and “Row” with the following formula</li>
+<li>Index = INT((INDEX())%[Total columns]^2+1</li>
+<li>Column = INT(([Index]-1)%[Total columns])+1</li>
+<li>Row = INT(([Index]-[Column])/[Total columns])+1</li>
+</ul></td>
 </tr>
 <tr class="odd">
 <td>2.3</td>
-<td></td>
-<td><img src="step 8.png" class="img-fluid"></td>
+<td><p><img src="step 8.png" class="img-fluid" width="700"></p>
+<ul>
+<li>Drag the “Column” Calculated Field into the Columns section. Drag the “Row” calculated field into the Rows section</li>
+<li>Make sure that the Column and Row are set as Discrete type</li>
+</ul></td>
 </tr>
 <tr class="even">
 <td>2.4</td>
-<td></td>
-<td><img src="step 9.png" class="img-fluid"></td>
+<td><p><img src="step 9.png" class="img-fluid" width="700"></p>
+<ul>
+<li>Create the Trellis plot of 3x3 age-sex pyramid according to the Planning Area by setting the fields as depicted in the image.</li>
+</ul></td>
 </tr>
 <tr class="odd">
 <td>2.5</td>
-<td></td>
-<td><img src=".png" class="img-fluid"><img src="step 10.png" class="img-fluid"></td>
+<td><img src="step 10.png" class="img-fluid" width="700"></td>
 </tr>
 <tr class="even">
 <td>2.6</td>
-<td></td>
-<td><img src="step 11.png" class="img-fluid"></td>
+<td><img src="step 11.png" class="img-fluid" width="700"></td>
 </tr>
 <tr class="odd">
 <td>2.7</td>
-<td></td>
-<td><img src="step 12.png" class="img-fluid"></td>
+<td><img src="step 12.png" class="img-fluid" width="700"></td>
 </tr>
 <tr class="even">
 <td>2.8</td>
-<td></td>
-<td><img src="step 13.png" class="img-fluid"></td>
+<td><img src="step 13.png" class="img-fluid" width="700"></td>
 </tr>
 <tr class="odd">
 <td>2.9</td>
-<td></td>
-<td><img src="step 14.png" class="img-fluid"></td>
+<td><img src="step 14.png" class="img-fluid" width="700"></td>
 </tr>
 <tr class="even">
 <td>2.10</td>
-<td></td>
-<td><img src="step 15.png" class="img-fluid"></td>
+<td><img src="step 15.png" class="img-fluid" width="700"></td>
 </tr>
 <tr class="odd">
 <td>2.11</td>
-<td></td>
-<td><img src="step 16.png" class="img-fluid"></td>
+<td><img src="step 16.png" class="img-fluid" width="700"></td>
 </tr>
 <tr class="even">
 <td>2.12</td>
-<td></td>
-<td><img src="step 17.png" class="img-fluid"></td>
+<td><img src="step 18.png" class="img-fluid"></td>
 </tr>
 <tr class="odd">
 <td>2.13</td>
-<td></td>
-<td></td>
+<td><img src="step 19.png" class="img-fluid"></td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="prepare-the-visualization-design-2" class="level4">
-<h4 class="anchored" data-anchor-id="prepare-the-visualization-design-2">3. Prepare the visualization Design 2</h4>
 </section>
 </section>
 <section id="reference" class="level3">
