@@ -21,11 +21,32 @@
     "text": "Install anad launching\n\npacman::p_load(tidyverse)\n\n\n\nImporting the data\n\n\n\nPlotting a simple bar chart"
   },
   {
+    "objectID": "In-class_Ex/In-class_Ex03/Hands-on_Ex03.html",
+    "href": "In-class_Ex/In-class_Ex03/Hands-on_Ex03.html",
+    "title": "Hands-on Exercise 3",
+    "section": "",
+    "text": "Getting Started\n\nInstall and launching R packages\nTwo packages will be installed and loaded. They are: tidyverse, ggiraph\n\npacman::p_load(ggiraph, tidyverse)\n\nImporting data\n\nexam_data <- read_csv(\"data/Exam_data.csv\")\nexam_data\n\n# A tibble: 322 × 7\n   ID         CLASS GENDER RACE    ENGLISH MATHS SCIENCE\n   <chr>      <chr> <chr>  <chr>     <dbl> <dbl>   <dbl>\n 1 Student321 3I    Male   Malay        21     9      15\n 2 Student305 3I    Female Malay        24    22      16\n 3 Student289 3H    Male   Chinese      26    16      16\n 4 Student227 3F    Male   Chinese      27    77      31\n 5 Student318 3I    Male   Malay        27    11      25\n 6 Student306 3I    Female Malay        31    16      16\n 7 Student313 3I    Male   Chinese      31    21      25\n 8 Student316 3I    Male   Malay        31    18      27\n 9 Student312 3I    Male   Malay        33    19      15\n10 Student297 3H    Male   Indian       34    49      37\n# … with 312 more rows"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "ISSS608-VAA",
     "section": "",
     "text": "Welcome to ISSS608 Visual Analytics and Applications. This blog is developed by Tasaporn Visawameteekul. It is still a work in progress, where data visualizations will be uploaded weekly.\nThis blog contains my journey of creating data visualization beyond default, using R and Tableau. This is part of the ISSS608 course by SMU MITB program, by Prof Kam Tin Seong from Jan - Apr 2023.\nIf you have any feedback or need any clarification, you may contact me at tasapornv.2021@mitb.smu.edu.sg.\nI hope you enjoy it!\n\n\n\n\n\nIn-class exercise\n\n\n\n \n\n\n\n\nHands-on exercise\n\n\n\n \n\n\n\n\nTake-home exercise"
+  },
+  {
+    "objectID": "indexInclass.html#in-class-exercise-03-28-jan-2023",
+    "href": "indexInclass.html#in-class-exercise-03-28-jan-2023",
+    "title": "In-class Exercise",
+    "section": "In-class Exercise 03 (28 Jan 2023)",
+    "text": "In-class Exercise 03 (28 Jan 2023)"
+  },
+  {
+    "objectID": "indexTakehome.html#in-class-exercise-03-28-jan-2023",
+    "href": "indexTakehome.html#in-class-exercise-03-28-jan-2023",
+    "title": "Take-home Exercise",
+    "section": "In-class Exercise 03 (28 Jan 2023)",
+    "text": "In-class Exercise 03 (28 Jan 2023)"
   },
   {
     "objectID": "Take-home_Ex/Take-home_Ex01/Take-home_Ex01/Take-home_Ex01.html",
