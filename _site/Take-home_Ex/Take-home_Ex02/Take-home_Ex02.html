@@ -123,12 +123,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script src="../../site_libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
+<script src="../../site_libs/plotly-binding-4.10.1/plotly.js"></script>
+<script src="../../site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="../../site_libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="../../site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="../../site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="../../site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="../../site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 <link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="floating nav-fixed">
+<body class="nav-fixed">
 
 
 <div id="quarto-search-results"></div>
@@ -217,25 +226,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Contents</h2>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#the-task" id="toc-the-task" class="nav-link active" data-scroll-target="#the-task">1. The task</a></li>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">2. Data</a></li>
   <li><a href="#critique-on-original-design" id="toc-critique-on-original-design" class="nav-link" data-scroll-target="#critique-on-original-design">3. Critique on Original Design</a></li>
-  <li><a href="#step-by-step-description" id="toc-step-by-step-description" class="nav-link" data-scroll-target="#step-by-step-description">4. Step-by-Step Description</a></li>
+  <li><a href="#proposed-sketch" id="toc-proposed-sketch" class="nav-link" data-scroll-target="#proposed-sketch">4. Proposed Sketch</a></li>
+  <li><a href="#step-to-create-plot-in-r" id="toc-step-to-create-plot-in-r" class="nav-link" data-scroll-target="#step-to-create-plot-in-r">5. Step to create plot in R</a></li>
   </ul>
 </nav>
-</nav>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -301,42 +309,71 @@ Time = Time / Period</p>
 </section>
 <section id="critique-on-original-design" class="level3">
 <h3 class="anchored" data-anchor-id="critique-on-original-design">3. Critique on Original Design</h3>
-<p><a href="https://isss608-ay2022-23jan.netlify.app/outline/lesson01_outline#age-sex-pyramid">Age-sex pyramid</a> is an analytical visualization commonly used by demographers to reveal the structure of population by gender and age group. In this take-home exercise, you are required to reveal the demographic structure of Singapore at planning area level by using age-sex pyramid method. Instead of plotting a single age-sex pyramid, however, you are required to display nine selected planning areas on a single view by using <a href="https://isss608-ay2022-23jan.netlify.app/outline/lesson01_outline#trellis-display">trellis display (also know as small-multiple plot)</a>.</p>
-<p>Firstly, once we consider about the expecting visualizing that we would ex</p>
-<p><img src="original design.png" class="img-fluid"></p>
+<p><a href="https://isss608-ay2022-23jan.netlify.app/outline/lesson01_outline#age-sex-pyramid">Age-sex pyramid</a> is an analytical visualization commonly used by demographers to reveal the structure of population by gender and age group. In addition, the Trellis plot style is employed to facilitate comparisons between planning areas.</p>
+<p>Below is the original design of the plot that will be redesigned.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://public.tableau.com/app/profile/yiman.chen/viz/takehome_ex01/Story1"><img src="original design.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 <section id="clarity" class="level4">
-<h4 class="anchored" data-anchor-id="clarity">3.1 Clarity</h4>
-<section id="a-title" class="level5">
-<h5 class="anchored" data-anchor-id="a-title">(a) Title</h5>
-<p>The title</p>
+<h4 class="anchored" data-anchor-id="clarity">Clarity</h4>
+<p>When developing a plot, we should have a particular message or&nbsp;insights to communicate to the audience. In our scenario, possible inferences from the trellis age-sex pyramid are as follows:</p>
+<ol type="1">
+<li>The pyramidal structure that represents the distribution of each gender within each age group in each planning area</li>
+<li>The varied distribution across each region</li>
+</ol>
+<p>In this section, we will evaluate the original plot based on how effectively it conveyed the above inferences to the audience.</p>
+<section id="a-data-selection" class="level6">
+<h6 class="anchored" data-anchor-id="a-data-selection"><strong>(a) Data Selection</strong></h6>
+<p>Instead of presenting the entire data set to the viewer, we might pick sample subsets of data that are appropriate for the intended message. By mapping all planning regions, it is extremely difficult for the viewer to compare areas of interest.</p>
 </section>
-<section id="b-plot-position" class="level5">
-<h5 class="anchored" data-anchor-id="b-plot-position">(b) Plot position</h5>
+<section id="b-graph-title" class="level6">
+<h6 class="anchored" data-anchor-id="b-graph-title"><strong>(b) Graph Title</strong></h6>
+<p>Instead of the conventional title, an interesting insight from the graph could be used as as the main title for the chart, as it&nbsp;encourages curiosity among readers to dig deeper into it. The original title lacks both clarity and appeal.</p>
 </section>
-<section id="c-y-axis-label" class="level5">
-<h5 class="anchored" data-anchor-id="c-y-axis-label">(c) Y-Axis label</h5>
+<section id="c-plot-arrangement" class="level6">
+<h6 class="anchored" data-anchor-id="c-plot-arrangement"><strong>(c) Plot arrangement</strong></h6>
+<p>The primary benefit of Trellis plot is that it facilitates comparison. The initial layout placed each plot on the diagonal, making comparison very difficult for the observer. It also restricts the number of plots that may be seen at once.</p>
 </section>
-<section id="d-x-axis-not-able-to-see" class="level5">
-<h5 class="anchored" data-anchor-id="d-x-axis-not-able-to-see">(d) X-Axis not able to see</h5>
+<section id="d-y-axis-labeling" class="level6">
+<h6 class="anchored" data-anchor-id="d-y-axis-labeling"><strong>(d) Y-Axis labeling</strong></h6>
+<p>The initial axis represented age range by a single integer. This makes it unclear to the observer whether the displayed value represents the age or the upper or lower bound. Additionally, the Null group is not a representative designation.</p>
 </section>
-<section id="e-color-representation" class="level5">
-<h5 class="anchored" data-anchor-id="e-color-representation">(e) Color representation</h5>
+<section id="e-x-axis-not-able-to-see" class="level6">
+<h6 class="anchored" data-anchor-id="e-x-axis-not-able-to-see"><strong>(e) x-Axis not able to see</strong></h6>
+<p>Due to the size of the plot, the x-Axis label cannot be seen unless the viewer scrolls all the way down. Not only is the bar&nbsp;size unclear, but the gender is also difficult to determine.</p>
 </section>
-<section id="f-data-label" class="level5">
-<h5 class="anchored" data-anchor-id="f-data-label">(f) Data Label</h5>
+<section id="f-color-representation" class="level6">
+<h6 class="anchored" data-anchor-id="f-color-representation"><strong>(f) Color representation</strong></h6>
+<p>Color is very crucial in visualizing. However, the original plot does not make advantage of it, making it more difficult for viewers to identify gender.</p>
+</section>
+<section id="f-data-label" class="level6">
+<h6 class="anchored" data-anchor-id="f-data-label"><strong>(f) Data Label</strong></h6>
+<p>The planning area label is plotted on the axis rather than within the plot, making it difficult for the observer to identify the planning area to which the plot belongs.</p>
+</section>
+<section id="g-resolution-settings" class="level6">
+<h6 class="anchored" data-anchor-id="g-resolution-settings"><strong>(g) Resolution settings</strong></h6>
+<p>The resolution is not adjustable. In a smaller screen, the axis is not visible.</p>
 </section>
 </section>
-<section id="aesthetic" class="level4">
-<h4 class="anchored" data-anchor-id="aesthetic">3.2 Aesthetic</h4>
 </section>
+<section id="proposed-sketch" class="level3">
+<h3 class="anchored" data-anchor-id="proposed-sketch">4. Proposed Sketch</h3>
+<p><img src="Proposed Design.png" class="img-fluid"></p>
 </section>
-<section id="step-by-step-description" class="level3">
-<h3 class="anchored" data-anchor-id="step-by-step-description">4. Step-by-Step Description</h3>
+<section id="step-to-create-plot-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="step-to-create-plot-in-r">5. Step to create plot in R</h3>
 <section id="installing-and-loading-the-required-libraries" class="level4">
-<h4 class="anchored" data-anchor-id="installing-and-loading-the-required-libraries">4.1 Installing and loading the required libraries</h4>
+<h4 class="anchored" data-anchor-id="installing-and-loading-the-required-libraries">1. Installing and loading the required libraries</h4>
 <p>The code chunk below is used to install and load the required packages onto RStudio.</p>
+<ul>
+<li><strong>tidyverse</strong> : A collection of core packages designed for data science, used extensively for data preparation and wrangling.</li>
+<li><strong>plotly</strong>: Used for creating interactive web-based graphs.</li>
+<li><strong>ggplot2:</strong> A system for ‘declaratively’ creating graphics, based on “The Grammar of Graphics”.</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'tidyverse'</span>, <span class="st">'plotly'</span>, <span class="st">'ggplot2'</span>, <span class="st">'knitr'</span>)</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'tidyverse'</span>, <span class="st">'plotly'</span>, <span class="st">'ggplot2'</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(p <span class="cf">in</span> packages){</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(p,<span class="at">character.only =</span> T)){</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(p)</span>
@@ -346,7 +383,7 @@ Time = Time / Period</p>
 </div>
 </section>
 <section id="importing-the-dataset" class="level4">
-<h4 class="anchored" data-anchor-id="importing-the-dataset">4.2 Importing the dataset</h4>
+<h4 class="anchored" data-anchor-id="importing-the-dataset">2. Importing the dataset</h4>
 <p>The source file is in csv format, hence read_csv of <strong>readr</strong> package is used to import the dataset.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Popdata2022 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/respopagesextod2022.csv"</span>)</span>
@@ -368,91 +405,69 @@ Time = Time / Period</p>
                     Max.   :2300.00   Max.   :2022  </code></pre>
 </div>
 </div>
-<p>Call the table name to see how the table look like.</p>
+<p>Use <strong>head</strong> command to see the first 5 rows of the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Popdata2022</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Popdata2022,<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 100,928 × 7
-   PA         SZ                     AG     Sex     TOD                Pop  Time
-   &lt;chr&gt;      &lt;chr&gt;                  &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;            &lt;dbl&gt; &lt;dbl&gt;
- 1 Ang Mo Kio Ang Mo Kio Town Centre 0_to_4 Males   HDB 1- and 2-Ro…     0  2022
- 2 Ang Mo Kio Ang Mo Kio Town Centre 0_to_4 Males   HDB 3-Room Flats    10  2022
- 3 Ang Mo Kio Ang Mo Kio Town Centre 0_to_4 Males   HDB 4-Room Flats    10  2022
- 4 Ang Mo Kio Ang Mo Kio Town Centre 0_to_4 Males   HDB 5-Room and …    30  2022
- 5 Ang Mo Kio Ang Mo Kio Town Centre 0_to_4 Males   HUDC Flats (exc…     0  2022
- 6 Ang Mo Kio Ang Mo Kio Town Centre 0_to_4 Males   Condominiums an…    50  2022
- 7 Ang Mo Kio Ang Mo Kio Town Centre 0_to_4 Males   Landed Properti…     0  2022
- 8 Ang Mo Kio Ang Mo Kio Town Centre 0_to_4 Males   Others               0  2022
- 9 Ang Mo Kio Ang Mo Kio Town Centre 0_to_4 Females HDB 1- and 2-Ro…     0  2022
-10 Ang Mo Kio Ang Mo Kio Town Centre 0_to_4 Females HDB 3-Room Flats     0  2022
-# … with 100,918 more rows</code></pre>
+<pre><code># A tibble: 5 × 7
+  PA         SZ                     AG     Sex   TOD                   Pop  Time
+  &lt;chr&gt;      &lt;chr&gt;                  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;               &lt;dbl&gt; &lt;dbl&gt;
+1 Ang Mo Kio Ang Mo Kio Town Centre 0_to_4 Males HDB 1- and 2-Room …     0  2022
+2 Ang Mo Kio Ang Mo Kio Town Centre 0_to_4 Males HDB 3-Room Flats       10  2022
+3 Ang Mo Kio Ang Mo Kio Town Centre 0_to_4 Males HDB 4-Room Flats       10  2022
+4 Ang Mo Kio Ang Mo Kio Town Centre 0_to_4 Males HDB 5-Room and Exe…    30  2022
+5 Ang Mo Kio Ang Mo Kio Town Centre 0_to_4 Males HUDC Flats (exclud…     0  2022</code></pre>
 </div>
 </div>
 </section>
-<section id="data-wrangling" class="level4">
-<h4 class="anchored" data-anchor-id="data-wrangling">4.3 Data Wrangling</h4>
+<section id="wrangling-data" class="level4">
+<h4 class="anchored" data-anchor-id="wrangling-data">3. Wrangling data</h4>
 <section id="select-focus-column" class="level5">
-<h5 class="anchored" data-anchor-id="select-focus-column">4.31 Select focus column</h5>
+<h5 class="anchored" data-anchor-id="select-focus-column">3.1 Select focus column</h5>
 <p>In this stage, we take only four columns from the original dataset <strong>Popdata2022</strong>, namely PA (Planning Area), AG (Age Group), Sex (Gender), and Pop (Number of People), and assign them to the new dataset <strong>Popdata</strong>.</p>
 <div class="cell" data-hide="true">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Popdata <span class="ot">&lt;-</span> Popdata2022 <span class="sc">%&gt;%</span> </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(PA, AG, Sex, Pop)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>Popdata</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Popdata,<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 100,928 × 4
-   PA         AG     Sex       Pop
-   &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;   &lt;dbl&gt;
- 1 Ang Mo Kio 0_to_4 Males       0
- 2 Ang Mo Kio 0_to_4 Males      10
- 3 Ang Mo Kio 0_to_4 Males      10
- 4 Ang Mo Kio 0_to_4 Males      30
- 5 Ang Mo Kio 0_to_4 Males       0
- 6 Ang Mo Kio 0_to_4 Males      50
- 7 Ang Mo Kio 0_to_4 Males       0
- 8 Ang Mo Kio 0_to_4 Males       0
- 9 Ang Mo Kio 0_to_4 Females     0
-10 Ang Mo Kio 0_to_4 Females     0
-# … with 100,918 more rows</code></pre>
+<pre><code># A tibble: 5 × 4
+  PA         AG     Sex     Pop
+  &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;
+1 Ang Mo Kio 0_to_4 Males     0
+2 Ang Mo Kio 0_to_4 Males    10
+3 Ang Mo Kio 0_to_4 Males    10
+4 Ang Mo Kio 0_to_4 Males    30
+5 Ang Mo Kio 0_to_4 Males     0</code></pre>
 </div>
 </div>
 </section>
 <section id="deriving-the-frequency-count-by-planning-area-age-group-sex" class="level5">
-<h5 class="anchored" data-anchor-id="deriving-the-frequency-count-by-planning-area-age-group-sex">4.32 Deriving the frequency count by Planning Area, Age Group, Sex</h5>
+<h5 class="anchored" data-anchor-id="deriving-the-frequency-count-by-planning-area-age-group-sex">3.2 Deriving the frequency count by Planning Area, Age Group, Sex</h5>
 <p>As we want to display the number of people in each age group and gender for each planning region, we use the group by command and drop off the na value. Then, the new column <strong>sumPop</strong> is derived to represent the data.</p>
 <div class="cell" data-hide="true">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Popdata <span class="ot">&lt;-</span> Popdata <span class="sc">%&gt;%</span> </span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(PA, AG, Sex) <span class="sc">%&gt;%</span> </span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sumPop =</span> <span class="fu">sum</span>(Pop))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`summarise()` has grouped output by 'PA', 'AG'. You can override using the
-`.groups` argument.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Popdata</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sumPop =</span> <span class="fu">sum</span>(Pop))</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Popdata,<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2,090 × 4
-# Groups:   PA, AG [1,045]
-   PA         AG       Sex     sumPop
-   &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;    &lt;dbl&gt;
- 1 Ang Mo Kio 0_to_4   Females   2480
- 2 Ang Mo Kio 0_to_4   Males     2530
- 3 Ang Mo Kio 10_to_14 Females   3320
- 4 Ang Mo Kio 10_to_14 Males     3350
- 5 Ang Mo Kio 15_to_19 Females   3620
- 6 Ang Mo Kio 15_to_19 Males     3780
- 7 Ang Mo Kio 20_to_24 Females   4030
- 8 Ang Mo Kio 20_to_24 Males     4250
- 9 Ang Mo Kio 25_to_29 Females   5020
-10 Ang Mo Kio 25_to_29 Males     4960
-# … with 2,080 more rows</code></pre>
+<pre><code># A tibble: 5 × 4
+# Groups:   PA, AG [3]
+  PA         AG       Sex     sumPop
+  &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;    &lt;dbl&gt;
+1 Ang Mo Kio 0_to_4   Females   2480
+2 Ang Mo Kio 0_to_4   Males     2530
+3 Ang Mo Kio 10_to_14 Females   3320
+4 Ang Mo Kio 10_to_14 Males     3350
+5 Ang Mo Kio 15_to_19 Females   3620</code></pre>
 </div>
 </div>
 </section>
 <section id="filter-planning-area" class="level5">
-<h5 class="anchored" data-anchor-id="filter-planning-area">4.33 Filter Planning Area</h5>
+<h5 class="anchored" data-anchor-id="filter-planning-area">3.3 Filter Planning Area</h5>
 <p>We may use the unique command on column PA to list every planning area in the dataset.</p>
 <div class="cell" data-hide="true">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(Popdata<span class="sc">$</span>PA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(Popdata<span class="sc">$</span>PA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "Ang Mo Kio"              "Bedok"                  
  [3] "Bishan"                  "Boon Lay"               
@@ -486,15 +501,17 @@ Time = Time / Period</p>
 </div>
 <p>Then we select 9 areas that we want to represent i.e.&nbsp;Bedok, Tampines, Jurong West, Sengkang, Woodlands, Hougang, Yishun, Choa Chu Kang, and Punggol.</p>
 <div class="cell" data-hide="true">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>Popdata <span class="ot">&lt;-</span> Popdata <span class="sc">%&gt;%</span> </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(PA <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Bedok"</span>, <span class="st">"Tampines"</span>, <span class="st">"Jurong West"</span>, <span class="st">"Sengkang"</span>, <span class="st">"Woodlands"</span>, <span class="st">"Hougang"</span>, <span class="st">"Yishun"</span>, <span class="st">"Choa Chu Kang"</span>, <span class="st">"Punggol"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Popdata <span class="ot">&lt;-</span> Popdata <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(PA <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Bedok"</span>, <span class="st">"Tampines"</span>, <span class="st">"Jurong West"</span>, </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Sengkang"</span>, <span class="st">"Woodlands"</span>, <span class="st">"Hougang"</span>, </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Yishun"</span>, <span class="st">"Choa Chu Kang"</span>, <span class="st">"Punggol"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="binning-age-group" class="level5">
-<h5 class="anchored" data-anchor-id="binning-age-group">4.34 Binning Age-group</h5>
+<h5 class="anchored" data-anchor-id="binning-age-group">3.4 Binning Age-group</h5>
 <p>Once more, we use the unique command to view the Age group in the original dataset.</p>
 <div class="cell" data-hide="true">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(Popdata<span class="sc">$</span>AG)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(Popdata<span class="sc">$</span>AG)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "0_to_4"      "10_to_14"    "15_to_19"    "20_to_24"    "25_to_29"   
  [6] "30_to_34"    "35_to_39"    "40_to_44"    "45_to_49"    "5_to_9"     
@@ -502,79 +519,203 @@ Time = Time / Period</p>
 [16] "75_to_79"    "80_to_84"    "85_to_89"    "90_and_over"</code></pre>
 </div>
 </div>
+<p>The Age-group will be recoded according to the table below. Each group will have a 10-year age range.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Original</th>
+<th>Recoded</th>
+<th></th>
+<th>Original</th>
+<th>Recoded</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>“0_to_4”</td>
+<td>“0-9”</td>
+<td></td>
+<td>“50_to_54”</td>
+<td>“50-59”</td>
+</tr>
+<tr class="even">
+<td>“5_to_9”</td>
+<td>“0-9”</td>
+<td></td>
+<td>“55_to_59”</td>
+<td>“50-59”</td>
+</tr>
+<tr class="odd">
+<td>“10_to_14”</td>
+<td>“10-19”</td>
+<td></td>
+<td>“60_to_64”</td>
+<td>“60-69”</td>
+</tr>
+<tr class="even">
+<td>“15_to_19”</td>
+<td>“10-19”</td>
+<td></td>
+<td>“65_to_69”</td>
+<td>“60-69”</td>
+</tr>
+<tr class="odd">
+<td>“20_to_24”</td>
+<td>“20-29”</td>
+<td></td>
+<td>“70_to_74”</td>
+<td>“70-79”</td>
+</tr>
+<tr class="even">
+<td>“25_to_29”</td>
+<td>“20-29”</td>
+<td></td>
+<td>“75_to_79”</td>
+<td>“70-79”</td>
+</tr>
+<tr class="odd">
+<td>“30_to_34”</td>
+<td>“30-39”</td>
+<td></td>
+<td>“80_to_84”</td>
+<td>“80-89”</td>
+</tr>
+<tr class="even">
+<td>“35_to_39”</td>
+<td>“30-39”</td>
+<td></td>
+<td>“85_to_89”</td>
+<td>“80-89”</td>
+</tr>
+<tr class="odd">
+<td>“40_to_44”</td>
+<td>“40-49”</td>
+<td></td>
+<td>“90_and_over”</td>
+<td>“&gt;90”</td>
+</tr>
+<tr class="even">
+<td>“45_to_49”</td>
+<td>“40-49”</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <div class="cell" data-hide="true">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>Popdata <span class="ot">&lt;-</span> Popdata <span class="sc">%&gt;%</span> </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AG =</span> <span class="fu">as.factor</span>(AG)) <span class="sc">%&gt;%</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AG =</span> <span class="fu">fct_collapse</span>(AG,</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"0-9"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"0_to_4"</span>,<span class="st">"5_to_9"</span>),</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"10-19"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"10_to_14"</span>,<span class="st">"15_to_19"</span>),</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"20-29"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"20_to_24"</span>,<span class="st">"25_to_29"</span>),</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"30-39"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"30_to_34"</span>,<span class="st">"35_to_39"</span>),</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"40-49"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"40_to_44"</span>,<span class="st">"45_to_49"</span>),</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"50-59"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"50_to_54"</span>,<span class="st">"55_to_59"</span>),</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"60-69"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"60_to_64"</span>,<span class="st">"65_to_69"</span>),</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"70-79"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"70_to_74"</span>,<span class="st">"75_to_79"</span>),</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"80-89"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"80_to_84"</span>,<span class="st">"85_to_89"</span>),</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"&gt;90"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"90_and_over"</span>)</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>                           )) <span class="sc">%&gt;%</span> </span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AG =</span> <span class="fu">fct_relevel</span>(AG, <span class="st">"0-9"</span>, <span class="st">"10-19"</span>, <span class="st">"20-29"</span>, <span class="st">"30-39"</span>, <span class="st">"40-49"</span>, <span class="st">"50-59"</span>, <span class="st">"60-69"</span>, <span class="st">"70-79"</span>, <span class="st">"80-89"</span>, <span class="st">"&gt;90"</span>))</span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>Popdata <span class="sc">%&gt;%</span></span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(AG) <span class="sc">%&gt;%</span></span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Popdata <span class="ot">&lt;-</span> Popdata <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AG =</span> <span class="fu">as.factor</span>(AG)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AG =</span> <span class="fu">fct_collapse</span>(AG,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"0-9"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"0_to_4"</span>,<span class="st">"5_to_9"</span>),</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"10-19"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"10_to_14"</span>,<span class="st">"15_to_19"</span>),</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"20-29"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"20_to_24"</span>,<span class="st">"25_to_29"</span>),</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"30-39"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"30_to_34"</span>,<span class="st">"35_to_39"</span>),</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"40-49"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"40_to_44"</span>,<span class="st">"45_to_49"</span>),</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"50-59"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"50_to_54"</span>,<span class="st">"55_to_59"</span>),</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"60-69"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"60_to_64"</span>,<span class="st">"65_to_69"</span>),</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"70-79"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"70_to_74"</span>,<span class="st">"75_to_79"</span>),</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"80-89"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"80_to_84"</span>,<span class="st">"85_to_89"</span>),</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"&gt;90"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"90_and_over"</span>)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>                           )) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AG =</span> <span class="fu">fct_relevel</span>(AG, <span class="st">"0-9"</span>, <span class="st">"10-19"</span>, <span class="st">"20-29"</span>, <span class="st">"30-39"</span>, <span class="st">"40-49"</span>, </span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"50-59"</span>, <span class="st">"60-69"</span>, <span class="st">"70-79"</span>, <span class="st">"80-89"</span>, <span class="st">"&gt;90"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(PA, AG, Sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sumPop =</span> <span class="fu">sum</span>(sumPop)) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Pop =</span> sumPop)</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Popdata,<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 90 × 3
-# Groups:   PA, AG [90]
-   PA            AG        n
-   &lt;chr&gt;         &lt;fct&gt; &lt;int&gt;
- 1 Bedok         0-9       4
- 2 Bedok         10-19     4
- 3 Bedok         20-29     4
- 4 Bedok         30-39     4
- 5 Bedok         40-49     4
- 6 Bedok         50-59     4
- 7 Bedok         60-69     4
- 8 Bedok         70-79     4
- 9 Bedok         80-89     4
-10 Choa Chu Kang 0-9       4
-# … with 80 more rows</code></pre>
+<pre><code># A tibble: 5 × 4
+# Groups:   PA, AG [3]
+  PA    AG    Sex       Pop
+  &lt;chr&gt; &lt;fct&gt; &lt;chr&gt;   &lt;dbl&gt;
+1 Bedok 0-9   Females 10670
+2 Bedok 0-9   Males   11050
+3 Bedok 10-19 Females 12880
+4 Bedok 10-19 Males   13210
+5 Bedok 20-29 Females 16130</code></pre>
 </div>
 </div>
+<p>To make the pyramid center, convert data from one gender to a negative value.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># xbrks &lt;- seq(-300000, 300000, 5000)</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># xlabls &lt;- paste0(as.character(c(seq(300, 0, -5), seq(5, 300, 5))))</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">#       coord_flip() +</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">#       theme_bw()</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># xbrks1 &lt;- seq(-300000, 300000, 50000)</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co"># xlabls1 &lt;- paste0(as.character(c(seq(300, 0, -50), seq(50, 300, 50))))</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co"># p1 &lt;- p +  facet_wrap (~ PA, nrow = 3, ncol = 3) +</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co">#             xlab("Age Groups") +</span></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co">#             scale_y_continuous(breaks = xbrks1, labels = xlabls1, name = "Population")</span></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplotly(p1)</span></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="co">#////////////////////////////////////////////////////////////////////////////</span></span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="co"># fig &lt;-</span></span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="co">#   ggplot(sorted_pop00to20, aes(x = nCount, y = AG, fill = Sex)) +</span></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_col() +</span></span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="co">#   scale_x_continuous(breaks = seq(-150000, 150000, 50000), </span></span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="co">#                      labels = paste0(as.character(c(seq(150, 0, -50), seq(50, 150, 50))),"k")) +</span></span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="co">#   labs (x = "Population",</span></span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a><span class="co">#         y = "Age Group",</span></span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a><span class="co">#         title='Singapore Age-Sex Population Pyramid') +</span></span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a><span class="co">#   theme_bw() +</span></span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a><span class="co">#   theme(axis.ticks.y = element_blank()) +</span></span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a><span class="co">#   scale_fill_manual(values = c("Males" = "lightblue", "Females" = "lightpink"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>Popdata_M <span class="ot">&lt;-</span> Popdata <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Sex</span><span class="st">`</span> <span class="sc">==</span>  <span class="st">"Males"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">mutate</span> (<span class="at">Pop =</span> <span class="sc">-</span>Pop)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>Popdata_F <span class="ot">&lt;-</span> Popdata <span class="sc">%&gt;%</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Sex</span><span class="st">`</span> <span class="sc">==</span>  <span class="st">"Females"</span>) </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>Popdata <span class="ot">&lt;-</span> <span class="fu">rbind</span>(Popdata_M,Popdata_F)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>Popdata</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 180 × 4
+# Groups:   PA, AG [90]
+   PA    AG    Sex      Pop
+   &lt;chr&gt; &lt;fct&gt; &lt;chr&gt;  &lt;dbl&gt;
+ 1 Bedok 0-9   Males -11050
+ 2 Bedok 10-19 Males -13210
+ 3 Bedok 20-29 Males -16920
+ 4 Bedok 30-39 Males -18000
+ 5 Bedok 40-49 Males -18740
+ 6 Bedok 50-59 Males -19960
+ 7 Bedok 60-69 Males -20050
+ 8 Bedok 70-79 Males -12390
+ 9 Bedok 80-89 Males  -4040
+10 Bedok &gt;90   Males   -660
+# … with 170 more rows</code></pre>
+</div>
 </div>
 </section>
-<section id="section" class="level5">
-<h5 class="anchored" data-anchor-id="section"></h5>
-
-
 </section>
+<section id="plotting-the-chart" class="level4">
+<h4 class="anchored" data-anchor-id="plotting-the-chart">4. Plotting the chart</h4>
+<p>Let us begin with a basic pyramid to depict the overall population distribution of age and gender in the nine planning districts chosen.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(Popdata, <span class="fu">aes</span>(<span class="at">x =</span> Pop, <span class="at">y =</span> AG, <span class="at">fill =</span> Sex, <span class="fu">ease_aes</span>(<span class="st">'linear'</span>))) <span class="sc">+</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">150000</span>, <span class="dv">150000</span>, <span class="dv">50000</span>), </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">paste0</span>(<span class="fu">as.character</span>(<span class="fu">c</span>(<span class="fu">seq</span>(<span class="dv">150</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">50</span>), <span class="fu">seq</span>(<span class="dv">50</span>, <span class="dv">150</span>, <span class="dv">50</span>))),<span class="st">"k"</span>)) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span> (<span class="at">x =</span> <span class="st">"Population size"</span>, </span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Age Group"</span>, </span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">title=</span><span class="st">'Singapore Age-Sex Population Pyramid'</span>) <span class="sc">+</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Males"</span> <span class="ot">=</span> <span class="st">"#00C19A"</span>, <span class="st">"Females"</span> <span class="ot">=</span> <span class="st">"#F8766D"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Following that, we develop a Trellis plot 3x3 to facilitate comparison across planning areas. The nice age-sex pyramid for each planning area is now available.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>xbrks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">20000</span>, <span class="sc">-</span><span class="dv">10000</span>, <span class="dv">0</span>, <span class="dv">10000</span>, <span class="dv">20000</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>xlabls <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="fu">as.character</span>(<span class="fu">c</span>(<span class="st">'20k'</span>, <span class="st">'10k'</span>, <span class="st">'0'</span>, <span class="st">'10k'</span>, <span class="st">'20k'</span>)))</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(Popdata, </span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">aes</span> (<span class="at">x =</span> AG, <span class="at">y =</span> Pop, <span class="at">fill =</span> Sex)) <span class="sc">+</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">width =</span> .<span class="dv">6</span> ) <span class="sc">+</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span> (<span class="at">x =</span> <span class="st">"Population"</span>, </span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">y =</span> <span class="st">"Age Group"</span>, </span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">title=</span><span class="st">'What is the demographic breakdown of Singaporeans in the top 9 most populous Planning Areas?'</span>) <span class="sc">+</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme</span>(<span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Males"</span> <span class="ot">=</span> <span class="st">"#00C19A"</span>, <span class="st">"Females"</span> <span class="ot">=</span> <span class="st">"#F8766D"</span>))</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>xbrks1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">20000</span>, <span class="sc">-</span><span class="dv">10000</span>, <span class="dv">0</span>, <span class="dv">10000</span>, <span class="dv">20000</span>)</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>xlabls1 <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="fu">as.character</span>(<span class="fu">c</span>(<span class="st">'20k'</span>, <span class="st">'10k'</span>, <span class="st">'0'</span>, <span class="st">'10k'</span>, <span class="st">'20k'</span>)))</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> p <span class="sc">+</span>  <span class="fu">facet_wrap</span> (<span class="sc">~</span> PA, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>            <span class="fu">xlab</span>(<span class="st">"Age Group"</span>) <span class="sc">+</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>            <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> xbrks1, <span class="at">labels =</span> xlabls1, <span class="at">name =</span> <span class="st">"Population Size"</span>)</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(p1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-c8aa3411ce6f9d82d995" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-c8aa3411ce6f9d82d995">{"x":{"data":[{"orientation":"h","width":[0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.600000000000001,0.600000000000001,0.600000000000001],"base":[0,0,0,0,0,0,0,0,0,0],"x":[10670,12880,16130,19430,21180,20740,21370,13890,5890,1440],"y":[1,2,3,4,5,6,7,8,9,10],"text":["AG: 0-9<br />Pop: 10670<br />Sex: Females","AG: 10-19<br />Pop: 12880<br />Sex: Females","AG: 20-29<br />Pop: 16130<br />Sex: Females","AG: 30-39<br />Pop: 19430<br />Sex: Females","AG: 40-49<br />Pop: 21180<br />Sex: Females","AG: 50-59<br />Pop: 20740<br />Sex: Females","AG: 60-69<br />Pop: 21370<br />Sex: Females","AG: 70-79<br />Pop: 13890<br />Sex: Females","AG: 80-89<br />Pop:  5890<br />Sex: Females","AG: >90<br />Pop:  1440<br />Sex: Females"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Females","legendgroup":"Females","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"h","width":[0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.600000000000001,0.600000000000001,0.600000000000001],"base":[0,0,0,0,0,0,0,0,0,0],"x":[8590,9980,15070,14080,13310,16170,11260,4830,1960,430],"y":[1,2,3,4,5,6,7,8,9,10],"text":["AG: 0-9<br />Pop:  8590<br />Sex: Females","AG: 10-19<br />Pop:  9980<br />Sex: Females","AG: 20-29<br />Pop: 15070<br />Sex: Females","AG: 30-39<br />Pop: 14080<br />Sex: Females","AG: 40-49<br />Pop: 13310<br />Sex: Females","AG: 50-59<br />Pop: 16170<br />Sex: Females","AG: 60-69<br />Pop: 11260<br />Sex: Females","AG: 70-79<br />Pop:  4830<br />Sex: Females","AG: 80-89<br />Pop:  1960<br />Sex: Females","AG: >90<br />Pop:   430<br />Sex: Females"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Females","legendgroup":"Females","showlegend":false,"xaxis":"x2","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"h","width":[0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.600000000000001,0.600000000000001,0.600000000000001],"base":[0,0,0,0,0,0,0,0,0,0],"x":[9390,10110,14550,17460,16040,17450,17390,9180,3810,900],"y":[1,2,3,4,5,6,7,8,9,10],"text":["AG: 0-9<br />Pop:  9390<br />Sex: Females","AG: 10-19<br />Pop: 10110<br />Sex: Females","AG: 20-29<br />Pop: 14550<br />Sex: Females","AG: 30-39<br />Pop: 17460<br />Sex: Females","AG: 40-49<br />Pop: 16040<br />Sex: Females","AG: 50-59<br />Pop: 17450<br />Sex: Females","AG: 60-69<br />Pop: 17390<br />Sex: Females","AG: 70-79<br />Pop:  9180<br />Sex: Females","AG: 80-89<br />Pop:  3810<br />Sex: Females","AG: >90<br />Pop:   900<br />Sex: Females"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Females","legendgroup":"Females","showlegend":false,"xaxis":"x3","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"h","width":[0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.600000000000001,0.600000000000001,0.600000000000001],"base":[0,0,0,0,0,0,0,0,0,0],"x":[10750,14380,17320,18810,20490,18880,16420,8410,2770,610],"y":[1,2,3,4,5,6,7,8,9,10],"text":["AG: 0-9<br />Pop: 10750<br />Sex: Females","AG: 10-19<br />Pop: 14380<br />Sex: Females","AG: 20-29<br />Pop: 17320<br />Sex: Females","AG: 30-39<br />Pop: 18810<br />Sex: Females","AG: 40-49<br />Pop: 20490<br />Sex: Females","AG: 50-59<br />Pop: 18880<br />Sex: Females","AG: 60-69<br />Pop: 16420<br />Sex: Females","AG: 70-79<br />Pop:  8410<br />Sex: Females","AG: 80-89<br />Pop:  2770<br />Sex: Females","AG: >90<br />Pop:   610<br />Sex: Females"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Females","legendgroup":"Females","showlegend":false,"xaxis":"x","yaxis":"y2","hoverinfo":"text","frame":null},{"orientation":"h","width":[0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.600000000000001,0.600000000000001,0.600000000000001],"base":[0,0,0,0,0,0,0,0,0,0],"x":[14600,10930,8790,20510,17590,9710,6940,4030,1300,270],"y":[1,2,3,4,5,6,7,8,9,10],"text":["AG: 0-9<br />Pop: 14600<br />Sex: Females","AG: 10-19<br />Pop: 10930<br />Sex: Females","AG: 20-29<br />Pop:  8790<br />Sex: Females","AG: 30-39<br />Pop: 20510<br />Sex: Females","AG: 40-49<br />Pop: 17590<br />Sex: Females","AG: 50-59<br />Pop:  9710<br />Sex: Females","AG: 60-69<br />Pop:  6940<br />Sex: Females","AG: 70-79<br />Pop:  4030<br />Sex: Females","AG: 80-89<br />Pop:  1300<br />Sex: Females","AG: >90<br />Pop:   270<br />Sex: Females"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Females","legendgroup":"Females","showlegend":false,"xaxis":"x2","yaxis":"y2","hoverinfo":"text","frame":null},{"orientation":"h","width":[0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.600000000000001,0.600000000000001,0.600000000000001],"base":[0,0,0,0,0,0,0,0,0,0],"x":[15280,14820,14210,23500,22740,16010,13080,6400,2280,570],"y":[1,2,3,4,5,6,7,8,9,10],"text":["AG: 0-9<br />Pop: 15280<br />Sex: Females","AG: 10-19<br />Pop: 14820<br />Sex: Females","AG: 20-29<br />Pop: 14210<br />Sex: Females","AG: 30-39<br />Pop: 23500<br />Sex: Females","AG: 40-49<br />Pop: 22740<br />Sex: Females","AG: 50-59<br />Pop: 16010<br />Sex: Females","AG: 60-69<br />Pop: 13080<br />Sex: Females","AG: 70-79<br />Pop:  6400<br />Sex: Females","AG: 80-89<br />Pop:  2280<br />Sex: Females","AG: >90<br />Pop:   570<br />Sex: Females"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Females","legendgroup":"Females","showlegend":false,"xaxis":"x3","yaxis":"y2","hoverinfo":"text","frame":null},{"orientation":"h","width":[0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.600000000000001,0.600000000000001,0.600000000000001],"base":[0,0,0,0,0,0,0,0,0,0],"x":[12310,11630,18160,21430,17630,20210,20650,9390,3730,890],"y":[1,2,3,4,5,6,7,8,9,10],"text":["AG: 0-9<br />Pop: 12310<br />Sex: Females","AG: 10-19<br />Pop: 11630<br />Sex: Females","AG: 20-29<br />Pop: 18160<br />Sex: Females","AG: 30-39<br />Pop: 21430<br />Sex: Females","AG: 40-49<br />Pop: 17630<br />Sex: Females","AG: 50-59<br />Pop: 20210<br />Sex: Females","AG: 60-69<br />Pop: 20650<br />Sex: Females","AG: 70-79<br />Pop:  9390<br />Sex: Females","AG: 80-89<br />Pop:  3730<br />Sex: Females","AG: >90<br />Pop:   890<br />Sex: Females"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Females","legendgroup":"Females","showlegend":false,"xaxis":"x","yaxis":"y3","hoverinfo":"text","frame":null},{"orientation":"h","width":[0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.600000000000001,0.600000000000001,0.600000000000001],"base":[0,0,0,0,0,0,0,0,0,0],"x":[11380,13890,19960,18010,18500,20820,14150,6220,2430,440],"y":[1,2,3,4,5,6,7,8,9,10],"text":["AG: 0-9<br />Pop: 11380<br />Sex: Females","AG: 10-19<br />Pop: 13890<br />Sex: Females","AG: 20-29<br />Pop: 19960<br />Sex: Females","AG: 30-39<br />Pop: 18010<br />Sex: Females","AG: 40-49<br />Pop: 18500<br />Sex: Females","AG: 50-59<br />Pop: 20820<br />Sex: Females","AG: 60-69<br />Pop: 14150<br />Sex: Females","AG: 70-79<br />Pop:  6220<br />Sex: Females","AG: 80-89<br />Pop:  2430<br />Sex: Females","AG: >90<br />Pop:   440<br />Sex: Females"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Females","legendgroup":"Females","showlegend":false,"xaxis":"x2","yaxis":"y3","hoverinfo":"text","frame":null},{"orientation":"h","width":[0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.600000000000001,0.600000000000001,0.600000000000001],"base":[0,0,0,0,0,0,0,0,0,0],"x":[11060,10580,13740,19160,16490,16240,15220,7400,2770,550],"y":[1,2,3,4,5,6,7,8,9,10],"text":["AG: 0-9<br />Pop: 11060<br />Sex: Females","AG: 10-19<br />Pop: 10580<br />Sex: Females","AG: 20-29<br />Pop: 13740<br />Sex: Females","AG: 30-39<br />Pop: 19160<br />Sex: Females","AG: 40-49<br />Pop: 16490<br />Sex: Females","AG: 50-59<br />Pop: 16240<br />Sex: Females","AG: 60-69<br />Pop: 15220<br />Sex: Females","AG: 70-79<br />Pop:  7400<br />Sex: Females","AG: 80-89<br />Pop:  2770<br />Sex: Females","AG: >90<br />Pop:   550<br />Sex: Females"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Females","legendgroup":"Females","showlegend":false,"xaxis":"x3","yaxis":"y3","hoverinfo":"text","frame":null},{"orientation":"h","width":[0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.600000000000001,0.600000000000001,0.600000000000001],"base":[-11050,-13210,-16920,-18000,-18740,-19960,-20050,-12390,-4040,-660],"x":[11050,13210,16920,18000,18740,19960,20050,12390,4040,660],"y":[1,2,3,4,5,6,7,8,9,10],"text":["AG: 0-9<br />Pop: 11050<br />Sex: Males","AG: 10-19<br />Pop: 13210<br />Sex: Males","AG: 20-29<br />Pop: 16920<br />Sex: Males","AG: 30-39<br />Pop: 18000<br />Sex: Males","AG: 40-49<br />Pop: 18740<br />Sex: Males","AG: 50-59<br />Pop: 19960<br />Sex: Males","AG: 60-69<br />Pop: 20050<br />Sex: Males","AG: 70-79<br />Pop: 12390<br />Sex: Males","AG: 80-89<br />Pop:  4040<br />Sex: Males","AG: >90<br />Pop:   660<br />Sex: Males"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,193,154,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Males","legendgroup":"Males","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"h","width":[0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.600000000000001,0.600000000000001,0.600000000000001],"base":[-8950,-10470,-15970,-13590,-12170,-15200,-12320,-4650,-1180,-150],"x":[8950,10470,15970,13590,12170,15200,12320,4650,1180,150],"y":[1,2,3,4,5,6,7,8,9,10],"text":["AG: 0-9<br />Pop:  8950<br />Sex: Males","AG: 10-19<br />Pop: 10470<br />Sex: Males","AG: 20-29<br />Pop: 15970<br />Sex: Males","AG: 30-39<br />Pop: 13590<br />Sex: Males","AG: 40-49<br />Pop: 12170<br />Sex: Males","AG: 50-59<br />Pop: 15200<br />Sex: Males","AG: 60-69<br />Pop: 12320<br />Sex: Males","AG: 70-79<br />Pop:  4650<br />Sex: Males","AG: 80-89<br />Pop:  1180<br />Sex: Males","AG: >90<br />Pop:   150<br />Sex: Males"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,193,154,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Males","legendgroup":"Males","showlegend":false,"xaxis":"x2","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"h","width":[0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.600000000000001,0.600000000000001,0.600000000000001],"base":[-9400,-10320,-15200,-16380,-14860,-16420,-17390,-8410,-2550,-330],"x":[9400,10320,15200,16380,14860,16420,17390,8410,2550,330],"y":[1,2,3,4,5,6,7,8,9,10],"text":["AG: 0-9<br />Pop:  9400<br />Sex: Males","AG: 10-19<br />Pop: 10320<br />Sex: Males","AG: 20-29<br />Pop: 15200<br />Sex: Males","AG: 30-39<br />Pop: 16380<br />Sex: Males","AG: 40-49<br />Pop: 14860<br />Sex: Males","AG: 50-59<br />Pop: 16420<br />Sex: Males","AG: 60-69<br />Pop: 17390<br />Sex: Males","AG: 70-79<br />Pop:  8410<br />Sex: Males","AG: 80-89<br />Pop:  2550<br />Sex: Males","AG: >90<br />Pop:   330<br />Sex: Males"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,193,154,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Males","legendgroup":"Males","showlegend":false,"xaxis":"x3","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"h","width":[0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.600000000000001,0.600000000000001,0.600000000000001],"base":[-11240,-15070,-18230,-17690,-19870,-20050,-16940,-8330,-2080,-200],"x":[11240,15070,18230,17690,19870,20050,16940,8330,2080,200],"y":[1,2,3,4,5,6,7,8,9,10],"text":["AG: 0-9<br />Pop: 11240<br />Sex: Males","AG: 10-19<br />Pop: 15070<br />Sex: Males","AG: 20-29<br />Pop: 18230<br />Sex: Males","AG: 30-39<br />Pop: 17690<br />Sex: Males","AG: 40-49<br />Pop: 19870<br />Sex: Males","AG: 50-59<br />Pop: 20050<br />Sex: Males","AG: 60-69<br />Pop: 16940<br />Sex: Males","AG: 70-79<br />Pop:  8330<br />Sex: Males","AG: 80-89<br />Pop:  2080<br />Sex: Males","AG: >90<br />Pop:   200<br />Sex: Males"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,193,154,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Males","legendgroup":"Males","showlegend":false,"xaxis":"x","yaxis":"y2","hoverinfo":"text","frame":null},{"orientation":"h","width":[0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.600000000000001,0.600000000000001,0.600000000000001],"base":[-15330,-11650,-8280,-16970,-18010,-10590,-6450,-3330,-910,-80],"x":[15330,11650,8280,16970,18010,10590,6450,3330,910,80],"y":[1,2,3,4,5,6,7,8,9,10],"text":["AG: 0-9<br />Pop: 15330<br />Sex: Males","AG: 10-19<br />Pop: 11650<br />Sex: Males","AG: 20-29<br />Pop:  8280<br />Sex: Males","AG: 30-39<br />Pop: 16970<br />Sex: Males","AG: 40-49<br />Pop: 18010<br />Sex: Males","AG: 50-59<br />Pop: 10590<br />Sex: Males","AG: 60-69<br />Pop:  6450<br />Sex: Males","AG: 70-79<br />Pop:  3330<br />Sex: Males","AG: 80-89<br />Pop:   910<br />Sex: Males","AG: >90<br />Pop:    80<br />Sex: Males"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,193,154,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Males","legendgroup":"Males","showlegend":false,"xaxis":"x2","yaxis":"y2","hoverinfo":"text","frame":null},{"orientation":"h","width":[0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.600000000000001,0.600000000000001,0.600000000000001],"base":[-16300,-15470,-14150,-20250,-21690,-16460,-12680,-5640,-1440,-150],"x":[16300,15470,14150,20250,21690,16460,12680,5640,1440,150],"y":[1,2,3,4,5,6,7,8,9,10],"text":["AG: 0-9<br />Pop: 16300<br />Sex: Males","AG: 10-19<br />Pop: 15470<br />Sex: Males","AG: 20-29<br />Pop: 14150<br />Sex: Males","AG: 30-39<br />Pop: 20250<br />Sex: Males","AG: 40-49<br />Pop: 21690<br />Sex: Males","AG: 50-59<br />Pop: 16460<br />Sex: Males","AG: 60-69<br />Pop: 12680<br />Sex: Males","AG: 70-79<br />Pop:  5640<br />Sex: Males","AG: 80-89<br />Pop:  1440<br />Sex: Males","AG: >90<br />Pop:   150<br />Sex: Males"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,193,154,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Males","legendgroup":"Males","showlegend":false,"xaxis":"x3","yaxis":"y2","hoverinfo":"text","frame":null},{"orientation":"h","width":[0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.600000000000001,0.600000000000001,0.600000000000001],"base":[-12970,-12540,-18540,-20820,-16460,-17390,-19490,-8860,-2290,-300],"x":[12970,12540,18540,20820,16460,17390,19490,8860,2290,300],"y":[1,2,3,4,5,6,7,8,9,10],"text":["AG: 0-9<br />Pop: 12970<br />Sex: Males","AG: 10-19<br />Pop: 12540<br />Sex: Males","AG: 20-29<br />Pop: 18540<br />Sex: Males","AG: 30-39<br />Pop: 20820<br />Sex: Males","AG: 40-49<br />Pop: 16460<br />Sex: Males","AG: 50-59<br />Pop: 17390<br />Sex: Males","AG: 60-69<br />Pop: 19490<br />Sex: Males","AG: 70-79<br />Pop:  8860<br />Sex: Males","AG: 80-89<br />Pop:  2290<br />Sex: Males","AG: >90<br />Pop:   300<br />Sex: Males"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,193,154,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Males","legendgroup":"Males","showlegend":false,"xaxis":"x","yaxis":"y3","hoverinfo":"text","frame":null},{"orientation":"h","width":[0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.600000000000001,0.600000000000001,0.600000000000001],"base":[-11990,-14910,-21490,-17470,-17230,-20590,-15330,-5790,-1700,-210],"x":[11990,14910,21490,17470,17230,20590,15330,5790,1700,210],"y":[1,2,3,4,5,6,7,8,9,10],"text":["AG: 0-9<br />Pop: 11990<br />Sex: Males","AG: 10-19<br />Pop: 14910<br />Sex: Males","AG: 20-29<br />Pop: 21490<br />Sex: Males","AG: 30-39<br />Pop: 17470<br />Sex: Males","AG: 40-49<br />Pop: 17230<br />Sex: Males","AG: 50-59<br />Pop: 20590<br />Sex: Males","AG: 60-69<br />Pop: 15330<br />Sex: Males","AG: 70-79<br />Pop:  5790<br />Sex: Males","AG: 80-89<br />Pop:  1700<br />Sex: Males","AG: >90<br />Pop:   210<br />Sex: Males"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,193,154,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Males","legendgroup":"Males","showlegend":false,"xaxis":"x2","yaxis":"y3","hoverinfo":"text","frame":null},{"orientation":"h","width":[0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.600000000000001,0.600000000000001,0.600000000000001],"base":[-11670,-11250,-14230,-17660,-15910,-15510,-14870,-6690,-1770,-190],"x":[11670,11250,14230,17660,15910,15510,14870,6690,1770,190],"y":[1,2,3,4,5,6,7,8,9,10],"text":["AG: 0-9<br />Pop: 11670<br />Sex: Males","AG: 10-19<br />Pop: 11250<br />Sex: Males","AG: 20-29<br />Pop: 14230<br />Sex: Males","AG: 30-39<br />Pop: 17660<br />Sex: Males","AG: 40-49<br />Pop: 15910<br />Sex: Males","AG: 50-59<br />Pop: 15510<br />Sex: Males","AG: 60-69<br />Pop: 14870<br />Sex: Males","AG: 70-79<br />Pop:  6690<br />Sex: Males","AG: 80-89<br />Pop:  1770<br />Sex: Males","AG: >90<br />Pop:   190<br />Sex: Males"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,193,154,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Males","legendgroup":"Males","showlegend":false,"xaxis":"x3","yaxis":"y3","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":55.4520547945205,"r":7.30593607305936,"b":40.1826484018265,"l":54.7945205479452},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"What is the demographic breakdown of Singaporeans in the top 9 most populous Planning Areas?","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0,"xref":"paper"},"xaxis":{"domain":[0,0.329256360078278],"automargin":true,"type":"linear","autorange":false,"range":[-23949.5,25759.5],"tickmode":"array","ticktext":["20k","10k","0","10k","20k"],"tickvals":[-20000,-10000,0,10000,20000],"categoryorder":"array","categoryarray":["20k","10k","0","10k","20k"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y3","title":"","hoverformat":".2f"},"annotations":[{"text":"Population Size","x":0.5,"y":0,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"top","annotationType":"axis","yshift":-21.9178082191781},{"text":"Age Group","x":0,"y":0.5,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-90,"xanchor":"right","yanchor":"center","annotationType":"axis","xshift":-39.4520547945205},{"text":"Bedok","x":0.164628180039139,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"Choa Chu Kang","x":0.5,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"Hougang","x":0.835371819960861,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"Jurong West","x":0.164628180039139,"y":0.651826484018265,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"Punggol","x":0.5,"y":0.651826484018265,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"Sengkang","x":0.835371819960861,"y":0.651826484018265,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"Tampines","x":0.164628180039139,"y":0.318493150684932,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"Woodlands","x":0.5,"y":0.318493150684932,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"Yishun","x":0.835371819960861,"y":0.318493150684932,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"}],"yaxis":{"domain":[0.681506849315069,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4,10.6],"tickmode":"array","ticktext":["0-9","10-19","20-29","30-39","40-49","50-59","60-69","70-79","80-89",">90"],"tickvals":[1,2,3,4,5,6,7,8,9,10],"categoryorder":"array","categoryarray":["0-9","10-19","20-29","30-39","40-49","50-59","60-69","70-79","80-89",">90"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"","hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":0.329256360078278,"y0":0.681506849315069,"y1":1},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":0.329256360078278,"y0":0,"y1":23.37899543379,"yanchor":1,"ysizemode":"pixel"},{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.337410306588389,"x1":0.662589693411611,"y0":0.681506849315069,"y1":1},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.337410306588389,"x1":0.662589693411611,"y0":0,"y1":23.37899543379,"yanchor":1,"ysizemode":"pixel"},{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.670743639921722,"x1":1,"y0":0.681506849315069,"y1":1},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.670743639921722,"x1":1,"y0":0,"y1":23.37899543379,"yanchor":1,"ysizemode":"pixel"},{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":0.329256360078278,"y0":0.348173515981735,"y1":0.651826484018265},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":0.329256360078278,"y0":0,"y1":23.37899543379,"yanchor":0.651826484018265,"ysizemode":"pixel"},{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.337410306588389,"x1":0.662589693411611,"y0":0.348173515981735,"y1":0.651826484018265},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.337410306588389,"x1":0.662589693411611,"y0":0,"y1":23.37899543379,"yanchor":0.651826484018265,"ysizemode":"pixel"},{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.670743639921722,"x1":1,"y0":0.348173515981735,"y1":0.651826484018265},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.670743639921722,"x1":1,"y0":0,"y1":23.37899543379,"yanchor":0.651826484018265,"ysizemode":"pixel"},{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":0.329256360078278,"y0":0,"y1":0.318493150684932},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":0.329256360078278,"y0":0,"y1":23.37899543379,"yanchor":0.318493150684932,"ysizemode":"pixel"},{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.337410306588389,"x1":0.662589693411611,"y0":0,"y1":0.318493150684932},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.337410306588389,"x1":0.662589693411611,"y0":0,"y1":23.37899543379,"yanchor":0.318493150684932,"ysizemode":"pixel"},{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.670743639921722,"x1":1,"y0":0,"y1":0.318493150684932},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.670743639921722,"x1":1,"y0":0,"y1":23.37899543379,"yanchor":0.318493150684932,"ysizemode":"pixel"}],"xaxis2":{"type":"linear","autorange":false,"range":[-23949.5,25759.5],"tickmode":"array","ticktext":["20k","10k","0","10k","20k"],"tickvals":[-20000,-10000,0,10000,20000],"categoryorder":"array","categoryarray":["20k","10k","0","10k","20k"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"domain":[0.337410306588389,0.662589693411611],"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y3","title":"","hoverformat":".2f"},"xaxis3":{"type":"linear","autorange":false,"range":[-23949.5,25759.5],"tickmode":"array","ticktext":["20k","10k","0","10k","20k"],"tickvals":[-20000,-10000,0,10000,20000],"categoryorder":"array","categoryarray":["20k","10k","0","10k","20k"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"domain":[0.670743639921722,1],"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y3","title":"","hoverformat":".2f"},"yaxis2":{"type":"linear","autorange":false,"range":[0.4,10.6],"tickmode":"array","ticktext":["0-9","10-19","20-29","30-39","40-49","50-59","60-69","70-79","80-89",">90"],"tickvals":[1,2,3,4,5,6,7,8,9,10],"categoryorder":"array","categoryarray":["0-9","10-19","20-29","30-39","40-49","50-59","60-69","70-79","80-89",">90"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"domain":[0.348173515981735,0.651826484018265],"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"","hoverformat":".2f"},"yaxis3":{"type":"linear","autorange":false,"range":[0.4,10.6],"tickmode":"array","ticktext":["0-9","10-19","20-29","30-39","40-49","50-59","60-69","70-79","80-89",">90"],"tickvals":[1,2,3,4,5,6,7,8,9,10],"categoryorder":"array","categoryarray":["0-9","10-19","20-29","30-39","40-49","50-59","60-69","70-79","80-89",">90"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"domain":[0,0.318493150684932],"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"","hoverformat":".2f"},"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"Sex","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"6c3c65ef1be":{"x":{},"y":{},"fill":{},"type":"bar"}},"cur_data":"6c3c65ef1be","visdat":{"6c3c65ef1be":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+
+
 </section>
 </section>
 
