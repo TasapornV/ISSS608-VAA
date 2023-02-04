@@ -21,6 +21,8 @@ head(exam, n=10)
 
 ## One-sample test: gghistostats() method
 
+easystats: <https://easystats.github.io/easystats/>
+
 ```{r}
 set.seed(1234)
 
