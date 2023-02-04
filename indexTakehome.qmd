@@ -1,0 +1,15 @@
+---
+title: "Take-home Exercise"
+format: 
+  html:
+    mainfont: system-ui
+    page-layout: full
+---
+
+## Take-home Exercise 01
+
+[![](Take-home_Ex/Take-home_Ex01/final%20result.png)](https://public.tableau.com/views/Take-home_01_PopulationbyPlanningArea/3x3Trellis?:language=en-US&:display_count=n&:origin=viz_share_link)
+
+## Take-home Exercise 02
+
+[![](Take-home_Ex/Take-home_Ex02/newplot.png)](https://isss608-tasapornv.netlify.app/take-home_ex/take-home_ex02/take-home_ex02)

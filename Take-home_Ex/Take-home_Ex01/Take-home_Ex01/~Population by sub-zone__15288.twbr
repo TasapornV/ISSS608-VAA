@@ -1,0 +1,1434 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20224.22.1117.1841                               -->
+<workbook original-version='18.1' source-build='2022.4.0 (20224.22.1117.1841)' source-platform='win' version='18.1' xml:base='https://public.tableau.com' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <_.fcp.AnimationOnByDefault.true...AnimationOnByDefault />
+    <IntuitiveSorting />
+    <IntuitiveSorting_SP2 />
+    <_.fcp.MarkAnimation.true...MarkAnimation />
+    <_.fcp.ObjectModelEncapsulateLegacy.true...ObjectModelEncapsulateLegacy />
+    <_.fcp.ObjectModelExtractV2.true...ObjectModelExtractV2 />
+    <_.fcp.ObjectModelTableType.true...ObjectModelTableType />
+    <_.fcp.SchemaViewerObjectModel.true...SchemaViewerObjectModel />
+    <SheetIdentifierTracking />
+    <SortTagCleanup />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <repository-location derived-from='https://public.tableau.com/workbooks/Tableau_16738555074630?rev=1.0' id='Take-home_01_Populationbysub-zone' path='/workbooks' revision='1.2' />
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <_.fcp.AnimationOnByDefault.false...style>
+    <_.fcp.AnimationOnByDefault.false..._.fcp.MarkAnimation.true...style-rule element='animation'>
+      <_.fcp.AnimationOnByDefault.false...format attr='animation-on' value='ao-on' />
+    </_.fcp.AnimationOnByDefault.false..._.fcp.MarkAnimation.true...style-rule>
+  </_.fcp.AnimationOnByDefault.false...style>
+  <datasources>
+    <datasource hasconnection='false' inline='true' name='Parameters' version='18.1'>
+      <aliases enabled='yes' />
+      <column caption='Total Columns' datatype='integer' name='[Parameter 1]' param-domain-type='any' role='measure' type='quantitative' value='3'>
+        <calculation class='tableau' formula='3' />
+      </column>
+      <column caption='Total Columns 2' datatype='integer' name='[Parameter 2]' param-domain-type='any' role='measure' type='quantitative' value='10'>
+        <calculation class='tableau' formula='10' />
+      </column>
+    </datasource>
+    <datasource caption='respopagesextod2022' inline='true' name='federated.0kpt87y1gxfs7n1e3thgx1njovlj' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='respopagesextod2022' name='textscan.0el0obv0k3j2k41ct9q0t18mwqol'>
+            <connection class='textscan' directory='Data/Data' filename='respopagesextod2022.csv' server='' workgroup-auth-mode='as-is' />
+          </named-connection>
+        </named-connections>
+        <_.fcp.ObjectModelEncapsulateLegacy.false...relation connection='textscan.0el0obv0k3j2k41ct9q0t18mwqol' name='Notes_respopagesextod2022.csv' table='[Notes_respopagesextod2022#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_GB'>
+            <column datatype='string' name='Notes for Singapore Residents by Planning Area/Subzone, Age Group, Sex and Type of Dwelling, June 2022' ordinal='0' />
+          </columns>
+        </_.fcp.ObjectModelEncapsulateLegacy.false...relation>
+        <_.fcp.ObjectModelEncapsulateLegacy.true...relation type='collection'>
+          <relation connection='textscan.0el0obv0k3j2k41ct9q0t18mwqol' name='respopagesextod2022.csv' table='[respopagesextod2022#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+              <column datatype='string' name='PA' ordinal='0' />
+              <column datatype='string' name='SZ' ordinal='1' />
+              <column datatype='string' name='AG' ordinal='2' />
+              <column datatype='string' name='Sex' ordinal='3' />
+              <column datatype='string' name='TOD' ordinal='4' />
+              <column datatype='integer' name='Pop' ordinal='5' />
+              <column datatype='integer' name='Time' ordinal='6' />
+            </columns>
+          </relation>
+          <relation connection='textscan.0el0obv0k3j2k41ct9q0t18mwqol' name='Notes_respopagesextod2022.csv' table='[Notes_respopagesextod2022#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_GB'>
+              <column datatype='string' name='Notes for Singapore Residents by Planning Area/Subzone, Age Group, Sex and Type of Dwelling, June 2022' ordinal='0' />
+            </columns>
+          </relation>
+        </_.fcp.ObjectModelEncapsulateLegacy.true...relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[respopagesextod2022.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='currency'>&quot;£&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[Notes_respopagesextod2022.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='currency'>&quot;£&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>PA</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[PA]</local-name>
+            <parent-name>[respopagesextod2022.csv]</parent-name>
+            <remote-alias>PA</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[respopagesextod2022.csv_B097F970764047628667064D296D978B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>SZ</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[SZ]</local-name>
+            <parent-name>[respopagesextod2022.csv]</parent-name>
+            <remote-alias>SZ</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[respopagesextod2022.csv_B097F970764047628667064D296D978B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>AG</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[AG]</local-name>
+            <parent-name>[respopagesextod2022.csv]</parent-name>
+            <remote-alias>AG</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[respopagesextod2022.csv_B097F970764047628667064D296D978B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Sex</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Sex]</local-name>
+            <parent-name>[respopagesextod2022.csv]</parent-name>
+            <remote-alias>Sex</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[respopagesextod2022.csv_B097F970764047628667064D296D978B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>TOD</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[TOD]</local-name>
+            <parent-name>[respopagesextod2022.csv]</parent-name>
+            <remote-alias>TOD</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[respopagesextod2022.csv_B097F970764047628667064D296D978B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Pop</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Pop]</local-name>
+            <parent-name>[respopagesextod2022.csv]</parent-name>
+            <remote-alias>Pop</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[respopagesextod2022.csv_B097F970764047628667064D296D978B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Time</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Time]</local-name>
+            <parent-name>[respopagesextod2022.csv]</parent-name>
+            <remote-alias>Time</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[respopagesextod2022.csv_B097F970764047628667064D296D978B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Notes for Singapore Residents by Planning Area/Subzone, Age Group, Sex and Type of Dwelling, June 2022</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Notes for Singapore Residents by Planning Area/Subzone, Age Group, Sex and Type of Dwelling, June 2022]</local-name>
+            <parent-name>[Notes_respopagesextod2022.csv]</parent-name>
+            <remote-alias>Notes for Singapore Residents by Planning Area/Subzone, Age Group, Sex and Type of Dwelling, June 2022</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Notes_respopagesextod2022.csv_CFC74A7AF7ED4473B378F167280E7DDB]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column datatype='string' name='[AG (group)]' role='dimension' type='nominal'>
+        <calculation class='categorical-bin' column='[AG]' new-bin='true'>
+          <bin default-name='false' value='&quot;0-9&quot;'>
+            <value>&quot;0_to_4&quot;</value>
+            <value>&quot;5_to_9&quot;</value>
+          </bin>
+          <bin default-name='false' value='&quot;10-19&quot;'>
+            <value>&quot;10_to_14&quot;</value>
+            <value>&quot;15_to_19&quot;</value>
+          </bin>
+          <bin default-name='false' value='&quot;20-29&quot;'>
+            <value>&quot;20_to_24&quot;</value>
+            <value>&quot;25_to_29&quot;</value>
+          </bin>
+          <bin default-name='false' value='&quot;60-69&quot;'>
+            <value>&quot;60_to_64&quot;</value>
+            <value>&quot;65_to_69&quot;</value>
+          </bin>
+          <bin default-name='false' value='&quot;70-79&quot;'>
+            <value>&quot;70_to_74&quot;</value>
+            <value>&quot;75_to_79&quot;</value>
+          </bin>
+          <bin default-name='false' value='&quot;80-89&quot;'>
+            <value>&quot;80_to_84&quot;</value>
+            <value>&quot;85_to_89&quot;</value>
+          </bin>
+          <bin default-name='false' value='&quot;90 and over&quot;'>
+            <value>&quot;90_and_over&quot;</value>
+          </bin>
+        </calculation>
+      </column>
+      <column datatype='string' hidden='true' name='[AG]' role='dimension' type='nominal' />
+      <column caption='Index' datatype='integer' datatype-customized='true' name='[Calculation1]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='INT((INDEX())%[Parameters].[Parameter 1]^2)+1'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='Male' datatype='integer' name='[Calculation_529173009049964546]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='IF [Sex] = &apos;Males&apos; THEN [Pop] END' />
+      </column>
+      <column caption='Female' datatype='integer' name='[Calculation_529173009062948868]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='IF [Sex] = &apos;Females&apos; THEN [Pop] END' />
+      </column>
+      <column caption='Column' datatype='integer' name='[Calculation_529173009091969036]' role='measure' type='ordinal'>
+        <calculation class='tableau' formula='(([Calculation1]-1)%[Parameters].[Parameter 1])+1'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='Row' datatype='integer' datatype-customized='true' name='[Calculation_529173009092018189]' role='measure' type='ordinal'>
+        <calculation class='tableau' formula='INT(([Calculation1] - [Calculation_529173009091969036])/[Parameters].[Parameter 1])+1'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='Column 2' datatype='integer' name='[Column (copy)_1075797414250639361]' role='measure' type='ordinal'>
+        <calculation class='tableau' formula='(([Index (copy)_1075797414252716035]-1)%[Parameters].[Parameter 2])+1'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='Index 2' datatype='integer' datatype-customized='true' name='[Index (copy)_1075797414252716035]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='INT((INDEX())%[Parameters].[Parameter 2]^2)'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column datatype='string' name='[PA]' role='dimension' type='nominal' />
+      <column caption='Row 2' datatype='integer' datatype-customized='true' name='[Row (copy)_1075797414250725378]' role='measure' type='ordinal'>
+        <calculation class='tableau' formula='INT(([Index (copy)_1075797414252716035] - [Column (copy)_1075797414250639361])/[Parameters].[Parameter 2])+1'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column datatype='string' hidden='true' name='[SZ]' role='dimension' type='nominal' />
+      <column datatype='string' name='[Sex]' role='dimension' type='nominal' />
+      <_.fcp.ObjectModelTableType.true...column caption='Notes_respopagesextod2022.csv' datatype='table' name='[__tableau_internal_object_id__].[Notes_respopagesextod2022.csv_CFC74A7AF7ED4473B378F167280E7DDB]' role='measure' type='quantitative' />
+      <_.fcp.ObjectModelTableType.true...column caption='respopagesextod2022.csv' datatype='table' name='[__tableau_internal_object_id__].[respopagesextod2022.csv_B097F970764047628667064D296D978B]' role='measure' type='quantitative' />
+      <column-instance column='[Calculation_529173009049964546]' derivation='Sum' name='[diff:sum:Calculation_529173009049964546:qk]' pivot='key' type='quantitative'>
+        <table-calc diff-options='Relative' ordering-type='Columns' type='Difference'>
+          <address>
+            <value>-1</value>
+          </address>
+        </table-calc>
+      </column-instance>
+      <column-instance column='[Calculation_529173009049964546]' derivation='None' name='[none:Calculation_529173009049964546:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Calculation_529173009062948868]' derivation='None' name='[none:Calculation_529173009062948868:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[PA]' derivation='None' name='[none:PA:nk]' pivot='key' type='nominal' />
+      <column-instance column='[Sex]' derivation='None' name='[none:Sex:nk]' pivot='key' type='nominal' />
+      <column-instance column='[Calculation_529173009049964546]' derivation='Sum' name='[sum:Calculation_529173009049964546:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Calculation_529173009062948868]' derivation='Sum' name='[sum:Calculation_529173009062948868:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Calculation1]' derivation='User' name='[usr:Calculation1:qk]' pivot='key' type='quantitative'>
+        <table-calc ordering-type='Columns' />
+      </column-instance>
+      <extract _.fcp.ObjectModelExtractV2.true...object-id='' count='-1' enabled='false' units='records'>
+        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='Data/แหล่งข้อมูล/respopagesextod20222.hyper' default-settings='yes' schema='Extract' sslmode='' update-time='01/17/2023 08:28:26 AM' username='tableau_internal_user'>
+          <_.fcp.ObjectModelEncapsulateLegacy.false...relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <_.fcp.ObjectModelEncapsulateLegacy.true...relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <refresh>
+            <refresh-event add-from-file-path='respopagesextod2022' increment-value='%null%' refresh-type='create' rows-inserted='100928' timestamp-start='2023-01-17 08:28:26.010' />
+          </refresh>
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>PA</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[PA]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>PA</remote-alias>
+              <ordinal>0</ordinal>
+              <family>respopagesextod2022.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>63</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[respopagesextod2022.csv_B097F970764047628667064D296D978B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>SZ</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[SZ]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>SZ</remote-alias>
+              <ordinal>1</ordinal>
+              <family>respopagesextod2022.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>755</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[respopagesextod2022.csv_B097F970764047628667064D296D978B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>AG</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[AG]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>AG</remote-alias>
+              <ordinal>2</ordinal>
+              <family>respopagesextod2022.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>19</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[respopagesextod2022.csv_B097F970764047628667064D296D978B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Sex</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Sex]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Sex</remote-alias>
+              <ordinal>3</ordinal>
+              <family>respopagesextod2022.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[respopagesextod2022.csv_B097F970764047628667064D296D978B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>TOD</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[TOD]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>TOD</remote-alias>
+              <ordinal>4</ordinal>
+              <family>respopagesextod2022.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>8</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[respopagesextod2022.csv_B097F970764047628667064D296D978B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Pop</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[Pop]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Pop</remote-alias>
+              <ordinal>5</ordinal>
+              <family>respopagesextod2022.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>222</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[respopagesextod2022.csv_B097F970764047628667064D296D978B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Time</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[Time]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Time</remote-alias>
+              <ordinal>6</ordinal>
+              <family>respopagesextod2022.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>1</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[respopagesextod2022.csv_B097F970764047628667064D296D978B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout _.fcp.SchemaViewerObjectModel.false...dim-percentage='0.5' _.fcp.SchemaViewerObjectModel.false...measure-percentage='0.4' _.fcp.SchemaViewerObjectModel.true...common-percentage='0.79056' _.fcp.SchemaViewerObjectModel.true...user-set-layout-v2='true' dim-ordering='alphabetic' measure-ordering='alphabetic' parameter-percentage='0.20944' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[none:PA:nk]' type='palette'>
+            <map to='#499894'>
+              <bucket>&quot;Changi&quot;</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>&quot;Outram&quot;</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>&quot;Toa Payoh&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;Ang Mo Kio&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;Bedok&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;Marina East&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;Simpang&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;Bukit Merah&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;Newton&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;Sungei Kadut&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;Downtown Core&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;Punggol&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;Woodlands&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;Changi Bay&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;Pasir Ris&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;Tuas&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;Bukit Panjang&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;North-Eastern Islands&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;Tampines&quot;</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>&quot;Lim Chu Kang&quot;</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>&quot;Sengkang&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;Bishan&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;Marina South&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;Singapore River&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;Jurong West&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;Seletar&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;Bukit Timah&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;Novena&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;Tanglin&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;Geylang&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;Queenstown&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;Yishun&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;Hougang&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;River Valley&quot;</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>&quot;Kallang&quot;</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>&quot;Sembawang&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;Mandai&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;Serangoon&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;Choa Chu Kang&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;Paya Lebar&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;Western Islands&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;Central Water Catchment&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;Orchard&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;Tengah&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;Boon Lay&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;Marine Parade&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;Southern Islands&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;Jurong East&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;Rochor&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;Clementi&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;Pioneer&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;Western Water Catchment&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;Bukit Batok&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;Museum&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;Straits View&quot;</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[:Measure Names]' type='palette'>
+            <map to='#4e79a7'>
+              <bucket>&quot;[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:Calculation_529173009062948868:qk]&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Calculation_529173009062948868:qk]&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;[Parameters].[Parameter 1]&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[diff:sum:Calculation_529173009049964546:qk]&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:Calculation_529173009049964546:qk]&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Calculation_529173009049964546:qk]&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation1:qk]&quot;</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[none:Sex:nk]' type='palette'>
+            <map to='#76b7b2'>
+              <bucket>&quot;Males&quot;</bucket>
+            </map>
+            <map to='#ed444a'>
+              <bucket>&quot;Females&quot;</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[AG (group)]' type='palette'>
+            <map to='#4e79a7'>
+              <bucket>&quot;0-9&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;40-49&quot;</bucket>
+            </map>
+            <map to='#76b7b2'>
+              <bucket>&quot;30-39&quot;</bucket>
+            </map>
+            <map to='#76b7b2'>
+              <bucket>&quot;30-39, 40-49, 50-59&quot;</bucket>
+            </map>
+            <map to='#9c755f'>
+              <bucket>&quot;80-89&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;60-69&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;90 and over&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;20-29&quot;</bucket>
+            </map>
+            <map to='#edc948'>
+              <bucket>&quot;50-59&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;10-19&quot;</bucket>
+            </map>
+            <map to='#ff9da7'>
+              <bucket>&quot;70-79&quot;</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;Singapore&quot;' />
+      </semantic-values>
+      <date-options start-of-week='monday' />
+      <field-sort-info field-sort-order-type='custom-order'>
+        <field-sort-custom-order field='PA' />
+        <field-sort-custom-order field='Calculation_529173009091387403' />
+        <field-sort-custom-order field='SZ' />
+        <field-sort-custom-order field='AG' />
+        <field-sort-custom-order field='Sex' />
+        <field-sort-custom-order field='Calculation_529173009062948868' />
+        <field-sort-custom-order field='TOD' />
+        <field-sort-custom-order field='Pop' />
+        <field-sort-custom-order field='Time' />
+        <field-sort-custom-order field='Calculation_529173009047736320' />
+        <field-sort-custom-order field='Calculation_529173009049964546' />
+        <field-sort-custom-order field='Calculation_529173009077182469' />
+      </field-sort-info>
+      <datasource-dependencies datasource='Parameters'>
+        <column caption='Total Columns' datatype='integer' name='[Parameter 1]' param-domain-type='any' role='measure' type='quantitative' value='3'>
+          <calculation class='tableau' formula='3' />
+        </column>
+        <column caption='Total Columns 2' datatype='integer' name='[Parameter 2]' param-domain-type='any' role='measure' type='quantitative' value='10'>
+          <calculation class='tableau' formula='10' />
+        </column>
+      </datasource-dependencies>
+      <_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+        <objects>
+          <object caption='Notes_respopagesextod2022.csv' id='Notes_respopagesextod2022.csv_CFC74A7AF7ED4473B378F167280E7DDB'>
+            <properties context=''>
+              <relation connection='textscan.0el0obv0k3j2k41ct9q0t18mwqol' name='Notes_respopagesextod2022.csv' table='[Notes_respopagesextod2022#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_GB'>
+                  <column datatype='string' name='Notes for Singapore Residents by Planning Area/Subzone, Age Group, Sex and Type of Dwelling, June 2022' ordinal='0' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+          <object caption='respopagesextod2022.csv' id='respopagesextod2022.csv_B097F970764047628667064D296D978B'>
+            <properties context=''>
+              <relation connection='textscan.0el0obv0k3j2k41ct9q0t18mwqol' name='respopagesextod2022.csv' table='[respopagesextod2022#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+                  <column datatype='string' name='PA' ordinal='0' />
+                  <column datatype='string' name='SZ' ordinal='1' />
+                  <column datatype='string' name='AG' ordinal='2' />
+                  <column datatype='string' name='Sex' ordinal='3' />
+                  <column datatype='string' name='TOD' ordinal='4' />
+                  <column datatype='integer' name='Pop' ordinal='5' />
+                  <column datatype='integer' name='Time' ordinal='6' />
+                </columns>
+              </relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='Extract' table='[Extract].[Extract]' type='table' />
+            </properties>
+          </object>
+        </objects>
+        <relationships>
+          <relationship>
+            <expression op='='>
+              <expression op='[]' />
+              <expression op='[]' />
+            </expression>
+            <first-end-point object-id='respopagesextod2022.csv_B097F970764047628667064D296D978B' />
+            <second-end-point object-id='Notes_respopagesextod2022.csv_CFC74A7AF7ED4473B378F167280E7DDB' />
+          </relationship>
+        </relationships>
+      </_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='By age group'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>By age group</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='respopagesextod2022' name='federated.0kpt87y1gxfs7n1e3thgx1njovlj' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0kpt87y1gxfs7n1e3thgx1njovlj'>
+            <column datatype='string' name='[AG (group)]' role='dimension' type='nominal'>
+              <calculation class='categorical-bin' column='[AG]' new-bin='true'>
+                <bin default-name='false' value='&quot;0-9&quot;'>
+                  <value>&quot;0_to_4&quot;</value>
+                  <value>&quot;5_to_9&quot;</value>
+                </bin>
+                <bin default-name='false' value='&quot;10-19&quot;'>
+                  <value>&quot;10_to_14&quot;</value>
+                  <value>&quot;15_to_19&quot;</value>
+                </bin>
+                <bin default-name='false' value='&quot;20-29&quot;'>
+                  <value>&quot;20_to_24&quot;</value>
+                  <value>&quot;25_to_29&quot;</value>
+                </bin>
+                <bin default-name='false' value='&quot;60-69&quot;'>
+                  <value>&quot;60_to_64&quot;</value>
+                  <value>&quot;65_to_69&quot;</value>
+                </bin>
+                <bin default-name='false' value='&quot;70-79&quot;'>
+                  <value>&quot;70_to_74&quot;</value>
+                  <value>&quot;75_to_79&quot;</value>
+                </bin>
+                <bin default-name='false' value='&quot;80-89&quot;'>
+                  <value>&quot;80_to_84&quot;</value>
+                  <value>&quot;85_to_89&quot;</value>
+                </bin>
+                <bin default-name='false' value='&quot;90 and over&quot;'>
+                  <value>&quot;90_and_over&quot;</value>
+                </bin>
+              </calculation>
+            </column>
+            <column datatype='string' hidden='true' name='[AG]' role='dimension' type='nominal' />
+            <column datatype='string' name='[PA]' role='dimension' type='nominal' />
+            <column datatype='integer' name='[Pop]' role='measure' type='quantitative' />
+            <column datatype='string' name='[Sex]' role='dimension' type='nominal' />
+            <column-instance column='[PA]' derivation='None' name='[none:PA:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Sex]' derivation='None' name='[none:Sex:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Pop]' derivation='Sum' name='[sum:Pop:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:PA:nk]'>
+            <groupfilter expression='SUM([Pop]) &gt; 0' function='filter' user:ui-filter-by-field='true' user:ui-marker='filter-by'>
+              <groupfilter function='level-members' level='[none:PA:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+            </groupfilter>
+          </filter>
+          <shelf-sorts>
+            <shelf-sort-v2 dimension-to-sort='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:PA:nk]' direction='DESC' is-on-innermost-dimension='true' measure-to-sort-by='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Pop:qk]' shelf='columns'>
+              <sort-filter-info>
+                <sort-filter level-name='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[AG (group)]' member-value='&quot;0-9&quot;' />
+              </sort-filter-info>
+            </shelf-sort-v2>
+          </shelf-sorts>
+          <slices>
+            <column>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:PA:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:Sex:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>([federated.0kpt87y1gxfs7n1e3thgx1njovlj].[AG (group)] * [federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Pop:qk])</rows>
+        <cols>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:PA:nk]</cols>
+      </table>
+      <simple-id uuid='{E99E19D8-9327-4E3E-A14A-99F71FDBEE3C}' />
+    </worksheet>
+    <worksheet name='By gender'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='respopagesextod2022' name='federated.0kpt87y1gxfs7n1e3thgx1njovlj' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0kpt87y1gxfs7n1e3thgx1njovlj'>
+            <column datatype='string' name='[PA]' role='dimension' type='nominal' />
+            <column datatype='integer' name='[Pop]' role='measure' type='quantitative' />
+            <column datatype='string' name='[Sex]' role='dimension' type='nominal' />
+            <column-instance column='[PA]' derivation='None' name='[none:PA:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Sex]' derivation='None' name='[none:Sex:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Pop]' derivation='Sum' name='[sum:Pop:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:PA:nk]'>
+            <groupfilter expression='SUM([Pop]) &gt; 0' function='filter' user:ui-filter-by-field='true' user:ui-marker='filter-by'>
+              <groupfilter function='level-members' level='[none:PA:nk]' user:ui-manual-selection='true' user:ui-manual-selection-all-when-empty='true' user:ui-manual-selection-is-empty='true' user:ui-marker='enumerate' />
+            </groupfilter>
+          </filter>
+          <computed-sort column='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:PA:nk]' direction='DESC' using='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Pop:qk]' />
+          <slices>
+            <column>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:PA:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:Sex:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Pop:qk]</rows>
+        <cols>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:PA:nk]</cols>
+      </table>
+      <simple-id uuid='{823E41CA-2286-4F5F-B4DF-31B59D047FB6}' />
+    </worksheet>
+    <worksheet name='Sheet 5'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='respopagesextod2022' name='federated.0kpt87y1gxfs7n1e3thgx1njovlj' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0kpt87y1gxfs7n1e3thgx1njovlj'>
+            <column datatype='string' name='[AG (group)]' role='dimension' type='nominal'>
+              <calculation class='categorical-bin' column='[AG]' new-bin='true'>
+                <bin default-name='false' value='&quot;0-9&quot;'>
+                  <value>&quot;0_to_4&quot;</value>
+                  <value>&quot;5_to_9&quot;</value>
+                </bin>
+                <bin default-name='false' value='&quot;10-19&quot;'>
+                  <value>&quot;10_to_14&quot;</value>
+                  <value>&quot;15_to_19&quot;</value>
+                </bin>
+                <bin default-name='false' value='&quot;20-29&quot;'>
+                  <value>&quot;20_to_24&quot;</value>
+                  <value>&quot;25_to_29&quot;</value>
+                </bin>
+                <bin default-name='false' value='&quot;60-69&quot;'>
+                  <value>&quot;60_to_64&quot;</value>
+                  <value>&quot;65_to_69&quot;</value>
+                </bin>
+                <bin default-name='false' value='&quot;70-79&quot;'>
+                  <value>&quot;70_to_74&quot;</value>
+                  <value>&quot;75_to_79&quot;</value>
+                </bin>
+                <bin default-name='false' value='&quot;80-89&quot;'>
+                  <value>&quot;80_to_84&quot;</value>
+                  <value>&quot;85_to_89&quot;</value>
+                </bin>
+                <bin default-name='false' value='&quot;90 and over&quot;'>
+                  <value>&quot;90_and_over&quot;</value>
+                </bin>
+              </calculation>
+            </column>
+            <column datatype='string' hidden='true' name='[AG]' role='dimension' type='nominal' />
+            <column datatype='string' name='[PA]' role='dimension' type='nominal' />
+            <column datatype='integer' name='[Pop]' role='measure' type='quantitative' />
+            <column-instance column='[PA]' derivation='None' name='[none:PA:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Pop]' derivation='Sum' name='[pcto:sum:Pop:qk:3]' pivot='key' type='quantitative'>
+              <table-calc ordering-type='Rows' type='PctTotal' />
+            </column-instance>
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:PA:nk]'>
+            <groupfilter expression='SUM([Pop]) &gt; 0' function='filter' user:ui-filter-by-field='true' user:ui-marker='filter-by'>
+              <groupfilter function='level-members' level='[none:PA:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:PA:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='height' field='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[AG (group)]' value='39' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[pcto:sum:Pop:qk:3]</rows>
+        <cols>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[AG (group)]</cols>
+      </table>
+      <simple-id uuid='{5A0A1DB4-96E1-43C7-AB65-130359DA29B3}' />
+    </worksheet>
+    <worksheet name='Trellis'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Trellis</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <repository-location id='Sheet12' path='/workbooks/Tableau_16738555074630' revision='' />
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='respopagesextod2022' name='federated.0kpt87y1gxfs7n1e3thgx1njovlj' />
+            <datasource name='Parameters' />
+          </datasources>
+          <datasource-dependencies datasource='Parameters'>
+            <column caption='Total Columns' datatype='integer' name='[Parameter 1]' param-domain-type='any' role='measure' type='quantitative' value='3'>
+              <calculation class='tableau' formula='3' />
+            </column>
+          </datasource-dependencies>
+          <datasource-dependencies datasource='federated.0kpt87y1gxfs7n1e3thgx1njovlj'>
+            <column datatype='string' name='[AG (group)]' role='dimension' type='nominal'>
+              <calculation class='categorical-bin' column='[AG]' new-bin='true'>
+                <bin default-name='false' value='&quot;0-9&quot;'>
+                  <value>&quot;0_to_4&quot;</value>
+                  <value>&quot;5_to_9&quot;</value>
+                </bin>
+                <bin default-name='false' value='&quot;10-19&quot;'>
+                  <value>&quot;10_to_14&quot;</value>
+                  <value>&quot;15_to_19&quot;</value>
+                </bin>
+                <bin default-name='false' value='&quot;20-29&quot;'>
+                  <value>&quot;20_to_24&quot;</value>
+                  <value>&quot;25_to_29&quot;</value>
+                </bin>
+                <bin default-name='false' value='&quot;60-69&quot;'>
+                  <value>&quot;60_to_64&quot;</value>
+                  <value>&quot;65_to_69&quot;</value>
+                </bin>
+                <bin default-name='false' value='&quot;70-79&quot;'>
+                  <value>&quot;70_to_74&quot;</value>
+                  <value>&quot;75_to_79&quot;</value>
+                </bin>
+                <bin default-name='false' value='&quot;80-89&quot;'>
+                  <value>&quot;80_to_84&quot;</value>
+                  <value>&quot;85_to_89&quot;</value>
+                </bin>
+                <bin default-name='false' value='&quot;90 and over&quot;'>
+                  <value>&quot;90_and_over&quot;</value>
+                </bin>
+              </calculation>
+            </column>
+            <column datatype='string' hidden='true' name='[AG]' role='dimension' type='nominal' />
+            <column caption='Index' datatype='integer' datatype-customized='true' name='[Calculation1]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='INT((INDEX())%[Parameters].[Parameter 1]^2)+1'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column caption='Male' datatype='integer' name='[Calculation_529173009049964546]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF [Sex] = &apos;Males&apos; THEN [Pop] END' />
+            </column>
+            <column caption='Female' datatype='integer' name='[Calculation_529173009062948868]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF [Sex] = &apos;Females&apos; THEN [Pop] END' />
+            </column>
+            <column caption='Column' datatype='integer' name='[Calculation_529173009091969036]' role='measure' type='ordinal'>
+              <calculation class='tableau' formula='(([Calculation1]-1)%[Parameters].[Parameter 1])+1'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column caption='Row' datatype='integer' datatype-customized='true' name='[Calculation_529173009092018189]' role='measure' type='ordinal'>
+              <calculation class='tableau' formula='INT(([Calculation1] - [Calculation_529173009091969036])/[Parameters].[Parameter 1])+1'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column datatype='string' name='[PA]' role='dimension' type='nominal' />
+            <column datatype='integer' name='[Pop]' role='measure' type='quantitative' />
+            <column datatype='string' name='[Sex]' role='dimension' type='nominal' />
+            <column-instance column='[PA]' derivation='None' name='[none:PA:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Calculation_529173009049964546]' derivation='Sum' name='[sum:Calculation_529173009049964546:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_529173009062948868]' derivation='Sum' name='[sum:Calculation_529173009062948868:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation1]' derivation='User' name='[usr:Calculation1:qk:1]' pivot='key' type='quantitative'>
+              <table-calc ordering-field='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[PA]' ordering-type='Field' />
+            </column-instance>
+            <column-instance column='[Calculation_529173009091969036]' derivation='User' name='[usr:Calculation_529173009091969036:ok:33]' pivot='key' type='ordinal'>
+              <table-calc ordering-field='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[PA]' ordering-type='Field' />
+              <table-calc field='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[Calculation1]' ordering-field='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[PA]' ordering-type='Field' />
+            </column-instance>
+            <column-instance column='[Calculation_529173009092018189]' derivation='User' name='[usr:Calculation_529173009092018189:ok:39]' pivot='key' type='ordinal'>
+              <table-calc ordering-field='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[PA]' ordering-type='Field' />
+              <table-calc field='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[Calculation1]' ordering-field='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[PA]' ordering-type='Field' />
+              <table-calc field='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[Calculation_529173009091969036]' ordering-field='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[PA]' ordering-type='Field' />
+            </column-instance>
+          </datasource-dependencies>
+          <natural-sort column='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[AG (group)]' direction='DESC' />
+          <filter class='categorical' column='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:PA:nk]'>
+            <groupfilter function='union' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='member' level='[none:PA:nk]' member='&quot;Ang Mo Kio&quot;' />
+              <groupfilter function='member' level='[none:PA:nk]' member='&quot;Bedok&quot;' />
+              <groupfilter function='member' level='[none:PA:nk]' member='&quot;Bishan&quot;' />
+              <groupfilter function='member' level='[none:PA:nk]' member='&quot;Boon Lay&quot;' />
+              <groupfilter function='member' level='[none:PA:nk]' member='&quot;Bukit Batok&quot;' />
+              <groupfilter function='member' level='[none:PA:nk]' member='&quot;Bukit Merah&quot;' />
+              <groupfilter function='member' level='[none:PA:nk]' member='&quot;Bukit Panjang&quot;' />
+              <groupfilter function='member' level='[none:PA:nk]' member='&quot;Bukit Timah&quot;' />
+              <groupfilter function='member' level='[none:PA:nk]' member='&quot;Geylang&quot;' />
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:PA:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Calculation_529173009049964546:qk]' field-type='quantitative' max='25000' min='0' range-type='fixed' reverse='true' scope='cols' type='space' />
+            <encoding attr='space' class='0' field='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Calculation_529173009062948868:qk]' field-type='quantitative' max='25000' min='0' range-type='fixed' scope='cols' type='space' />
+          </style-rule>
+          <style-rule element='cell'>
+            <format attr='vertical-align' field='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009091969036:ok:33]' value='bottom' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='height-header' value='32' />
+            <format attr='height' field='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009091969036:ok:33]' value='34' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='display' field='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:PA:nk]' value='true' />
+            <format attr='display' field='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009091969036:ok:33]' value='false' />
+            <format attr='display' field='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[AG (group)]' value='true' />
+            <format attr='display' field='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009092018189:ok:39]' value='false' />
+            <format attr='text-align' field='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:PA:nk]' value='auto' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='in-tooltip' field='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009091969036:ok:33]' value='false' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='15' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <encodings>
+              <lod column='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation1:qk:1]' />
+            </encodings>
+            <style>
+              <style-rule element='cell'>
+                <format attr='text-align' value='right' />
+              </style-rule>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-mode' value='all' />
+                <format attr='mark-labels-show' value='false' />
+                <format attr='mark-color' value='#f17b79' />
+                <format attr='has-stroke' value='false' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='16' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Calculation_529173009062948868:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <encodings>
+              <lod column='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation1:qk:1]' />
+              <lod column='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:PA:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='cell'>
+                <format attr='text-align' value='right' />
+              </style-rule>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-mode' value='all' />
+                <format attr='mark-color' value='#ff9d9a' />
+                <format attr='has-stroke' value='false' />
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='17' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Calculation_529173009049964546:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <encodings>
+              <lod column='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation1:qk:1]' />
+              <text column='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:PA:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='cell'>
+                <format attr='text-align' value='right' />
+              </style-rule>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-mode' value='all' />
+                <format attr='mark-labels-show' value='false' />
+                <format attr='mark-color' value='#76b7b2' />
+                <format attr='has-stroke' value='false' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>([federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009092018189:ok:39] / [federated.0kpt87y1gxfs7n1e3thgx1njovlj].[AG (group)])</rows>
+        <cols>([federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009091969036:ok:33] * ([federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Calculation_529173009049964546:qk] + [federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Calculation_529173009062948868:qk]))</cols>
+        <mark-labels>
+          <mark-label id='1' label-state='on'>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009091969036:ok:33]</field>
+                    <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Calculation_529173009049964546:qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009092018189:ok:39]</field>
+                    <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[AG (group)]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[AG (group)]</field>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:PA:nk]</field>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Calculation_529173009049964546:qk]</field>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Calculation_529173009062948868:qk]</field>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009091969036:ok:33]</field>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009092018189:ok:39]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;0-9&quot;</value>
+                <value>&quot;Bukit Merah&quot;</value>
+                <value>6160</value>
+                <value>5800</value>
+                <value>1</value>
+                <value>2</value>
+              </tuple>
+            </tuple-reference>
+            <label-position x='-114' y='166' />
+          </mark-label>
+          <mark-label id='4' label-state='on'>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009091969036:ok:33]</field>
+                    <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Calculation_529173009049964546:qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009092018189:ok:39]</field>
+                    <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[AG (group)]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[AG (group)]</field>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:PA:nk]</field>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Calculation_529173009049964546:qk]</field>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Calculation_529173009062948868:qk]</field>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009091969036:ok:33]</field>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009092018189:ok:39]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;10-19&quot;</value>
+                <value>&quot;Bukit Panjang&quot;</value>
+                <value>7330</value>
+                <value>7260</value>
+                <value>2</value>
+                <value>2</value>
+              </tuple>
+            </tuple-reference>
+            <label-position x='-96' y='145' />
+          </mark-label>
+          <mark-label id='5' label-state='on'>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009091969036:ok:33]</field>
+                    <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Calculation_529173009049964546:qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009092018189:ok:39]</field>
+                    <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[AG (group)]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[AG (group)]</field>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:PA:nk]</field>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Calculation_529173009049964546:qk]</field>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Calculation_529173009062948868:qk]</field>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009091969036:ok:33]</field>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009092018189:ok:39]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;10-19&quot;</value>
+                <value>&quot;Ang Mo Kio&quot;</value>
+                <value>7130</value>
+                <value>6940</value>
+                <value>2</value>
+                <value>1</value>
+              </tuple>
+            </tuple-reference>
+            <label-position x='-109' y='146' />
+          </mark-label>
+          <mark-label id='6' label-state='on'>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009091969036:ok:33]</field>
+                    <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Calculation_529173009049964546:qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009092018189:ok:39]</field>
+                    <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[AG (group)]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[AG (group)]</field>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:PA:nk]</field>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Calculation_529173009049964546:qk]</field>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Calculation_529173009062948868:qk]</field>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009091969036:ok:33]</field>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009092018189:ok:39]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;0-9&quot;</value>
+                <value>&quot;Bukit Batok&quot;</value>
+                <value>8580</value>
+                <value>8140</value>
+                <value>3</value>
+                <value>1</value>
+              </tuple>
+            </tuple-reference>
+            <label-position x='-92' y='165' />
+          </mark-label>
+          <mark-label id='7' label-state='on'>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009091969036:ok:33]</field>
+                    <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Calculation_529173009049964546:qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009092018189:ok:39]</field>
+                    <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[AG (group)]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[AG (group)]</field>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:PA:nk]</field>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Calculation_529173009049964546:qk]</field>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[sum:Calculation_529173009062948868:qk]</field>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009091969036:ok:33]</field>
+                  <field>[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[usr:Calculation_529173009092018189:ok:39]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;10-19&quot;</value>
+                <value>&quot;Bukit Timah&quot;</value>
+                <value>4470</value>
+                <value>5400</value>
+                <value>3</value>
+                <value>2</value>
+              </tuple>
+            </tuple-reference>
+            <label-position x='-129' y='143' />
+          </mark-label>
+        </mark-labels>
+      </table>
+      <simple-id uuid='{7F034BCE-A963-4AB1-BDDE-7EB67D929AF4}' />
+    </worksheet>
+  </worksheets>
+  <windows source-height='37'>
+    <window class='worksheet' maximized='true' name='Trellis'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='fit-width' />
+        <floating-toolbar-visibility value='2' />
+      </viewpoint>
+      <simple-id uuid='{8B87908E-D73C-4BE4-8EAE-C2A57285960F}' />
+    </window>
+    <window class='worksheet' name='By gender'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:Sex:nk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='fit-width' />
+      </viewpoint>
+      <simple-id uuid='{C839AAED-9814-4688-80ED-08839C30960B}' />
+    </window>
+    <window class='worksheet' name='By age group'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.0kpt87y1gxfs7n1e3thgx1njovlj].[none:Sex:nk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='fit-width' />
+      </viewpoint>
+      <simple-id uuid='{96FD40DC-C557-421F-B79C-E12FC0B8B4EC}' />
+    </window>
+    <window class='worksheet' name='Sheet 5'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{2DB85B08-FC77-41BC-AAEC-060B4DA84EDD}' />
+    </window>
+  </windows>
+</workbook>

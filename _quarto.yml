@@ -2,27 +2,33 @@ project:
   type: website
 
 website:
+  comments: 
+    utterances: 
+      repo: quarto-dev/quarto-web
   title: "ISSS608-VAA"
+
   navbar:
     left:
+    - icon: "house-fill"
+      href: "index.html"
     - text: "In-class Exercise"
       menu:
       - text: "In-class Exercise 1"
-        href: "In-class_Ex/In-class_Ex01/In-class_Ex01.html"
-      - text: "In-class Exercise 2"
-        href: "In-class_Ex/In-class_Ex02/In-class_Ex02.html"
+        href: "https://public.tableau.com/app/profile/tasaporn.visawameteekul6790/viz/In-class_Ex01_16736930308190/SalesandProfitSummary"
+      # - text: "In-class Exercise 2"
+        # href: "In-class_Ex/In-class_Ex02/In-class_Ex02.html"
       - text: "In-class Exercise 3"
-        href: "In-class_Ex/In-class_Ex03/In-class_Ex03.html"
+        href: "https://public.tableau.com/views/In-class_Ex03_16748826143570/Dashboard1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link"
       - text: "In-class Exercise 4"
         href: "In-class_Ex/In-class_Ex04/In-class_Ex04.html"
-      - text: "In-class Exercise 5"
-        href: "In-class_Ex/In-class_Ex05/In-class_Ex05.html"
-      - text: "In-class Exercise 6"
-        href: "In-class_Ex/In-class_Ex06/In-class_Ex06.html"
-      - text: "In-class Exercise 7"
-        href: "In-class_Ex/In-class_Ex07/In-class_Ex07.html"
-      - text: "In-class Exercise 8"
-        href: "In-class_Ex/In-class_Ex08/In-class_Ex08.html"
+      # - text: "In-class Exercise 5"
+      #   href: "In-class_Ex/In-class_Ex05/In-class_Ex05.html"
+      # - text: "In-class Exercise 6"
+      #   href: "In-class_Ex/In-class_Ex06/In-class_Ex06.html"
+      # - text: "In-class Exercise 7"
+      #   href: "In-class_Ex/In-class_Ex07/In-class_Ex07.html"
+      # - text: "In-class Exercise 8"
+      # href: "In-class_Ex/In-class_Ex08/In-class_Ex08.html"
 
     - text: "Hands-on Exercise"
       menu:
@@ -34,14 +40,14 @@ website:
         href: "Hands-on_Ex/Hands-on_Ex03/Hands-on_Ex03.html"
       - text: "Hands-on Exercise 4"
         href: "Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04.html"
-      - text: "Hands-on Exercise 5"
-        href: "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html"
-      - text: "Hands-on Exercise 6"
-        href: "Hands-on_Ex/Hands-on_Ex06/Hands-on_Ex06.html"
-      - text: "Hands-on Exercise 7"
-        href: "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html"
-      - text: "Hands-on Exercise 8"
-        href: "Hands-on_Ex/Hands-on_Ex08/Hands-on_Ex08.html"
+      # - text: "Hands-on Exercise 5"
+      #   href: "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html"
+      # - text: "Hands-on Exercise 6"
+      #   href: "Hands-on_Ex/Hands-on_Ex06/Hands-on_Ex06.html"
+      # - text: "Hands-on Exercise 7"
+      #   href: "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html"
+      # - text: "Hands-on Exercise 8"
+      #   href: "Hands-on_Ex/Hands-on_Ex08/Hands-on_Ex08.html"
 
     - text: "Take-home Exercise"
       menu:
@@ -49,22 +55,25 @@ website:
         href: "Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html"
       - text: "Take-home Exercise 2"
         href: "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html"
-      - text: "Take-home Exercise 3"
-        href: "Take-home_Ex/Take-home_Ex03/Take-home_Ex03.html"
-      - text: "Take-home Exercise 4"
-        href: "Take-home_Ex/Take-home_Ex04/Take-home_Ex04.html"
-      - text: "Take-home Exercise 5"
-        href: "Take-home_Ex/Take-home_Ex05/Take-home_Ex05.html"
-      - text: "Take-home Exercise 6"
-        href: "Take-home_Ex/Take-home_Ex06/Take-home_Ex06.html"
-      - text: "Take-home Exercise 7"
-        href: "Take-home_Ex/Take-home_Ex07/Take-home_Ex07.html"
-      - text: "Take-home Exercise 8"
-        href: "Take-home_Ex/Take-home_Ex08/Take-home_Ex08.html"
-    right: 
-      - href: index.qmd
-        text: Home
-      - about.qmd
+      # - text: "Take-home Exercise 3"
+      #   href: "Take-home_Ex/Take-home_Ex03/Take-home_Ex03.html"
+      # - text: "Take-home Exercise 4"
+      #   href: "Take-home_Ex/Take-home_Ex04/Take-home_Ex04.html"
+      # - text: "Take-home Exercise 5"
+      #   href: "Take-home_Ex/Take-home_Ex05/Take-home_Ex05.html"
+      # - text: "Take-home Exercise 6"
+      #   href: "Take-home_Ex/Take-home_Ex06/Take-home_Ex06.html"
+      # - text: "Take-home Exercise 7"
+      #   href: "Take-home_Ex/Take-home_Ex07/Take-home_Ex07.html"
+      # - text: "Take-home Exercise 8"
+      #   href: "Take-home_Ex/Take-home_Ex08/Take-home_Ex08.html"
+    - text: "Group Project"
+      href: "https://isss608-ay2022-23t2g9.netlify.app/"
+    right:
+      - icon: github
+        href: https://github.com/TasapornV/ISSS608-VAA.git
+      - text: "about me"
+        href: about.qmd
 format:
   html:
     theme: minty

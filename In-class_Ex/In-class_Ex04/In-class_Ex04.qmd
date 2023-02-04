@@ -1,0 +1,40 @@
+---
+title: "In-class Exercise 4"
+author: "Tasaporn Visawameteekul"
+date: 04 February 2023
+date-modified: "`r Sys.Date()`"
+execute: 
+  echo: true
+  eval: true
+  warning: false
+format: html
+toc: true
+editor: visual
+---
+
+Getting Started
+
+# Install and launching R packages
+
+Two packages will be installed and loaded. They are: tidyverse, ggiraph
+
+```{r}
+pacman::p_load(plotly, DT, patchwork, tidyverse)
+```
+
+Importing data
+
+```{r, warning = FALSE, message=FALSE}
+exam_data <- read_csv("data/Exam_data.csv")
+head(exam_data, n=5)
+```
+
+### Working with visual variable: plot_ly() method
+
+```{r, message = FALSE}
+plot_ly(data = exam_data, 
+        x = ~ENGLISH,
+        y = ~MATHS,
+        color = ~RACE,
+        colors = "Set1") #<<
+```

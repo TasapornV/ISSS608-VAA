@@ -1,11 +1,173 @@
 ---
 title: "Take-home Exercise 1"
+subtitle: "Comparing Singapore resident demographic by sub-zone with Trellis chart"
 author: "Tasaporn Visawameteekul"
 date: "15 Jan 2023"
 toc: true
+toc-location: left
+toc-title: Contents
 ---
 
-# Task description
+### 1. The task
 
-Age-sex pyramid is an analytical visualization commonly used by demographers to reveal the structure of population by gender and age group. In this take-home exercise, you are required to reveal the demographic structure of Singapore at planning area level by using age-sex pyramid method. Instead of plotting a single age-sex pyramid, however, you are required to display nine selected planning areas on a single view by using trellis display (also know as small-multiple plot).
+[Age-sex pyramid](https://isss608-ay2022-23jan.netlify.app/outline/lesson01_outline#age-sex-pyramid) is an analytical visualization commonly used by demographers to reveal the structure of population by gender and age group. In this take-home exercise, you are required to reveal the demographic structure of Singapore at planning area level by using age-sex pyramid method. Instead of plotting a single age-sex pyramid, however, you are required to display nine selected planning areas on a single view by using [trellis display (also know as small-multiple plot)](https://isss608-ay2022-23jan.netlify.app/outline/lesson01_outline#trellis-display).
 
+### 2. Data
+
+"Singapore Residents by Planning Area / Subzone, Age Group, Sex and Type of Dwelling, June 2022" is used to prepare the analytical visualization. It is available at Department of Statistics, Singapore([SingStat](https://www.singstat.gov.sg/find-data/search-by-theme/population/geographic-distribution/latest-data)).
+
+#### Metadata
+
+| PA = Planning Area
+| SZ = Subzone
+| AG = Age Group
+| Sex = Sex
+| TOD = Type of Dwelling
+| Pop = Resident Count
+| Time = Time / Period
+
+Note:
+
+1.  For June 2022, Planning Areas refer to areas demarcated in the Urban Redevelopment Authority's Master Plan 2019.
+2.  Data from 2003 onwards exclude residents who have been away from Singapore for a continuous period of 12 months or longer as at the reference period.
+3.  The figures have been rounded to the nearest 10. 4) The data may not add up due to rounding.
+
+Date generated: 29/02/2022 Source: Singapore Department of Statistics
+
+### 3. Analysis
+
+#### What is the distribution of Singapore residence by Planning Area?
+
+![](Population%20distribution.png)
+
+The above bar chart depicts the number of residents in each Planning Area. In this scenario, we choose the 9 most populous areas, which account for 52.3% of the overall population.
+
+Now, let's examine the demographic specifics of these nine regions. What is the age and gender distribution of the population in each area? We will utilize the pyramid chart, which is separated into equal-height horizontal divisions. The width of each part varies. Population pyramids are produced using a horizontal column chart with positive and negative values. These graphs permit comparisons of distinct categories (in this case, age) across two series (male and female).
+
+In addition, for comparative purposes, we introduce Trellis plot techniques, which consist of a grid of smaller plots. Each small plot represents a unique state or item, and all small plots have identical scales.
+
+#### What is the demographic breakdown of Singaporeans in the top 9 most populous Planning Areas?
+
+[![Design 1 : 3x3 Trellis plot](output.gif.gif){fig-align="center"}](https://public.tableau.com/views/Take-home_01_PopulationbyPlanningArea/3x3Trellis?:language=en-US&:display_count=n&:origin=viz_share_link)
+
+At first look, each of the 9 selected areas appears to have a symmetrical shape. This indicates the ratio of males to females in the population. However, a closer examination reveals that the senior female population is typically slightly larger than the senior male population.
+
+We may categorize them into 4 groups based on their similarities.
+
+1.  The first group comprises two areas, namely *Bedok* and *Jurong West*. They have a similar shape, with symmetrical small apex that gradually widens and tapers to a smaller base. These 2 regions contain a substantial proportion of residents between the ages of 40-69.
+2.  While the next group *Sengkang* and *Punggol* have a form that widens in the 30-39 and 40-49 year age-range, the population in the 20-29-year age group is much smaller.
+3.  The following group includes 4 areas: *Tampines*, *Woodlands*, *Hougang*, and *Choa Chu Kang*. This group depicts a little head that rapidly enlarges between the ages of 60 - 69, narrows between the ages of 40-49, and then enlarges again before narrowing at the bottom.
+4.  The final one is *Yishun*, which has a unique shape compared to the others. In Yishun, the proportions of the people in the age groups 40-49, 50-59, and 60-69 are very similar, while the 30-39 age group is the greatest.
+
+### 4. Step-by-Step Description
+
+#### 1. Prepare the data
+
+In this project, we prepare the data using [Tableau Prep Builder](https://www.tableau.com/support/releases/prep) version 2022.4.0, which makes data preparation simple and intuitive.
+
++-----+-----------------------------------------------------------------------------------------------------------------------------------+
+| No. | Step                                                                                                                              |
++=====+===================================================================================================================================+
+| 1.1 | ![](step%201.png){width="700"}                                                                                                    |
+|     |                                                                                                                                   |
+|     | -   Open Tableau Prep Builder                                                                                                     |
+|     | -   Click the blue button "Connect to Data"                                                                                       |
+|     | -   We are using csv file, therefore pick "Text file"                                                                             |
+|     | -   Connect our main data file "respopagesextod2022.csv"                                                                          |
+|     | -   The data field summary will be displayed as indicated in the image. We can see from this that our original data had 7 fields. |
++-----+-----------------------------------------------------------------------------------------------------------------------------------+
+| 1.2 | ![](step%202.png){width="700"}                                                                                                    |
+|     |                                                                                                                                   |
+|     | -   Add a clean step by clicking the "+ symbol" and then selecting "Clean Step"                                                   |
+|     | -   To eliminate Planning areas with no population, remove the zero value from the "Pop" parameter                                |
+|     | -   Rename the step as "Filter Pop"                                                                                               |
++-----+-----------------------------------------------------------------------------------------------------------------------------------+
+| 1.3 | ![](step%203.png){width="700"}                                                                                                    |
+|     |                                                                                                                                   |
+|     | -   Add a clean step "Group age range"                                                                                            |
+|     | -   To make analysis easier, group the age range into 10 years                                                                    |
++-----+-----------------------------------------------------------------------------------------------------------------------------------+
+| 1.4 | ![](step%204.png){width="700"}                                                                                                    |
+|     |                                                                                                                                   |
+|     | -   Add a clean step "Create parameter"                                                                                           |
+|     | -   Create the fields "Female Population" and "Male Population" using the following formula                                       |
+|     |     -   IF \[Sex\]='Females' THEN \[Pop\] ELSE 0 END                                                                              |
+|     |     -   IF \[SEX\] = 'Males' THEN \[Pop\] ELSE 0 END                                                                              |
+|     | -   Remove any unneeded fields, including Sex, SZ, TOD, and Time                                                                  |
+|     | -   At this point, you should get data with 5 fields 31K rows                                                                     |
++-----+-----------------------------------------------------------------------------------------------------------------------------------+
+| 1.5 | ![](step%205.png){width="700"}                                                                                                    |
+|     |                                                                                                                                   |
+|     | -   Export the cleansed data to Tableau Desktop with a right-click and the "Preview in Tableau Desktop" option                    |
++-----+-----------------------------------------------------------------------------------------------------------------------------------+
+
+#### 2. Prepare the visualization
+
+Now that we have import the cleansed data into Tableau Desktop
+
++------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| No.  | Step                                                                                                                                                         |
++======+==============================================================================================================================================================+
+| 2.1  | ![](step%206.png){width="700"}                                                                                                                               |
+|      |                                                                                                                                                              |
+|      | -   We begin by creating the "*Total columns*" parameter. In our scenario, we wish to generate 3x3 tables with a value of 3 for each column.                 |
++------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 2.2  | ![](step%207.png){width="700"}                                                                                                                               |
+|      |                                                                                                                                                              |
+|      | -   Create the Calculated Field "Index", "Column", and "Row" with the following formula                                                                      |
+|      | -   Index = INT((INDEX())%\[Total columns\]\^2+1                                                                                                             |
+|      | -   Column = INT((\[Index\]-1)%\[Total columns\])+1                                                                                                          |
+|      | -   Row = INT((\[Index\]-\[Column\])/\[Total columns\])+1                                                                                                    |
++------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 2.3  | ![](step%208.png){width="700"}                                                                                                                               |
+|      |                                                                                                                                                              |
+|      | -   Drag the "Column" Calculated Field into the Columns section. Drag the *Row* calculated field into the Rows section                                       |
+|      | -   Make sure that the *Column* and *Row* are set as Discrete type                                                                                           |
++------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 2.4  | ![](step%209.png){width="700"}                                                                                                                               |
+|      |                                                                                                                                                              |
+|      | -   Create the Trellis plot of 3x3 age-sex pyramid according to the *Planning Area* by setting the fields as depicted in the image                           |
+|      | -   Start by dragging the *PA* field into Filters and then selecting the focus area (top 9 populous)                                                         |
+|      | -   The drag *Index* followed by *PA* into the marks                                                                                                         |
+|      | -   Drag the fields *Male Pop* and *Female Pop* into the Columns pane, while *AG* is dragged into the Rows window                                            |
++------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 2.5  | ![](step%2010.png){width="700"}                                                                                                                              |
+|      |                                                                                                                                                              |
+|      | -   Configure the *Column* pill to be computed using *PA* and repeat for *Row*                                                                               |
++------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 2.6  | ![](step%2012.png){width="700"}                                                                                                                              |
+|      |                                                                                                                                                              |
+|      | -   Set the *Male Pop* axis to be reversed                                                                                                                   |
++------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 2.7  | ![](step%2013.png){width="700"}                                                                                                                              |
+|      |                                                                                                                                                              |
+|      | -   Set the color for *Male Pop* and *Female Pop* to be different so the spectator may easily distinguish gender                                             |
++------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 2.8  | ![](step%2014.png){width="700"}                                                                                                                              |
+|      |                                                                                                                                                              |
+|      | -   Sort the age range so that 0-9 is at the bottom and 90 and above is at the top                                                                           |
++------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 2.9  | ![](step%2015.png){width="700"}                                                                                                                              |
+|      |                                                                                                                                                              |
+|      | -   Hide header of *Column* and *Row*                                                                                                                        |
++------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 2.10 | ![](step%2018.png)                                                                                                                                           |
+|      |                                                                                                                                                              |
+|      | -   Edit the SUM(\[Male Pop\]) and SUM(\[Female Pop\]) formulas as follows to display the percentage of each gender in each age group for each Planning Area |
+|      |                                                                                                                                                              |
+|      |     SUM(\[Male Pop\]) = SUM(\[Male Pop\]) / (TOTAL(SUM(\[Male Pop\])) + TOTAL(SUM(\[Female Pop\])))                                                          |
+|      |                                                                                                                                                              |
+|      |     SUM(\[Female Pop\]) = SUM(\[Female Pop\]) / (TOTAL(SUM(\[Male Pop\])) + TOTAL(SUM(\[Female Pop\])))                                                      |
++------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+### 5. Reference
+
+Betzendahl, L. (2019, April 25). *Trellis Charts and Color Highlighting*. Viz Zen Data. Retrieved January 21, 2023, from <https://vizzendata.com/2019/04/25/trellis-charts-and-color-highlighting/>
+
+DataCrunch(2020, June 22). *A Detailed Guide on How to Create a Tableau Pareto Chart \| DataCrunchCorp*. A Detailed Guide on How to Create a Tableau Pareto Chart \| DataCrunchCorp. Retrieved January 21, 2023, from <https://datacrunchcorp.com/tableau-pareto-chart/>
+
+Egervari. (n.d.). *The Data School - Displaying multiple Charts in one Worksheet -- The Trellis Chart*. The Data School - Displaying Multiple Charts in One Worksheet -- the Trellis Chart. Retrieved January 21, 2023, from <https://www.thedataschool.co.uk/frederik-egervari/displaying-multiple-charts-in-one-worksheet-the-trellis-chart/>
+
+Sleeper. (2017, August 22). *How to Make Trellis / Tile / Small Multiple Maps in Tableau \| Playfair Data*. Playfair Data. Retrieved January 21, 2023, from <https://playfairdata.com/how-to-make-trellis-tile-small-multiple-maps-in-tableau/>
+
+Tarannum. (2017, February 17). *Workout Wednesday Week 7 - Dynamic Trellis Chart*. Visual Vantage. Retrieved January 21, 2023, from <http://www.tarannum.io//2017/02/17/workout-wednesday-week7.html>

@@ -1,7 +1,7 @@
 {
-  "hash": "a754ce02c0472c0b163d8ffb898e69ac",
+  "hash": "d76023870042da9f0cb29ea696522899",
   "result": {
-    "markdown": "---\ntitle: \"About\"\n---\n\n\nAbout this site\n\n\n::: {.cell}\n\n```{.r .cell-code}\n1 + 1\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] 2\n```\n:::\n:::\n",
+    "markdown": "---\ntitle: \"About me\"\n---\n\n\n**Hi there!**\n\nThanks for stopping by my little corner of the internet! My name is Tasaporn Visawameteekul, and I'm excited to know that you have seen my work. I'm just an engineer who fall in love with an art of data visualization. Even though I'm just a beginner, but I hope my blog here would be any help to you.\n\n**Education**\n\n**MS in Master of IT in Business, Analytics track** (2023) \\| Singapore Management University, Singapore\n\n**BS in Electrical engineering** (2012) \\| Chulalongkorn University, Thailand\n\n**Experience**\n\n![](Tasa.jpg){fig-align=\"right\" width=\"300\"}\n\n\n::: {.cell}\n\n```{.r .cell-code}\n1 + 1\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] 2\n```\n:::\n:::\n",
     "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"

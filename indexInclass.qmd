@@ -1,0 +1,15 @@
+---
+title: "In-class Exercise"
+format: 
+  html:
+    mainfont: system-ui
+    page-layout: full
+---
+
+## In-class Exercise 01 (14 Jan 2023)
+
+[![](In-class_Ex/In-class_Ex01/In-class_Ex01.png){fig-align="left"}](https://public.tableau.com/views/In-class_Ex01_16736930308190/SalesandProfitSummary?:language=en-US&:display_count=n&:origin=viz_share_link)
+
+## In-class Exercise 03 (28 Jan 2023)
+
+[![](In-class_Ex/In-class_Ex03/In-class_Ex03.png){fig-align="left"}](https://public.tableau.com/views/In-class_Ex03_16748826143570/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link)
