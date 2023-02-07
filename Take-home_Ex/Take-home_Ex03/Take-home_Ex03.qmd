@@ -1,0 +1,335 @@
+---
+title: "Take-home Exercise 3"
+subtitle: "Putting Visual Analytics into Practical Use"
+author: "Tasaporn Visawameteekul"
+date: "06 Feb 2023"
+affiliation: "SMU MITB"
+format: 
+  html:
+    code-fold: true
+    page-layout: full
+    toc: true
+    toc_float: 
+      collapsed: true
+---
+
+### 1. The task
+
+In this take-home exercise, you are required to uncover the salient patterns of the resale prices of public housing property by residential towns and estates in Singapore by using appropriate analytical visualisation techniques learned in **Lesson 4: Fundamentals of Visual Analytics**. Students are encouraged to apply appropriate interactive techniques to enhance user and data discovery experiences.
+
+For the purpose of this study, the focus should be on **3-ROOM, 4-ROOM and 5-ROOM types**. You can choose to focus on either one housing type or multiple housing types. The study period should be on **2022**.
+
+The write-up of the take-home exercise should include but not limited to the followings:
+
+-   Describe the selection and designed consideration of the analytical data visualisation used. The discussion should limit to not more than 150 words each.
+-   A reproducible description of the procedures used to prepare the analytical visualisation. Please refer to the peer submission I shared.
+-   A write-up of not more than 100 words to discuss the patterns reveal by each analytical visualisation prepared.
+
+### 2. Data
+
+The original dataset '*Resale flat princes based on registration date from Jan-2017 onwards'* was obtained from [Data.gov.sg](https://data.gov.sg/). This dataset provides information on all resale HDB flat transactions from 2017 to 2023.
+The notable features in this dataset are as follows:\
+i) **town**: the town of the associated HDB flat\
+ii) **flat_type**: the type of flat of the associated HDB flat. In Singapore, there are 1-room flats up to 5-room flats, as well as executive flats, which are slightly bigger than 5-room flats. (The remaining flat type: Multi-generational flats, are few and far between)\
+iii) **block**: the block of the associated HDB flat\
+iv) **street**: the street of the associated HDB flat\
+v) **storey_range**: the storey range of the associated HDB flat. In this dataset, the storey range is given in a range of 3 (e.g. 10 to 12 , which means the flat is based on the 10th to 12th storey).\
+vi) **floor_area_sqm**: the floor area of the associated HDB flat in square meters\
+vii) **remaining_lease**: the remaining lease of the associated HDB flat in months and years\
+viii) **resale_price**: the resale price of the assocaited HDB flat
+
+### 3. Design Consideration
+
+### 4. Step to create plot in R
+
+#### 1. Installing and loading the required libraries
+
+The code chunk below is used to install and load the required packages onto RStudio.
+
+-   **tidyverse** : A collection of core packages designed for data science, used extensively for data preparation and wrangling. (*readr, ggplot2, dplyr, purrr, tidyr, tibble*)
+-   **ggstatplot:** an extension of ggplot2 package for creating graphics with details from statistical tests included in the plots themselves and targeted primarily at behavioral sciences community to provide a one-line code to produce information-rich plots.
+-   **psych:** A general purpose toolbox for personality, psychometric theory and experimental psychology. Functions are primarily for multivariate analysis and scale construction using factor analysis, principal component analysis, cluster analysis and reliability analysis, although others provide basic descriptive statistics.
+-   **lubridate:** Provides tools that make it easier to parse and manipulate dates. These tools are grouped below by common purpose.
+-   **ggrepel:** This package contains extra geoms for **ggplot2**.
+
+```{r, results='hide', message=FALSE}
+packages = c('tidyverse', 'ggstatsplot', 'psych', 'lubridate', 'ggrepel', 'plotly')
+for(p in packages){
+  if(!require(p,character.only = T)){
+    install.packages(p)
+  }
+  library(p,character.only = T)
+}
+```
+
+#### 2. Importing the dataset
+
+The source file is in csv format, hence read_csv of **readr** package is used to import the dataset. From the result below, we will see that our original data has 146,215 rows with 11 columns ( 8 categorical fields and 3 numeric fields).
+
+```{r, message=FALSE, }
+Resale_raw <- read_csv("Data/resale-flat-prices-based-on-registration-date-from-jan-2017-onwards.csv")
+glimpse(Resale_raw)
+```
+
+Use **head** command to see the first 5 rows of the data.
+
+```{r}
+head(Resale_raw,5)
+```
+
+#### 3. Wrangling data
+
+##### 3.1 Select interested fields
+
+```{r}
+Resale <-Resale_raw %>%
+  select("month", "town", "flat_type", "storey_range", "floor_area_sqm", "lease_commence_date", "remaining_lease", "resale_price")
+```
+
+##### 3.2 Filter the analyzing year of 2022
+
+Separating column *month* using separate(). Filter only Year of 2022.
+
+```{r}
+Resale <-Resale %>%
+  mutate(quarter = quarter(ym(month)))
+```
+
+```{r}
+Resale <-Resale %>%
+  separate(`month`, into = c("Year", "Month"), sep = "-") %>% 
+  filter(Year == "2022")
+```
+
+##### 3.3 Filter flat types 3-Room, 4-Room, 5-Room
+
+```{r}
+Resale <- Resale %>% 
+  filter(flat_type %in% c("3 ROOM","4 ROOM", "5 ROOM"))
+```
+
+##### 3.4 Change format of price to represent in kSGD
+
+```{r}
+Resale <- Resale %>%
+  mutate(resale_price=resale_price/1000) %>% 
+  rename('resale_price_kSGD' = 'resale_price')
+```
+
+##### 3.5 Change format of remaining lease to represent in years
+
+```{r, warning=FALSE}
+# library(stringr)
+Resale <-Resale %>%
+  separate(`remaining_lease`, into = "remaining_lease", sep = " years") %>% 
+  mutate(remaining_lease = as.numeric(remaining_lease))
+```
+
+Here, we can see that our data now only has 24,374 rows left after filter year and flat type.
+
+```{r}
+Resale
+```
+
+#### 4. Exploratory Data Analysis
+
+Using the describe() function, you can get a sense-check of the data and see if there were any errors in the feature engineering. These are the summary statistics that were observed:
+
+1.  **Resale Price** --- The prices of the flats range between \$200K to \$1,418K with a mean of \$536K
+2.  **Floor Area** --- The sizes of the flats range between 51sqm to 159sqm, with a mean of 94.07sqm
+3.  **Remaining Lease** --- The lease commence date of the flats range between 43 years to 96 years
+
+```{r}
+describe(Resale)
+```
+
+#### 5. Visualizations
+
+##### 5.1 Plotting histogram of resale price
+
+Findings:
+
+1.  Right-skewed distribtion plot has a mean of \$527k resale price.
+2.  The mode (peak) for resale price hover around \$420000 mark having a count of nearing 750 transactions.
+3.  The right tail is longer.
+4.  This gives a distribution pattern of frequency on transaction prices generally falls under.
+
+```{r}
+gghistostats(
+  data = Resale,
+  x = 'resale_price_kSGD',
+  type = "bayes",
+  test.value = 60,
+  xlab = "resale_price (kSGD)" ) +
+  ggtitle("What is the overall Resale price distribution?")
+```
+
+##### 5.2 Plotting histogram of floor area
+
+```{r}
+gghistostats(
+  data = Resale,
+  x = 'floor_area_sqm',
+  type = "bayes",
+  test.value = 60,
+  xlab = "floor_area_sqm" ) +
+  ggtitle("What is the overall floor area distribution?")
+```
+
+##### 5.3 Two sample mean test on resale price between flat types
+
+```{r}
+ggbetweenstats(
+  data = Resale,
+  x = 'flat_type', 
+  y = 'resale_price_kSGD',
+  type = "np",
+  messages = FALSE) +
+  ggtitle("What is the difference in resale price between different types of flats?")
+```
+
+##### 5.4 Box plot of resale price by flat types
+
+A boxplot was also used to understand the relationship between the flat types and resale prices. It can be seen that there are quite a number of outliers in all 3 flat types.
+
+```{r, message=FALSE, warning=FALSE}
+p<-ggplot(Resale, aes(x=flat_type, y=resale_price_kSGD, fill=flat_type)) +
+  geom_boxplot() +
+  stat_summary(fun.y=mean, geom="point", color="red") +
+  theme(legend.position="none") +
+  ggtitle("Boxplot of resale price by flat type")
+# Remove legend
+#| fig-height: 12
+#| fig-width: 12
+p
+```
+
+##### 5.5 Box plot of resale price by town
+
+```{r, message=FALSE}
+Resale %>%
+  mutate(class = fct_reorder(town, resale_price_kSGD, .fun='mean')) %>%
+  ggplot( aes(x=reorder(town, resale_price_kSGD), y=resale_price_kSGD)) +
+  geom_boxplot() +
+  stat_summary(fun.y=mean, geom="point", color="red") +
+  theme(legend.position="none") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  ggtitle("Boxplot of resale price by town")
+```
+
+##### 5.6 HDB resale prices in 2022 by town
+
+```{r}
+Resale %>% 
+  group_by(flat_type) %>% 
+  # Extract quarter and price per sqm
+  mutate(price_per_sqm = resale_price_kSGD/floor_area_sqm) %>%
+  ggplot(mapping = aes(x = town, y = price_per_sqm)) +
+  # Make grouped boxplot
+  geom_boxplot(aes(fill = as.factor(flat_type)), color = "grey") +
+  theme_minimal() +
+  theme(legend.position = "top") +
+  scale_fill_viridis_d(option = "C") +
+  # Adjust lables and add title
+  labs(title = "HDB resale prices in 2022 by town", y="Price per square metre (SGD)", fill = "flat_type")+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+```
+
+##### 5.7 **Significant Test of Correlation: *ggscatterstats()***
+
+```{r}
+ggscatterstats(
+  data = Resale,
+  x = floor_area_sqm,
+  y = resale_price_kSGD,
+  marginal = FALSE
+  )
+```
+
+```{r, message=FALSE}
+p <- ggscatterstats(
+  data = Resale,
+  x = floor_area_sqm,
+  y = resale_price_kSGD,
+  marginal = FALSE,
+  point.args = list(size = 0.5, alpha = 0.1, stroke = 0, color = "red"),
+  smooth.line.args = list(linewidth = 0.5, color = "blue", method = "lm", formula = y ~
+    x)
+  )
+      
+p1 <- p +  facet_wrap (~ town, nrow = 6, ncol = 6) + 
+            xlab("floor area") +
+            scale_y_continuous(breaks = c(0,3000,6000,9000,12000), name = "Resale price(kSGD)")
+
+ggplotly(p1)
+```
+
+##### 5.8 
+
+```{r}
+ggplot(data = Resale, mapping = aes(y=town, fill=flat_type)) +
+  theme_minimal() +
+  geom_bar(position = "fill") +
+  scale_fill_viridis_d(option = "C") +
+  labs(title = "Flat type proportion by town", fill = "Flat type", 
+       x = "Count", y = "")
+```
+
+##### 5.9 How have prices fluctuated in 2022 for different flat types?
+
+We display a quarterly boxplot to illustrate the price trend over time. As room count increases, the average price per square meter drops. There are numerous outliers with extremely high prices per square meter in 3, 4, and 5 ROOM. The type of flat with the highest.
+
+```{r}
+Resale %>% 
+  group_by(flat_type) %>% 
+  # Extract quarter and price per sqm
+  mutate(price_per_sqm = resale_price_kSGD/floor_area_sqm) %>%
+  ggplot(mapping = aes(x = flat_type, y = price_per_sqm)) +
+  # Make grouped boxplot
+  geom_boxplot(aes(fill = as.factor(quarter)), color = "black") +
+  theme_minimal() +
+  theme(legend.position = "top") +
+  scale_fill_viridis_d(option = "C") +
+  # Adjust lables and add title
+  labs(title = "HDB resale prices in 2022 by flat type", y="Price per square metre (SGD)", fill = "Quarter")
+```
+
+##### 5.10 Resale flat type by town
+
+```{r}
+Resale %>% 
+  group_by(town) %>% 
+  # Calculate housing age
+  mutate(housing_age = 2023 - lease_commence_date) %>% 
+  summarise(average_price = mean(resale_price_kSGD), average_housing_age = mean(housing_age), average_area = mean(floor_area_sqm)) %>% 
+  ggplot(mapping = aes(x=average_housing_age, y=average_price)) +
+  geom_count(aes(color = average_area), alpha = 0.6) +
+  # Change size of count points
+  scale_size_area(max_size = 10) +
+  # Add lables next to count points
+  geom_text_repel(aes(label = town),size = 2.7) +
+  scale_y_continuous( limits = c(400, 800)) +
+  theme_minimal() +
+  theme(legend.position = "top") +
+  scale_color_viridis_c(option = "C")
+```
+
+### 5. Reference
+
+<https://r4ds.had.co.nz/index.html>
+
+<https://r-graph-gallery.com/267-reorder-a-variable-in-ggplot2.html>
+
+<https://wangjing.city/wp-content/uploads/2021/05/Looking-into-Singapore-Resale-Flats-Market.html>
+
+<https://towardsdatascience.com/understanding-and-predicting-resale-hdb-flat-prices-in-singapore-1853ec7069b0>
+
+<https://rpubs.com/chunwey/LinearR2>
+
+<https://www.linkedin.com/pulse/data-analytics-understanding-resale-prices-hdb-houses-bannister/?trk=read_related_article-card_title>
+
+<https://wangjing.city/portfolio/looking-into-singapore-resale-flats-market/>
+
+<https://stackoverflow.com/questions/1330989/rotating-and-spacing-axis-labels-in-ggplot2>
+
+<http://www.sthda.com/english/wiki/ggplot2-axis-ticks-a-guide-to-customize-tick-marks-and-labels>

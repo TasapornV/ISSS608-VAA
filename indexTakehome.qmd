@@ -13,3 +13,7 @@ format:
 ## Take-home Exercise 02
 
 [![](Take-home_Ex/Take-home_Ex02/newplot.png)](https://isss608-tasapornv.netlify.app/take-home_ex/take-home_ex02/take-home_ex02)
+
+## Take-home Exercise 03
+
+![](Take-home_Ex/Take-home_Ex03/Take-home_Ex03.jpg){width="591"}
