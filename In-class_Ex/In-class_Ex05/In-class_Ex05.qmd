@@ -49,8 +49,10 @@ display on upper
 pairs(wine[,2:12], lower.panel = NULL)
 ```
 
-[ggcorrmat](https://www.rdocumentation.org/packages/ggstatsplot/versions/0.2.0/topics/ggcorrmat)
-Visualization of a correlation matrix
+## [ggcorrmat](https://www.rdocumentation.org/packages/ggstatsplot/versions/0.2.0/topics/ggcorrmat)
+
+Visualization of a correlation matrix. The message below x = ... explain the significant level.
+We also have an option to resize the cross according to the significant level.
 
 ```{r}
 ggstatsplot::ggcorrmat(
@@ -58,7 +60,25 @@ ggstatsplot::ggcorrmat(
   cor.vars = 1:11)
 ```
 
+```{r}
+ggstatsplot::ggcorrmat(
+  data = wine, 
+  cor.vars = 1:11,
+  ggcorrplot.args = list(outline.color = "black", 
+                         hc.order = TRUE,
+                         tl.cex = 10),
+  title    = "Correlogram for wine dataset",
+  subtitle = "Four pairs are no significant at p < 0.05"
+)
+```
+
 Include correlation coefficient
+
+## Correlation plot
+
+Corrplot is not a ggplot extension but based on Rgraphic
+
+ggcorrplot will require the object .corr which can be generated with the command cor.
 
 ```{r}
 wine.cor <- cor(wine[, 1:11])
@@ -80,11 +100,13 @@ corrplot(wine.cor,
          type="lower")
 ```
 
+corrplot.mixed allows us to combine the corrplot and the corrmat.
+
 ```{r}
 corrplot.mixed(wine.cor, 
                lower = "ellipse", 
                upper = "number",
                tl.pos = "lt",
                diag = "l",
-               tl.col = "black")
+               tl.col = "blue")
 ```
