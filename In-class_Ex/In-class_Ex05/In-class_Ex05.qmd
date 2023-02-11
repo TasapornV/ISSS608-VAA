@@ -131,16 +131,16 @@ ggpairs(wine, columns = 1:12)
 
 ### Ternary diagram with R
 
+package use
+
+```{r}
+pacman::p_load(ggtern, plotly, tidyverse, tidyr)
+```
+
 read data
 
 ```{r, warning=FALSE, message=FALSE}
 pop_data <- read_csv("data/respopagsex2000to2018_tidy.csv") 
-```
-
-package use
-
-```{r}
-pacman::p_load(ggtern, plotly, tidyverse)
 ```
 
 prepare data
@@ -162,6 +162,8 @@ see how the data look like
 ```{r}
 agpop_mutated
 ```
+
+using same feature with ggplot2. ggtern add in the z.
 
 ```{r}
 ggtern(data=agpop_mutated,aes(x=YOUNG,y=ACTIVE, z=OLD)) +

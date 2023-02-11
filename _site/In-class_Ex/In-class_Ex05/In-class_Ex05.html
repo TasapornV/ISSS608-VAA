@@ -441,13 +441,13 @@ $ type                   &lt;chr&gt; "red", "red", "red", "red", "red", "red", "
 </section>
 <section id="ternary-diagram-with-r" class="level3">
 <h3 class="anchored" data-anchor-id="ternary-diagram-with-r">Ternary diagram with R</h3>
-<p>read data</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pop_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/respopagsex2000to2018_tidy.csv"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <p>package use</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(ggtern, plotly, tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(ggtern, plotly, tidyverse, tidyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>read data</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pop_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/respopagsex2000to2018_tidy.csv"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>prepare data</p>
 <div class="cell">
@@ -486,6 +486,7 @@ $ type                   &lt;chr&gt; "red", "red", "red", "red", "red", "red", "
 #   ⁵​`AGE20-24`, ⁶​`AGE25-29`, ⁷​`AGE30-34`</code></pre>
 </div>
 </div>
+<p>using same feature with ggplot2. ggtern add in the z.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggtern</span>(<span class="at">data=</span>agpop_mutated,<span class="fu">aes</span>(<span class="at">x=</span>YOUNG,<span class="at">y=</span>ACTIVE, <span class="at">z=</span>OLD)) <span class="sc">+</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
