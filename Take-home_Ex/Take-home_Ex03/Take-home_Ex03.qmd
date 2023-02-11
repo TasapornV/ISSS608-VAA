@@ -27,8 +27,7 @@ The write-up of the take-home exercise should include but not limited to the fol
 
 ### 2. Data
 
-The original dataset '*Resale flat princes based on registration date from Jan-2017 onwards'* was obtained from [Data.gov.sg](https://data.gov.sg/). This dataset provides information on all resale HDB flat transactions from 2017 to 2023.
-The notable features in this dataset are as follows:\
+The original dataset '*Resale flat princes based on registration date from Jan-2017 onwards'* was obtained from [Data.gov.sg](https://data.gov.sg/). This dataset provides information on all resale HDB flat transactions from 2017 to 2023. The notable features in this dataset are as follows:\
 i) **town**: the town of the associated HDB flat\
 ii) **flat_type**: the type of flat of the associated HDB flat. In Singapore, there are 1-room flats up to 5-room flats, as well as executive flats, which are slightly bigger than 5-room flats. (The remaining flat type: Multi-generational flats, are few and far between)\
 iii) **block**: the block of the associated HDB flat\
@@ -264,13 +263,13 @@ p1 <- p +  facet_wrap (~ town, nrow = 6, ncol = 6) +
 ggplotly(p1)
 ```
 
-##### 5.8 
+##### 5.8
 
 ```{r}
 ggplot(data = Resale, mapping = aes(y=town, fill=flat_type)) +
   theme_minimal() +
   geom_bar(position = "fill") +
-  scale_fill_viridis_d(option = "C") +
+  scale_fill_viridis_d(option = "E") +
   labs(title = "Flat type proportion by town", fill = "Flat type", 
        x = "Count", y = "")
 ```
@@ -286,7 +285,8 @@ Resale %>%
   mutate(price_per_sqm = resale_price_kSGD/floor_area_sqm) %>%
   ggplot(mapping = aes(x = flat_type, y = price_per_sqm)) +
   # Make grouped boxplot
-  geom_boxplot(aes(fill = as.factor(quarter)), color = "black") +
+  geom_boxplot(aes(fill = as.factor(quarter)), color = "grey") +
+    stat_summary(fun.y=mean, geom="point", color="red") +
   theme_minimal() +
   theme(legend.position = "top") +
   scale_fill_viridis_d(option = "C") +
@@ -305,9 +305,9 @@ Resale %>%
   ggplot(mapping = aes(x=average_housing_age, y=average_price)) +
   geom_count(aes(color = average_area), alpha = 0.6) +
   # Change size of count points
-  scale_size_area(max_size = 10) +
+  scale_size_area(max_size = 15) +
   # Add lables next to count points
-  geom_text_repel(aes(label = town),size = 2.7) +
+  geom_text_repel(aes(label = town),size = 2.0) +
   scale_y_continuous( limits = c(400, 800)) +
   theme_minimal() +
   theme(legend.position = "top") +
