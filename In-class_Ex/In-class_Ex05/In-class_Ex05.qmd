@@ -19,7 +19,7 @@ Getting Started
 Two packages will be installed and loaded. They are: tidyverse, ggiraph
 
 ```{r}
-pacman::p_load(corrplot, tidyverse, ggstatsplot)
+pacman::p_load(corrplot, tidyverse, ggstatsplot, GGally)
 ```
 
 Read data
@@ -109,4 +109,61 @@ corrplot.mixed(wine.cor,
                tl.pos = "lt",
                diag = "l",
                tl.col = "blue")
+```
+
+From the plot below, we can see the highly correlate group.
+
+```{r}
+corrplot(wine.cor, 
+         method = "ellipse", 
+         tl.pos = "lt",
+         tl.col = "black",
+         order="hclust",
+         hclust.method = "ward.D",
+         addrect = 3)
+```
+
+### Generalised Pairs plot
+
+```{r, warning = FALSE, message=FALSE}
+ggpairs(wine, columns = 1:12)
+```
+
+### Ternary diagram with R
+
+read data
+
+```{r, warning=FALSE, message=FALSE}
+pop_data <- read_csv("data/respopagsex2000to2018_tidy.csv") 
+```
+
+package use
+
+```{r}
+pacman::p_load(ggtern, plotly, tidyverse)
+```
+
+prepare data
+
+```{r}
+agpop_mutated <- pop_data %>%
+  mutate(`Year` = as.character(Year))%>%
+  spread(AG, Population) %>%
+  mutate(YOUNG = rowSums(.[4:8]))%>%
+  mutate(ACTIVE = rowSums(.[9:16]))  %>%
+  mutate(OLD = rowSums(.[17:21])) %>%
+  mutate(TOTAL = rowSums(.[22:24])) %>%
+  filter(Year == 2018)%>%
+  filter(TOTAL > 0)
+```
+
+see how the data look like
+
+```{r}
+agpop_mutated
+```
+
+```{r}
+ggtern(data=agpop_mutated,aes(x=YOUNG,y=ACTIVE, z=OLD)) +
+  geom_point()
 ```
