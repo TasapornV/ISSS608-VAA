@@ -14,9 +14,7 @@ editor: visual
 
 Getting Started
 
-# Install and launching R packages
-
-Two packages will be installed and loaded. They are: tidyverse, ggiraph
+Install and launching R packages
 
 ```{r}
 pacman::p_load(corrplot, tidyverse, ggstatsplot, GGally)
@@ -49,7 +47,7 @@ display on upper
 pairs(wine[,2:12], lower.panel = NULL)
 ```
 
-## [ggcorrmat](https://www.rdocumentation.org/packages/ggstatsplot/versions/0.2.0/topics/ggcorrmat)
+### [ggcorrmat](https://www.rdocumentation.org/packages/ggstatsplot/versions/0.2.0/topics/ggcorrmat)
 
 Visualization of a correlation matrix. The message below x = ... explain the significant level.
 We also have an option to resize the cross according to the significant level.
