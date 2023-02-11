@@ -172,6 +172,10 @@ ggtern(data=agpop_mutated,aes(x=YOUNG,y=ACTIVE, z=OLD)) +
 
 ## Heatmap
 
+```{r}
+pacman::p_load(seriation, dendextend, heatmaply, tidyverse)
+```
+
 ```{r, message = FALSE, warning=FALSE}
 wh <- read_csv("data/WHData-2018.csv")
 wh
@@ -197,4 +201,22 @@ wh_matrix <- data.matrix(wh)
 ```{r}
 wh_heatmap <- heatmap(wh_matrix,
                       Rowv=NA, Colv=NA)
+```
+
+```{r}
+wh_heatmap <- heatmap(wh_matrix,
+                      scale="column",
+                      cexRow = 0.6, 
+                      cexCol = 0.8,
+                      margins = c(10, 4))
+```
+
+```{r}
+heatmaply(mtcars)
+```
+
+excluding
+
+```{r}
+heatmaply(wh_matrix[, -c(1, 2, 4, 5)])
 ```

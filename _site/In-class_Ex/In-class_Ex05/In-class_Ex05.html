@@ -527,9 +527,21 @@ $ type                   &lt;chr&gt; "red", "red", "red", "red", "red", "red", "
 </div>
 <section id="prepare-data" class="level3">
 <h3 class="anchored" data-anchor-id="prepare-data">prepare data</h3>
-<p>Move the country column to replace the id so the heatmap is able to label the x-axis.</p>
+<p>Move the country column to replace the row name so the heatmap is able to label the x-axis.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(wh) <span class="ot">&lt;-</span> wh<span class="sc">$</span>Country</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>specify the function used. Taking column 3 and drop country, region, whisker-high, whisker-low, Dystopia.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>wh1 <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">select</span>(wh, <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">7</span><span class="sc">:</span><span class="dv">12</span>))</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>wh_matrix <span class="ot">&lt;-</span> <span class="fu">data.matrix</span>(wh)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>wh_heatmap <span class="ot">&lt;-</span> <span class="fu">heatmap</span>(wh_matrix,</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">Rowv=</span><span class="cn">NA</span>, <span class="at">Colv=</span><span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="In-class_Ex05_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+</div>
 </div>
 
 
