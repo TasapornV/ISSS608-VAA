@@ -253,6 +253,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#generalised-pairs-plot" id="toc-generalised-pairs-plot" class="nav-link" data-scroll-target="#generalised-pairs-plot">Generalised Pairs plot</a></li>
   <li><a href="#ternary-diagram-with-r" id="toc-ternary-diagram-with-r" class="nav-link" data-scroll-target="#ternary-diagram-with-r">Ternary diagram with R</a></li>
   </ul></li>
+  <li><a href="#heatmap" id="toc-heatmap" class="nav-link" data-scroll-target="#heatmap">Heatmap</a>
+  <ul class="collapse">
+  <li><a href="#prepare-data" id="toc-prepare-data" class="nav-link" data-scroll-target="#prepare-data">prepare data</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -493,6 +497,39 @@ $ type                   &lt;chr&gt; "red", "red", "red", "red", "red", "red", "
 <div class="cell-output-display">
 <p><img src="In-class_Ex05_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
 </div>
+</div>
+</section>
+</section>
+<section id="heatmap" class="level2">
+<h2 class="anchored" data-anchor-id="heatmap">Heatmap</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>wh <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/WHData-2018.csv"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>wh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 156 × 12
+   Country        Region Happi…¹ Whisk…² Whisk…³ Dysto…⁴ GDP p…⁵ Socia…⁶ Healt…⁷
+   &lt;chr&gt;          &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1 Albania        Centr…    4.59    4.70    4.48    1.46   0.916   0.817   0.79 
+ 2 Bosnia and He… Centr…    5.13    5.22    5.04    1.88   0.915   1.08    0.758
+ 3 Bulgaria       Centr…    4.93    5.02    4.84    1.22   1.05    1.52    0.712
+ 4 Croatia        Centr…    5.32    5.40    5.24    1.77   1.12    1.16    0.737
+ 5 Czech Republic Centr…    6.71    6.78    6.64    2.49   1.23    1.49    0.854
+ 6 Estonia        Centr…    5.74    5.82    5.66    1.46   1.2     1.53    0.737
+ 7 Hungary        Centr…    5.62    5.70    5.54    1.97   1.17    1.40    0.732
+ 8 Kosovo         Centr…    5.66    5.76    5.57    2.26   0.855   1.23    0.578
+ 9 Latvia         Centr…    5.93    6.00    5.86    2.14   1.15    1.45    0.671
+10 Lithuania      Centr…    5.95    6.04    5.87    2.13   1.20    1.53    0.716
+# … with 146 more rows, 3 more variables: `Freedom to make life choices` &lt;dbl&gt;,
+#   Generosity &lt;dbl&gt;, `Perceptions of corruption` &lt;dbl&gt;, and abbreviated
+#   variable names ¹​`Happiness score`, ²​`Whisker-high`, ³​`Whisker-low`,
+#   ⁴​Dystopia, ⁵​`GDP per capita`, ⁶​`Social support`, ⁷​`Healthy life expectancy`</code></pre>
+</div>
+</div>
+<section id="prepare-data" class="level3">
+<h3 class="anchored" data-anchor-id="prepare-data">prepare data</h3>
+<p>Move the country column to replace the id so the heatmap is able to label the x-axis.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(wh) <span class="ot">&lt;-</span> wh<span class="sc">$</span>Country</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

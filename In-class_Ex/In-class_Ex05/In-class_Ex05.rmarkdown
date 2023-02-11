@@ -200,3 +200,36 @@ ggtern(data=agpop_mutated,aes(x=YOUNG,y=ACTIVE, z=OLD)) +
   geom_point()
 ```
 
+
+## Heatmap
+
+
+```{r, message = FALSE, warning=FALSE}
+wh <- read_csv("data/WHData-2018.csv")
+wh
+```
+
+
+### prepare data
+
+Move the country column to replace the row name so the heatmap is able to label the x-axis.
+
+
+```{r, warning=FALSE}
+row.names(wh) <- wh$Country
+```
+
+
+specify the function used. Taking column 3 and drop country, region, whisker-high, whisker-low, Dystopia.
+
+
+```{r}
+wh1 <- dplyr::select(wh, c(3, 7:12))
+wh_matrix <- data.matrix(wh)
+```
+
+```{r}
+wh_heatmap <- heatmap(wh_matrix,
+                      Rowv=NA, Colv=NA)
+```
+
