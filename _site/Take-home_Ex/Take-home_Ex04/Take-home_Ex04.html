@@ -256,9 +256,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-task" id="toc-the-task" class="nav-link active" data-scroll-target="#the-task">1. The task</a></li>
-  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages">2. Packages</a></li>
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">3. Data</a></li>
+  <li><a href="#the-task" id="toc-the-task" class="nav-link active" data-scroll-target="#the-task"><span class="toc-section-number">0.1</span>  1. The task</a></li>
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="toc-section-number">0.2</span>  2. Packages</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="toc-section-number">0.3</span>  3. Data</a></li>
   </ul>
 </nav>
     </div>
@@ -295,8 +295,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="the-task" class="level3">
-<h3 class="anchored" data-anchor-id="the-task">1. The task</h3>
+<section id="the-task" class="level3" data-number="0.1">
+<h3 data-number="0.1" class="anchored" data-anchor-id="the-task"><span class="header-section-number">0.1</span> 1. The task</h3>
 <p>In this take-home exercise, you are required to uncover the impact of COVID-19 as well as the global economic and political dynamic in 2022 on Singapore bi-lateral trade (i.e.&nbsp;Import, Export and Trade Balance) by using appropriate analytical visualisation techniques learned in <strong>Lesson 6: It’s About Time</strong>. Students are encouraged to apply appropriate interactive techniques to enhance user and data discovery experiences.</p>
 <p>The write-up of the take-home exercise should include but not limited to the followings:</p>
 <ul>
@@ -305,8 +305,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>A write-up of not more than 100 words to discuss the patterns reveal by each analytical visualization prepared.</li>
 </ul>
 </section>
-<section id="packages" class="level3">
-<h3 class="anchored" data-anchor-id="packages">2. Packages</h3>
+<section id="packages" class="level3" data-number="0.2">
+<h3 data-number="0.2" class="anchored" data-anchor-id="packages"><span class="header-section-number">0.2</span> 2. Packages</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'readxl'</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(p <span class="cf">in</span> packages){</span>
@@ -317,11 +317,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="data" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="data">3. Data</h3>
+<section id="data" class="level3 page-columns page-full" data-number="0.3">
+<h3 data-number="0.3" class="anchored" data-anchor-id="data"><span class="header-section-number">0.3</span> 3. Data</h3>
 <p>For the purpose of this take-home exercise, Merchandise Trade provided by Department of Statistics, Singapore (DOS) will be used. The data are available under the sub-section of Merchandise Trade by Region/Market. You should download the data by clicking on the link Download all in Excel on the same webpage. The study period should be between January 2020 to December 2022.</p>
-<section id="data-preparation" class="level4 page-columns page-full">
-<h4 class="anchored" data-anchor-id="data-preparation">Data Preparation</h4>
+<section id="data-preparation" class="level4 page-columns page-full" data-number="0.3.1">
+<h4 data-number="0.3.1" class="anchored" data-anchor-id="data-preparation"><span class="header-section-number">0.3.1</span> Data Preparation</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># checking the number of sheets it contains</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">excel_sheets</span>(<span class="st">"data/data.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
