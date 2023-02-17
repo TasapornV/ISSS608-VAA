@@ -1,0 +1,74 @@
+---
+title: "Take-home Exercise 4"
+subtitle: "Putting Visual Analytics into Practical Use"
+author: "Tasaporn Visawameteekul"
+date: "16 Feb 2023"
+affiliation: "SMU MITB"
+format: 
+  html:
+    mainfont: system-ui
+    fontsize: smaller
+    code-fold: false
+    code-overflow: wrap
+    highlight-style: solarized
+    page-layout: full
+    toc: true
+    number-sections: true
+    toc_float: 
+      collapsed: true
+---
+
+# The task
+
+In this take-home exercise, you are required to uncover the impact of COVID-19 as well as the global economic and political dynamic in 2022 on Singapore bi-lateral trade (i.e. Import, Export and Trade Balance) by using appropriate analytical visualisation techniques learned in **Lesson 6: It's About Time**. Students are encouraged to apply appropriate interactive techniques to enhance user and data discovery experiences.
+
+The write-up of the take-home exercise should include but not limited to the followings:
+
+-   Describe the selection and designed consideration of the analytical data visualisation used. The discussion should limit to not more than 150 words each.
+-   A reproducible description of the procedures used to prepare the analytical visualisation. Please refer to the peer submission I shared.
+-   A write-up of not more than 100 words to discuss the patterns reveal by each analytical visualization prepared.
+
+**Packages**
+
+```{r, results='hide', message=FALSE}
+packages = c('readxl', 'datawizard')
+for(p in packages){
+  if(!require(p,character.only = T)){
+    install.packages(p)
+  }
+  library(p,character.only = T)
+}
+```
+
+# Data
+
+For the purpose of this take-home exercise, Merchandise Trade provided by Department of Statistics, Singapore (DOS) will be used. The data are available under the sub-section of Merchandise Trade by Region/Market. You should download the data by clicking on the link Download all in Excel on the same webpage. The study period should be between January 2020 to December 2022.
+
+**Checking the number of sheets it contains**
+
+```{r}
+excel_sheets("data/data.xlsx")
+```
+
+**Importing data**
+
+```{r import, warning=FALSE}
+T1 <- data_transpose(read_excel("data/data.xlsx", sheet = "T1"), rownames = "Month", colnames = TRUE)
+T2 <- data_transpose(read_excel("data/data.xlsx", sheet = "T2"), rownames = "Month", colnames = TRUE)
+```
+
+## T1 table: Merchandise Imports By Region/Market, Monthly
+
+```{r T1, message=FALSE}
+#| code-fold: true
+knitr::kable(
+  head(T1, 5))
+```
+
+## T2 table: Merchandise Exports By Region/Market, Monthly
+
+```{r T2, message=FALSE}
+#| code-fold: true
+knitr::kable(
+  head(T2, 5))
+```
