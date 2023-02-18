@@ -376,5 +376,12 @@
     "title": "In-class Exercise 6",
     "section": "",
     "text": "Arrivals_by_air\n\nThe data is wide and short\nHighlight all the countries and select Pivot. Rename the column to Country and Arrivals\n\n\nPull the Month-Year to Columns and Arrivals to Rows and Country to Filters.\n\n\n\n\n\n\nThis plot reveals the pattern in the separate month. For the plot above, we observe that the August of every year always have high arrivals but the number is particular high in 2018.\n\n\n\n\n\n\n\n\n\nGood to see how the ranking change over time in comparison with other group."
+  },
+  {
+    "objectID": "indexInclass.html#in-class-exercise-06-19-feb-2023",
+    "href": "indexInclass.html#in-class-exercise-06-19-feb-2023",
+    "title": "In-class Exercise",
+    "section": "In-class Exercise 06 (19 Feb 2023)",
+    "text": "In-class Exercise 06 (19 Feb 2023)"
   }
 ]
