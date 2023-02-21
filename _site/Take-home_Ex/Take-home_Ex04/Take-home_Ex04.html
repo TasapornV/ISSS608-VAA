@@ -170,6 +170,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex05/In-class_Ex05.html">
  <span class="dropdown-text">In-class Exercise 5</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex06/In-class_Ex06.html">
+ <span class="dropdown-text">In-class Exercise 6</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -259,8 +263,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#the-task" id="toc-the-task" class="nav-link active" data-scroll-target="#the-task"><span class="toc-section-number">1</span>  The task</a></li>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="toc-section-number">2</span>  Data</a>
   <ul class="collapse">
-  <li><a href="#t1-table-merchandise-imports-by-regionmarket-monthly" id="toc-t1-table-merchandise-imports-by-regionmarket-monthly" class="nav-link" data-scroll-target="#t1-table-merchandise-imports-by-regionmarket-monthly"><span class="toc-section-number">2.1</span>  T1 table: Merchandise Imports By Region/Market, Monthly</a></li>
-  <li><a href="#t2-table-merchandise-exports-by-regionmarket-monthly" id="toc-t2-table-merchandise-exports-by-regionmarket-monthly" class="nav-link" data-scroll-target="#t2-table-merchandise-exports-by-regionmarket-monthly"><span class="toc-section-number">2.2</span>  T2 table: Merchandise Exports By Region/Market, Monthly</a></li>
+  <li><a href="#table-merchandise-importsexport-by-regionmarket-monthly" id="toc-table-merchandise-importsexport-by-regionmarket-monthly" class="nav-link" data-scroll-target="#table-merchandise-importsexport-by-regionmarket-monthly"><span class="toc-section-number">2.1</span>  Table: Merchandise Imports/Export By Region/Market, Monthly</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -309,7 +312,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p><strong>Packages</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'readxl'</span>, <span class="st">'datawizard'</span>)</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'readxl'</span>, <span class="st">'datawizard'</span>, <span class="st">'tidyr'</span>, <span class="st">'lubridate'</span>,<span class="st">'tidyverse'</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(p <span class="cf">in</span> packages){</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(p,<span class="at">character.only =</span> T)){</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(p)</span>
@@ -320,7 +323,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="data" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Data</h1>
-<p>For the purpose of this take-home exercise, Merchandise Trade provided by Department of Statistics, Singapore (DOS) will be used. The data are available under the sub-section of Merchandise Trade by Region/Market. You should download the data by clicking on the link Download all in Excel on the same webpage. The study period should be between January 2020 to December 2022.</p>
+<p>Merchandise Trade provided by Department of Statistics, Singapore (DOS) is used. The study period is between January 2020 to December 2022.</p>
 <p><strong>Checking the number of sheets it contains</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">excel_sheets</span>(<span class="st">"data/data.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -329,1555 +332,275 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p><strong>Importing data</strong></p>
+<p>In the code chunk below, <em>read_xlsx()</em> of readxl package is used to import the data worksheet of our data workbook into R.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>T1 <span class="ot">&lt;-</span> <span class="fu">data_transpose</span>(<span class="fu">read_excel</span>(<span class="st">"data/data.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"T1"</span>), <span class="at">rownames =</span> <span class="st">"Month"</span>, <span class="at">colnames =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>T2 <span class="ot">&lt;-</span> <span class="fu">data_transpose</span>(<span class="fu">read_excel</span>(<span class="st">"data/data.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"T2"</span>), <span class="at">rownames =</span> <span class="st">"Month"</span>, <span class="at">colnames =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>T1 <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"data/data.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"T1"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>T2 <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"data/data.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"T2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="t1-table-merchandise-imports-by-regionmarket-monthly" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="t1-table-merchandise-imports-by-regionmarket-monthly"><span class="header-section-number">2.1</span> T1 table: Merchandise Imports By Region/Market, Monthly</h2>
+<p><strong>Formatting data</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Transpose the fat table to long table</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>T1 <span class="ot">&lt;-</span> <span class="fu">gather</span>(T1, <span class="st">"MonthYear"</span>, <span class="st">"ImportValue"</span>, <span class="sc">-</span><span class="st">`</span><span class="at">Data Series</span><span class="st">`</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>T2 <span class="ot">&lt;-</span> <span class="fu">gather</span>(T2, <span class="st">"MonthYear"</span>, <span class="st">"ExportValue"</span>, <span class="sc">-</span><span class="st">`</span><span class="at">Data Series</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>ymd_hms() and hour() are from lubridate package</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert MonthYear column to date format</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>T1<span class="sc">$</span><span class="st">`</span><span class="at">MonthYear</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="fu">ym</span>(T1<span class="sc">$</span><span class="st">`</span><span class="at">MonthYear</span><span class="st">`</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>T2<span class="sc">$</span><span class="st">`</span><span class="at">MonthYear</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="fu">ym</span>(T2<span class="sc">$</span><span class="st">`</span><span class="at">MonthYear</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(T1, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert ImportValue column to numeric format</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>T1<span class="sc">$</span><span class="st">`</span><span class="at">ImportValue</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(T1<span class="sc">$</span><span class="st">`</span><span class="at">ImportValue</span><span class="st">`</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>Million <span class="ot">&lt;-</span> T1 <span class="sc">%&gt;%</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">'Million'</span>, <span class="st">`</span><span class="at">Data Series</span><span class="st">`</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">ImportValue</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">ImportValue</span><span class="st">`</span> <span class="sc">*</span> <span class="dv">1000</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Data Series</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">str_replace_all</span>(<span class="st">`</span><span class="at">Data Series</span><span class="st">`</span>, <span class="st">"(Million Dollars)"</span>, <span class="st">""</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">`</span><span class="at">ImportValue (kUSD)</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">ImportValue</span><span class="st">`</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>Thousand <span class="ot">&lt;-</span> T1 <span class="sc">%&gt;%</span> </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">'Thousand'</span>, <span class="st">`</span><span class="at">Data Series</span><span class="st">`</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">ImportValue</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">ImportValue</span><span class="st">`</span> <span class="sc">*</span> <span class="dv">1000</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Data Series</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">str_replace_all</span>(<span class="st">`</span><span class="at">Data Series</span><span class="st">`</span>, <span class="st">"(Thousand Dollars)"</span>, <span class="st">""</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">`</span><span class="at">ImportValue (kUSD)</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">ImportValue</span><span class="st">`</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>Import <span class="ot">&lt;-</span> <span class="fu">rbind</span>(Million, Thousand)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert ImportValue column to numeric format</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>T2<span class="sc">$</span><span class="st">`</span><span class="at">ExportValue</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(T2<span class="sc">$</span><span class="st">`</span><span class="at">ExportValue</span><span class="st">`</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>Million <span class="ot">&lt;-</span> T2 <span class="sc">%&gt;%</span> </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">'Million'</span>, <span class="st">`</span><span class="at">Data Series</span><span class="st">`</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">ExportValue</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">ExportValue</span><span class="st">`</span> <span class="sc">*</span> <span class="dv">1000</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Data Series</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">str_replace_all</span>(<span class="st">`</span><span class="at">Data Series</span><span class="st">`</span>, <span class="st">"(Million Dollars)"</span>, <span class="st">""</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">`</span><span class="at">ExportValue (kUSD)</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">ExportValue</span><span class="st">`</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>Thousand <span class="ot">&lt;-</span> T2 <span class="sc">%&gt;%</span> </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">'Thousand'</span>, <span class="st">`</span><span class="at">Data Series</span><span class="st">`</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">ExportValue</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">ExportValue</span><span class="st">`</span> <span class="sc">*</span> <span class="dv">1000</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Data Series</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">str_replace_all</span>(<span class="st">`</span><span class="at">Data Series</span><span class="st">`</span>, <span class="st">"(Thousand Dollars)"</span>, <span class="st">""</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">`</span><span class="at">ExportValue (kUSD)</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">ExportValue</span><span class="st">`</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>Export <span class="ot">&lt;-</span> <span class="fu">rbind</span>(Million, Thousand)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="table-merchandise-importsexport-by-regionmarket-monthly" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="table-merchandise-importsexport-by-regionmarket-monthly"><span class="header-section-number">2.1</span> Table: Merchandise Imports/Export By Region/Market, Monthly</h2>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <table class="table table-sm table-striped">
-<colgroup>
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 1%">
-</colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Month</th>
-<th style="text-align: left;">Total Merchandise Imports (Thousand Dollars)</th>
-<th style="text-align: left;">America (Million Dollars)</th>
-<th style="text-align: left;">Asia (Million Dollars)</th>
-<th style="text-align: left;">Europe (Million Dollars)</th>
-<th style="text-align: left;">Oceania (Million Dollars)</th>
-<th style="text-align: left;">Africa (Million Dollars)</th>
-<th style="text-align: left;">European Union (Million Dollars)</th>
-<th style="text-align: left;">Belgium (Thousand Dollars)</th>
-<th style="text-align: left;">Denmark (Thousand Dollars)</th>
-<th style="text-align: left;">France (Thousand Dollars)</th>
-<th style="text-align: left;">Germany, Federal Republic Of (Thousand Dollars)</th>
-<th style="text-align: left;">Greece (Thousand Dollars)</th>
-<th style="text-align: left;">Ireland (Thousand Dollars)</th>
-<th style="text-align: left;">Italy (Thousand Dollars)</th>
-<th style="text-align: left;">Luxembourg (Thousand Dollars)</th>
-<th style="text-align: left;">Netherlands (Thousand Dollars)</th>
-<th style="text-align: left;">United Kingdom (Thousand Dollars)</th>
-<th style="text-align: left;">Portugal (Thousand Dollars)</th>
-<th style="text-align: left;">Spain (Thousand Dollars)</th>
-<th style="text-align: left;">Austria (Thousand Dollars)</th>
-<th style="text-align: left;">Finland (Thousand Dollars)</th>
-<th style="text-align: left;">Norway (Thousand Dollars)</th>
-<th style="text-align: left;">Sweden (Thousand Dollars)</th>
-<th style="text-align: left;">Switzerland (Thousand Dollars)</th>
-<th style="text-align: left;">Liechtenstein (Thousand Dollars)</th>
-<th style="text-align: left;">Malta (Thousand Dollars)</th>
-<th style="text-align: left;">Germany, Democratic Republic Of (Thousand Dollars)</th>
-<th style="text-align: left;">Hungary (Thousand Dollars)</th>
-<th style="text-align: left;">Poland (Thousand Dollars)</th>
-<th style="text-align: left;">Estonia (Thousand Dollars)</th>
-<th style="text-align: left;">Latvia (Thousand Dollars)</th>
-<th style="text-align: left;">Lithuania (Thousand Dollars)</th>
-<th style="text-align: left;">Slovenia (Thousand Dollars)</th>
-<th style="text-align: left;">Czech Republic (Thousand Dollars)</th>
-<th style="text-align: left;">Slovak Republic (Slovakia) (Thousand Dollars)</th>
-<th style="text-align: left;">Brunei Darussalam (Thousand Dollars)</th>
-<th style="text-align: left;">Indonesia (Thousand Dollars)</th>
-<th style="text-align: left;">Malaysia (Thousand Dollars)</th>
-<th style="text-align: left;">Philippines (Thousand Dollars)</th>
-<th style="text-align: left;">Thailand (Thousand Dollars)</th>
-<th style="text-align: left;">Myanmar (Thousand Dollars)</th>
-<th style="text-align: left;">Cambodia (Thousand Dollars)</th>
-<th style="text-align: left;">Laos People’s Democratic Republic (Thousand Dollars)</th>
-<th style="text-align: left;">Vietnam, Socialist Republic Of (Thousand Dollars)</th>
-<th style="text-align: left;">Japan (Thousand Dollars)</th>
-<th style="text-align: left;">Hong Kong (Thousand Dollars)</th>
-<th style="text-align: left;">Republic Of Korea (Thousand Dollars)</th>
-<th style="text-align: left;">Taiwan (Thousand Dollars)</th>
-<th style="text-align: left;">Macau (Thousand Dollars)</th>
-<th style="text-align: left;">Mainland China (Thousand Dollars)</th>
-<th style="text-align: left;">Afghanistan (Thousand Dollars)</th>
-<th style="text-align: left;">Bangladesh (Thousand Dollars)</th>
-<th style="text-align: left;">India (Thousand Dollars)</th>
-<th style="text-align: left;">Maldives, Republic Of (Thousand Dollars)</th>
-<th style="text-align: left;">Nepal (Thousand Dollars)</th>
-<th style="text-align: left;">Pakistan (Thousand Dollars)</th>
-<th style="text-align: left;">Sri Lanka (Thousand Dollars)</th>
-<th style="text-align: left;">Bahrain (Thousand Dollars)</th>
-<th style="text-align: left;">Cyprus (Thousand Dollars)</th>
-<th style="text-align: left;">Iran (Islamic Republic Of) (Thousand Dollars)</th>
-<th style="text-align: left;">Israel (Thousand Dollars)</th>
-<th style="text-align: left;">Jordan (Thousand Dollars)</th>
-<th style="text-align: left;">Kuwait (Thousand Dollars)</th>
-<th style="text-align: left;">Lebanon (Thousand Dollars)</th>
-<th style="text-align: left;">Oman (Thousand Dollars)</th>
-<th style="text-align: left;">Qatar (Thousand Dollars)</th>
-<th style="text-align: left;">Saudi Arabia (Thousand Dollars)</th>
-<th style="text-align: left;">Syrian Arab Republic (Thousand Dollars)</th>
-<th style="text-align: left;">United Arab Emirates (Thousand Dollars)</th>
-<th style="text-align: left;">Yemen (Thousand Dollars)</th>
-<th style="text-align: left;">Yemen Democratic (Thousand Dollars)</th>
-<th style="text-align: left;">Canada (Thousand Dollars)</th>
-<th style="text-align: left;">Puerto Rico (Thousand Dollars)</th>
-<th style="text-align: left;">United States (Thousand Dollars)</th>
-<th style="text-align: left;">Argentina (Thousand Dollars)</th>
-<th style="text-align: left;">Brazil (Thousand Dollars)</th>
-<th style="text-align: left;">Chile (Thousand Dollars)</th>
-<th style="text-align: left;">Colombia (Thousand Dollars)</th>
-<th style="text-align: left;">Ecuador (Thousand Dollars)</th>
-<th style="text-align: left;">Mexico (Thousand Dollars)</th>
-<th style="text-align: left;">Paraguay (Thousand Dollars)</th>
-<th style="text-align: left;">Peru (Thousand Dollars)</th>
-<th style="text-align: left;">Uruguay (Thousand Dollars)</th>
-<th style="text-align: left;">Venezuela (Thousand Dollars)</th>
-<th style="text-align: left;">Netherlands Antilles (Thousand Dollars)</th>
-<th style="text-align: left;">Panama (Thousand Dollars)</th>
-<th style="text-align: left;">Bahamas (Thousand Dollars)</th>
-<th style="text-align: left;">Bermuda (Thousand Dollars)</th>
-<th style="text-align: left;">French Guiana (Thousand Dollars)</th>
-<th style="text-align: left;">Grenada (Thousand Dollars)</th>
-<th style="text-align: left;">Guatemala (Thousand Dollars)</th>
-<th style="text-align: left;">Honduras (Thousand Dollars)</th>
-<th style="text-align: left;">Jamaica (Thousand Dollars)</th>
-<th style="text-align: left;">St Vincent &amp; The Grenadines (Thousand Dollars)</th>
-<th style="text-align: left;">Trinidad &amp; Tobago (Thousand Dollars)</th>
-<th style="text-align: left;">Anguilla (Thousand Dollars)</th>
-<th style="text-align: left;">Other Countries In America (Thousand Dollars)</th>
-<th style="text-align: left;">Australia (Thousand Dollars)</th>
-<th style="text-align: left;">Fiji (Thousand Dollars)</th>
-<th style="text-align: left;">Nauru (Thousand Dollars)</th>
-<th style="text-align: left;">New Caledonia (Thousand Dollars)</th>
-<th style="text-align: left;">New Zealand (Thousand Dollars)</th>
-<th style="text-align: left;">Papua New Guinea (Thousand Dollars)</th>
-<th style="text-align: left;">Cocos (Keeling) Islands (Thousand Dollars)</th>
-<th style="text-align: left;">French Southern Territories (Thousand Dollars)</th>
-<th style="text-align: left;">Norfolk Island (Thousand Dollars)</th>
-<th style="text-align: left;">Cook Islands (Thousand Dollars)</th>
-<th style="text-align: left;">French Polynesia (Thousand Dollars)</th>
-<th style="text-align: left;">Guam (Thousand Dollars)</th>
-<th style="text-align: left;">Kiribati (Thousand Dollars)</th>
-<th style="text-align: left;">Niue (Thousand Dollars)</th>
-<th style="text-align: left;">Solomon Islands (Thousand Dollars)</th>
-<th style="text-align: left;">Tuvalu (Thousand Dollars)</th>
-<th style="text-align: left;">Wallis &amp; Fatuna Islands (Thousand Dollars)</th>
-<th style="text-align: left;">Micronesia (Thousand Dollars)</th>
-<th style="text-align: left;">Palau (Thousand Dollars)</th>
-<th style="text-align: left;">South Sudan (Thousand Dollars)</th>
-<th style="text-align: left;">Other Countries In Oceania (Thousand Dollars)</th>
-<th style="text-align: left;">Commonwealth Of Independent States (Thousand Dollars)</th>
+<th style="text-align: left;">Data Series</th>
+<th style="text-align: left;">MonthYear</th>
+<th style="text-align: right;">ImportValue (kUSD)</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">2022 Dec</td>
-<td style="text-align: left;">49869770.0</td>
-<td style="text-align: left;">6901.5</td>
-<td style="text-align: left;">33611.7</td>
-<td style="text-align: left;">7541.8</td>
-<td style="text-align: left;">1399.9</td>
-<td style="text-align: left;">414.9</td>
-<td style="text-align: left;">5058.8</td>
-<td style="text-align: left;">103655.0</td>
-<td style="text-align: left;">67665.0</td>
-<td style="text-align: left;">1537347.0</td>
-<td style="text-align: left;">1129542.0</td>
-<td style="text-align: left;">99085.0</td>
-<td style="text-align: left;">106678.0</td>
-<td style="text-align: left;">702472.0</td>
-<td style="text-align: left;">8156.0</td>
-<td style="text-align: left;">384010.0</td>
-<td style="text-align: left;">940088.0</td>
-<td style="text-align: left;">31026.0</td>
-<td style="text-align: left;">262629.0</td>
-<td style="text-align: left;">104665.0</td>
-<td style="text-align: left;">42399.0</td>
-<td style="text-align: left;">50581.0</td>
-<td style="text-align: left;">162253.0</td>
-<td style="text-align: left;">992687.0</td>
-<td style="text-align: left;">2250.0</td>
-<td style="text-align: left;">41040.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">44406.0</td>
-<td style="text-align: left;">61324.0</td>
-<td style="text-align: left;">5378.0</td>
-<td style="text-align: left;">4288.0</td>
-<td style="text-align: left;">13594.0</td>
-<td style="text-align: left;">7106.0</td>
-<td style="text-align: left;">69549.0</td>
-<td style="text-align: left;">9115.0</td>
-<td style="text-align: left;">143124.0</td>
-<td style="text-align: left;">2074781.0</td>
-<td style="text-align: left;">6017970.0</td>
-<td style="text-align: left;">592778.0</td>
-<td style="text-align: left;">1116398.0</td>
-<td style="text-align: left;">7486.0</td>
-<td style="text-align: left;">25899.0</td>
-<td style="text-align: left;">7281.0</td>
-<td style="text-align: left;">567388.0</td>
-<td style="text-align: left;">2618288.0</td>
-<td style="text-align: left;">240017.0</td>
-<td style="text-align: left;">3207322.0</td>
-<td style="text-align: left;">5357878.0</td>
-<td style="text-align: left;">1376.0</td>
-<td style="text-align: left;">7642587.0</td>
-<td style="text-align: left;">61.0</td>
-<td style="text-align: left;">27270.0</td>
-<td style="text-align: left;">834657.0</td>
-<td style="text-align: left;">103.0</td>
-<td style="text-align: left;">221.0</td>
-<td style="text-align: left;">7334.0</td>
-<td style="text-align: left;">10737.0</td>
-<td style="text-align: left;">44949.0</td>
-<td style="text-align: left;">21698.0</td>
-<td style="text-align: left;">317.0</td>
-<td style="text-align: left;">98717.0</td>
-<td style="text-align: left;">8265.0</td>
-<td style="text-align: left;">639.0</td>
-<td style="text-align: left;">332.0</td>
-<td style="text-align: left;">72624.0</td>
-<td style="text-align: left;">640131.0</td>
-<td style="text-align: left;">801168.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">1212293.0</td>
-<td style="text-align: left;">629.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">211232.0</td>
-<td style="text-align: left;">8375.0</td>
-<td style="text-align: left;">5314219.0</td>
-<td style="text-align: left;">11273.0</td>
-<td style="text-align: left;">1004171.0</td>
-<td style="text-align: left;">16649.0</td>
-<td style="text-align: left;">7915.0</td>
-<td style="text-align: left;">4475.0</td>
-<td style="text-align: left;">277739.0</td>
-<td style="text-align: left;">681.0</td>
-<td style="text-align: left;">3464.0</td>
-<td style="text-align: left;">635.0</td>
-<td style="text-align: left;">89.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">127.0</td>
-<td style="text-align: left;">11.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">123.0</td>
-<td style="text-align: left;">6.0</td>
-<td style="text-align: left;">570.0</td>
-<td style="text-align: left;">1457.0</td>
-<td style="text-align: left;">93.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">64.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">37931.0</td>
-<td style="text-align: left;">1253373.0</td>
-<td style="text-align: left;">243.0</td>
-<td style="text-align: left;">14.0</td>
-<td style="text-align: left;">18.0</td>
-<td style="text-align: left;">122266.0</td>
-<td style="text-align: left;">23124.0</td>
-<td style="text-align: left;">2.0</td>
-<td style="text-align: left;">46.0</td>
-<td style="text-align: left;">1.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">210.0</td>
-<td style="text-align: left;">35.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">80.0</td>
-<td style="text-align: left;">3.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">29.0</td>
-<td style="text-align: left;">1.0</td>
-<td style="text-align: left;">33107.0</td>
-<td style="text-align: left;">1577.0</td>
-<td style="text-align: left;">559381.0</td>
+<td style="text-align: left;">America ()</td>
+<td style="text-align: left;">2022-12-01</td>
+<td style="text-align: right;">6901500</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">2022 Nov</td>
-<td style="text-align: left;">50653907.0</td>
-<td style="text-align: left;">7529.4</td>
-<td style="text-align: left;">34733.7</td>
-<td style="text-align: left;">7242.8</td>
-<td style="text-align: left;">664.4</td>
-<td style="text-align: left;">483.6</td>
-<td style="text-align: left;">4961.4</td>
-<td style="text-align: left;">121773.0</td>
-<td style="text-align: left;">67436.0</td>
-<td style="text-align: left;">1563127.0</td>
-<td style="text-align: left;">1107630.0</td>
-<td style="text-align: left;">37937.0</td>
-<td style="text-align: left;">118525.0</td>
-<td style="text-align: left;">725004.0</td>
-<td style="text-align: left;">5714.0</td>
-<td style="text-align: left;">301384.0</td>
-<td style="text-align: left;">1050419.0</td>
-<td style="text-align: left;">33086.0</td>
-<td style="text-align: left;">245875.0</td>
-<td style="text-align: left;">105084.0</td>
-<td style="text-align: left;">49148.0</td>
-<td style="text-align: left;">43134.0</td>
-<td style="text-align: left;">196484.0</td>
-<td style="text-align: left;">949410.0</td>
-<td style="text-align: left;">3686.0</td>
-<td style="text-align: left;">23080.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">46849.0</td>
-<td style="text-align: left;">59504.0</td>
-<td style="text-align: left;">6972.0</td>
-<td style="text-align: left;">6436.0</td>
-<td style="text-align: left;">8716.0</td>
-<td style="text-align: left;">8502.0</td>
-<td style="text-align: left;">77729.0</td>
-<td style="text-align: left;">7487.0</td>
-<td style="text-align: left;">121051.0</td>
-<td style="text-align: left;">1971918.0</td>
-<td style="text-align: left;">6773423.0</td>
-<td style="text-align: left;">581054.0</td>
-<td style="text-align: left;">1241990.0</td>
-<td style="text-align: left;">6044.0</td>
-<td style="text-align: left;">16407.0</td>
-<td style="text-align: left;">4963.0</td>
-<td style="text-align: left;">488956.0</td>
-<td style="text-align: left;">2837697.0</td>
-<td style="text-align: left;">169227.0</td>
-<td style="text-align: left;">2863026.0</td>
-<td style="text-align: left;">5319407.0</td>
-<td style="text-align: left;">17054.0</td>
-<td style="text-align: left;">8285837.0</td>
-<td style="text-align: left;">26.0</td>
-<td style="text-align: left;">25709.0</td>
-<td style="text-align: left;">837673.0</td>
-<td style="text-align: left;">145.0</td>
-<td style="text-align: left;">612.0</td>
-<td style="text-align: left;">10169.0</td>
-<td style="text-align: left;">12169.0</td>
-<td style="text-align: left;">11520.0</td>
-<td style="text-align: left;">2385.0</td>
-<td style="text-align: left;">267.0</td>
-<td style="text-align: left;">85965.0</td>
-<td style="text-align: left;">7262.0</td>
-<td style="text-align: left;">54562.0</td>
-<td style="text-align: left;">578.0</td>
-<td style="text-align: left;">60005.0</td>
-<td style="text-align: left;">476149.0</td>
-<td style="text-align: left;">866619.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">1205738.0</td>
-<td style="text-align: left;">106.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">224872.0</td>
-<td style="text-align: left;">16518.0</td>
-<td style="text-align: left;">5832049.0</td>
-<td style="text-align: left;">6775.0</td>
-<td style="text-align: left;">1132945.0</td>
-<td style="text-align: left;">13831.0</td>
-<td style="text-align: left;">4436.0</td>
-<td style="text-align: left;">2745.0</td>
-<td style="text-align: left;">242881.0</td>
-<td style="text-align: left;">281.0</td>
-<td style="text-align: left;">2155.0</td>
-<td style="text-align: left;">779.0</td>
-<td style="text-align: left;">720.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">116.0</td>
-<td style="text-align: left;">4.0</td>
-<td style="text-align: left;">4.0</td>
-<td style="text-align: left;">517.0</td>
-<td style="text-align: left;">19.0</td>
-<td style="text-align: left;">997.0</td>
-<td style="text-align: left;">838.0</td>
-<td style="text-align: left;">117.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">2854.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">43918.0</td>
-<td style="text-align: left;">577829.0</td>
-<td style="text-align: left;">191.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">256.0</td>
-<td style="text-align: left;">72677.0</td>
-<td style="text-align: left;">12724.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">99.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">35.0</td>
-<td style="text-align: left;">104.0</td>
-<td style="text-align: left;">3.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">13.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">8.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">27952.0</td>
-<td style="text-align: left;">3090.0</td>
-<td style="text-align: left;">355213.0</td>
+<td style="text-align: left;">Asia ()</td>
+<td style="text-align: left;">2022-12-01</td>
+<td style="text-align: right;">33611700</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">2022 Oct</td>
-<td style="text-align: left;">53182943.0</td>
-<td style="text-align: left;">7666.4</td>
-<td style="text-align: left;">36120.9</td>
-<td style="text-align: left;">7475.9</td>
-<td style="text-align: left;">1329.8</td>
-<td style="text-align: left;">589.9</td>
-<td style="text-align: left;">4685.2</td>
-<td style="text-align: left;">88796.0</td>
-<td style="text-align: left;">63719.0</td>
-<td style="text-align: left;">1493161.0</td>
-<td style="text-align: left;">1122251.0</td>
-<td style="text-align: left;">15850.0</td>
-<td style="text-align: left;">157648.0</td>
-<td style="text-align: left;">594994.0</td>
-<td style="text-align: left;">15746.0</td>
-<td style="text-align: left;">263199.0</td>
-<td style="text-align: left;">859994.0</td>
-<td style="text-align: left;">39971.0</td>
-<td style="text-align: left;">184146.0</td>
-<td style="text-align: left;">101231.0</td>
-<td style="text-align: left;">49749.0</td>
-<td style="text-align: left;">40090.0</td>
-<td style="text-align: left;">180230.0</td>
-<td style="text-align: left;">1811943.0</td>
-<td style="text-align: left;">2650.0</td>
-<td style="text-align: left;">51734.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">42761.0</td>
-<td style="text-align: left;">72936.0</td>
-<td style="text-align: left;">5489.0</td>
-<td style="text-align: left;">2299.0</td>
-<td style="text-align: left;">5892.0</td>
-<td style="text-align: left;">8759.0</td>
-<td style="text-align: left;">78066.0</td>
-<td style="text-align: left;">9522.0</td>
-<td style="text-align: left;">214994.0</td>
-<td style="text-align: left;">1987191.0</td>
-<td style="text-align: left;">6417377.0</td>
-<td style="text-align: left;">646820.0</td>
-<td style="text-align: left;">1431165.0</td>
-<td style="text-align: left;">5856.0</td>
-<td style="text-align: left;">9089.0</td>
-<td style="text-align: left;">16907.0</td>
-<td style="text-align: left;">522441.0</td>
-<td style="text-align: left;">3038903.0</td>
-<td style="text-align: left;">207166.0</td>
-<td style="text-align: left;">3044583.0</td>
-<td style="text-align: left;">6484560.0</td>
-<td style="text-align: left;">2341.0</td>
-<td style="text-align: left;">7377473.0</td>
-<td style="text-align: left;">9.0</td>
-<td style="text-align: left;">18536.0</td>
-<td style="text-align: left;">826855.0</td>
-<td style="text-align: left;">14.0</td>
-<td style="text-align: left;">688.0</td>
-<td style="text-align: left;">6327.0</td>
-<td style="text-align: left;">14721.0</td>
-<td style="text-align: left;">66675.0</td>
-<td style="text-align: left;">2034.0</td>
-<td style="text-align: left;">692.0</td>
-<td style="text-align: left;">93452.0</td>
-<td style="text-align: left;">3020.0</td>
-<td style="text-align: left;">52798.0</td>
-<td style="text-align: left;">449.0</td>
-<td style="text-align: left;">108470.0</td>
-<td style="text-align: left;">528921.0</td>
-<td style="text-align: left;">1010564.0</td>
-<td style="text-align: left;">3.0</td>
-<td style="text-align: left;">1642118.0</td>
-<td style="text-align: left;">265.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">213606.0</td>
-<td style="text-align: left;">5480.0</td>
-<td style="text-align: left;">6163496.0</td>
-<td style="text-align: left;">14908.0</td>
-<td style="text-align: left;">917460.0</td>
-<td style="text-align: left;">11567.0</td>
-<td style="text-align: left;">2200.0</td>
-<td style="text-align: left;">4893.0</td>
-<td style="text-align: left;">272680.0</td>
-<td style="text-align: left;">487.0</td>
-<td style="text-align: left;">11670.0</td>
-<td style="text-align: left;">1123.0</td>
-<td style="text-align: left;">885.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">175.0</td>
-<td style="text-align: left;">4.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">12899.0</td>
-<td style="text-align: left;">1.0</td>
-<td style="text-align: left;">262.0</td>
-<td style="text-align: left;">706.0</td>
-<td style="text-align: left;">61.0</td>
-<td style="text-align: left;">2.0</td>
-<td style="text-align: left;">31.0</td>
-<td style="text-align: left;">1.0</td>
-<td style="text-align: left;">44771.0</td>
-<td style="text-align: left;">1246296.0</td>
-<td style="text-align: left;">170.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">14.0</td>
-<td style="text-align: left;">72719.0</td>
-<td style="text-align: left;">10221.0</td>
-<td style="text-align: left;">2.0</td>
-<td style="text-align: left;">115.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">60.0</td>
-<td style="text-align: left;">65.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">1.0</td>
-<td style="text-align: left;">21.0</td>
-<td style="text-align: left;">1.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">5.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">269.0</td>
-<td style="text-align: left;">211147.0</td>
+<td style="text-align: left;">Europe ()</td>
+<td style="text-align: left;">2022-12-01</td>
+<td style="text-align: right;">7541800</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">2022 Sep</td>
-<td style="text-align: left;">55799312.0</td>
-<td style="text-align: left;">7995.9</td>
-<td style="text-align: left;">37696.3</td>
-<td style="text-align: left;">8167.6</td>
-<td style="text-align: left;">1544.6</td>
-<td style="text-align: left;">395.0</td>
-<td style="text-align: left;">5145.8</td>
-<td style="text-align: left;">215978.0</td>
-<td style="text-align: left;">61842.0</td>
-<td style="text-align: left;">1660563.0</td>
-<td style="text-align: left;">1170472.0</td>
-<td style="text-align: left;">107888.0</td>
-<td style="text-align: left;">118936.0</td>
-<td style="text-align: left;">547587.0</td>
-<td style="text-align: left;">55482.0</td>
-<td style="text-align: left;">314814.0</td>
-<td style="text-align: left;">1131385.0</td>
-<td style="text-align: left;">47500.0</td>
-<td style="text-align: left;">209987.0</td>
-<td style="text-align: left;">130438.0</td>
-<td style="text-align: left;">48419.0</td>
-<td style="text-align: left;">41524.0</td>
-<td style="text-align: left;">143127.0</td>
-<td style="text-align: left;">1758858.0</td>
-<td style="text-align: left;">3558.0</td>
-<td style="text-align: left;">23836.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">38367.0</td>
-<td style="text-align: left;">82610.0</td>
-<td style="text-align: left;">7789.0</td>
-<td style="text-align: left;">2679.0</td>
-<td style="text-align: left;">8406.0</td>
-<td style="text-align: left;">7816.0</td>
-<td style="text-align: left;">73954.0</td>
-<td style="text-align: left;">7399.0</td>
-<td style="text-align: left;">208537.0</td>
-<td style="text-align: left;">1924895.0</td>
-<td style="text-align: left;">7672003.0</td>
-<td style="text-align: left;">599147.0</td>
-<td style="text-align: left;">1343781.0</td>
-<td style="text-align: left;">6949.0</td>
-<td style="text-align: left;">12607.0</td>
-<td style="text-align: left;">20214.0</td>
-<td style="text-align: left;">594893.0</td>
-<td style="text-align: left;">3109529.0</td>
-<td style="text-align: left;">354257.0</td>
-<td style="text-align: left;">3113799.0</td>
-<td style="text-align: left;">5683947.0</td>
-<td style="text-align: left;">436.0</td>
-<td style="text-align: left;">7390866.0</td>
-<td style="text-align: left;">19.0</td>
-<td style="text-align: left;">18308.0</td>
-<td style="text-align: left;">1023746.0</td>
-<td style="text-align: left;">43.0</td>
-<td style="text-align: left;">602.0</td>
-<td style="text-align: left;">5272.0</td>
-<td style="text-align: left;">13436.0</td>
-<td style="text-align: left;">2744.0</td>
-<td style="text-align: left;">1662.0</td>
-<td style="text-align: left;">258.0</td>
-<td style="text-align: left;">143055.0</td>
-<td style="text-align: left;">8904.0</td>
-<td style="text-align: left;">16848.0</td>
-<td style="text-align: left;">303.0</td>
-<td style="text-align: left;">42137.0</td>
-<td style="text-align: left;">766915.0</td>
-<td style="text-align: left;">954922.0</td>
-<td style="text-align: left;">17.0</td>
-<td style="text-align: left;">2315066.0</td>
-<td style="text-align: left;">48.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">241035.0</td>
-<td style="text-align: left;">9831.0</td>
-<td style="text-align: left;">6537215.0</td>
-<td style="text-align: left;">13163.0</td>
-<td style="text-align: left;">833293.0</td>
-<td style="text-align: left;">29599.0</td>
-<td style="text-align: left;">10518.0</td>
-<td style="text-align: left;">2522.0</td>
-<td style="text-align: left;">263872.0</td>
-<td style="text-align: left;">235.0</td>
-<td style="text-align: left;">14741.0</td>
-<td style="text-align: left;">3311.0</td>
-<td style="text-align: left;">238.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">328.0</td>
-<td style="text-align: left;">4.0</td>
-<td style="text-align: left;">3.0</td>
-<td style="text-align: left;">296.0</td>
-<td style="text-align: left;">3.0</td>
-<td style="text-align: left;">926.0</td>
-<td style="text-align: left;">432.0</td>
-<td style="text-align: left;">493.0</td>
-<td style="text-align: left;">21.0</td>
-<td style="text-align: left;">58.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">35101.0</td>
-<td style="text-align: left;">1447901.0</td>
-<td style="text-align: left;">498.0</td>
-<td style="text-align: left;">8.0</td>
-<td style="text-align: left;">262.0</td>
-<td style="text-align: left;">79919.0</td>
-<td style="text-align: left;">14332.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">242.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">23.0</td>
-<td style="text-align: left;">37.0</td>
-<td style="text-align: left;">176.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">3.0</td>
-<td style="text-align: left;">4.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">10.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">14777.0</td>
-<td style="text-align: left;">664.0</td>
-<td style="text-align: left;">192289.0</td>
+<td style="text-align: left;">Oceania ()</td>
+<td style="text-align: left;">2022-12-01</td>
+<td style="text-align: right;">1399900</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">2022 Aug</td>
-<td style="text-align: left;">58466009.0</td>
-<td style="text-align: left;">8633.8</td>
-<td style="text-align: left;">40911.9</td>
-<td style="text-align: left;">7433.2</td>
-<td style="text-align: left;">935.9</td>
-<td style="text-align: left;">551.2</td>
-<td style="text-align: left;">5131.0</td>
-<td style="text-align: left;">132917.0</td>
-<td style="text-align: left;">126150.0</td>
-<td style="text-align: left;">1624646.0</td>
-<td style="text-align: left;">1135242.0</td>
-<td style="text-align: left;">170197.0</td>
-<td style="text-align: left;">193225.0</td>
-<td style="text-align: left;">592000.0</td>
-<td style="text-align: left;">31284.0</td>
-<td style="text-align: left;">339001.0</td>
-<td style="text-align: left;">753406.0</td>
-<td style="text-align: left;">45507.0</td>
-<td style="text-align: left;">200170.0</td>
-<td style="text-align: left;">105197.0</td>
-<td style="text-align: left;">38114.0</td>
-<td style="text-align: left;">36231.0</td>
-<td style="text-align: left;">107557.0</td>
-<td style="text-align: left;">1420434.0</td>
-<td style="text-align: left;">3380.0</td>
-<td style="text-align: left;">40703.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">39917.0</td>
-<td style="text-align: left;">64268.0</td>
-<td style="text-align: left;">7588.0</td>
-<td style="text-align: left;">3549.0</td>
-<td style="text-align: left;">6345.0</td>
-<td style="text-align: left;">7957.0</td>
-<td style="text-align: left;">76026.0</td>
-<td style="text-align: left;">10549.0</td>
-<td style="text-align: left;">311958.0</td>
-<td style="text-align: left;">2301232.0</td>
-<td style="text-align: left;">7225607.0</td>
-<td style="text-align: left;">1121526.0</td>
-<td style="text-align: left;">1511871.0</td>
-<td style="text-align: left;">8313.0</td>
-<td style="text-align: left;">21829.0</td>
-<td style="text-align: left;">36150.0</td>
-<td style="text-align: left;">688285.0</td>
-<td style="text-align: left;">3100676.0</td>
-<td style="text-align: left;">319470.0</td>
-<td style="text-align: left;">3841813.0</td>
-<td style="text-align: left;">7174679.0</td>
-<td style="text-align: left;">3219.0</td>
-<td style="text-align: left;">8196629.0</td>
-<td style="text-align: left;">107.0</td>
-<td style="text-align: left;">36996.0</td>
-<td style="text-align: left;">908131.0</td>
-<td style="text-align: left;">37.0</td>
-<td style="text-align: left;">559.0</td>
-<td style="text-align: left;">9692.0</td>
-<td style="text-align: left;">12789.0</td>
-<td style="text-align: left;">7085.0</td>
-<td style="text-align: left;">2499.0</td>
-<td style="text-align: left;">255.0</td>
-<td style="text-align: left;">126174.0</td>
-<td style="text-align: left;">3782.0</td>
-<td style="text-align: left;">56351.0</td>
-<td style="text-align: left;">337.0</td>
-<td style="text-align: left;">73156.0</td>
-<td style="text-align: left;">827737.0</td>
-<td style="text-align: left;">1081996.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">1629843.0</td>
-<td style="text-align: left;">151.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">599499.0</td>
-<td style="text-align: left;">14898.0</td>
-<td style="text-align: left;">6575058.0</td>
-<td style="text-align: left;">11801.0</td>
-<td style="text-align: left;">968690.0</td>
-<td style="text-align: left;">75458.0</td>
-<td style="text-align: left;">9806.0</td>
-<td style="text-align: left;">1931.0</td>
-<td style="text-align: left;">247995.0</td>
-<td style="text-align: left;">513.0</td>
-<td style="text-align: left;">1888.0</td>
-<td style="text-align: left;">806.0</td>
-<td style="text-align: left;">803.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">424.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">2.0</td>
-<td style="text-align: left;">431.0</td>
-<td style="text-align: left;">8.0</td>
-<td style="text-align: left;">2170.0</td>
-<td style="text-align: left;">793.0</td>
-<td style="text-align: left;">137.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">80568.0</td>
-<td style="text-align: left;">9.0</td>
-<td style="text-align: left;">40996.0</td>
-<td style="text-align: left;">696980.0</td>
-<td style="text-align: left;">185.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">186.0</td>
-<td style="text-align: left;">133089.0</td>
-<td style="text-align: left;">104656.0</td>
-<td style="text-align: left;">7.0</td>
-<td style="text-align: left;">8.0</td>
-<td style="text-align: left;">101.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">38.0</td>
-<td style="text-align: left;">86.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">2.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">10.0</td>
-<td style="text-align: left;">6.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">441.0</td>
-<td style="text-align: left;">170747.0</td>
+<td style="text-align: left;">Africa ()</td>
+<td style="text-align: left;">2022-12-01</td>
+<td style="text-align: right;">414900</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">European Union ()</td>
+<td style="text-align: left;">2022-12-01</td>
+<td style="text-align: right;">5058800</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">America ()</td>
+<td style="text-align: left;">2022-11-01</td>
+<td style="text-align: right;">7529400</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Asia ()</td>
+<td style="text-align: left;">2022-11-01</td>
+<td style="text-align: right;">34733700</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Europe ()</td>
+<td style="text-align: left;">2022-11-01</td>
+<td style="text-align: right;">7242800</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Oceania ()</td>
+<td style="text-align: left;">2022-11-01</td>
+<td style="text-align: right;">664400</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Africa ()</td>
+<td style="text-align: left;">2022-11-01</td>
+<td style="text-align: right;">483600</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">European Union ()</td>
+<td style="text-align: left;">2022-11-01</td>
+<td style="text-align: right;">4961400</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">America ()</td>
+<td style="text-align: left;">2022-10-01</td>
+<td style="text-align: right;">7666400</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Asia ()</td>
+<td style="text-align: left;">2022-10-01</td>
+<td style="text-align: right;">36120900</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Europe ()</td>
+<td style="text-align: left;">2022-10-01</td>
+<td style="text-align: right;">7475900</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Data Series</th>
+<th style="text-align: left;">MonthYear</th>
+<th style="text-align: right;">ExportValue (kUSD)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">America ()</td>
+<td style="text-align: left;">2022-12-01</td>
+<td style="text-align: right;">6217500</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Asia ()</td>
+<td style="text-align: left;">2022-12-01</td>
+<td style="text-align: right;">39734800</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Europe ()</td>
+<td style="text-align: left;">2022-12-01</td>
+<td style="text-align: right;">4924400</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Oceania ()</td>
+<td style="text-align: left;">2022-12-01</td>
+<td style="text-align: right;">3034800</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Africa ()</td>
+<td style="text-align: left;">2022-12-01</td>
+<td style="text-align: right;">1088600</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">European Union ()</td>
+<td style="text-align: left;">2022-12-01</td>
+<td style="text-align: right;">4137100</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">America ()</td>
+<td style="text-align: left;">2022-11-01</td>
+<td style="text-align: right;">6394200</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Asia ()</td>
+<td style="text-align: left;">2022-11-01</td>
+<td style="text-align: right;">37973200</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Europe ()</td>
+<td style="text-align: left;">2022-11-01</td>
+<td style="text-align: right;">5025200</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Oceania ()</td>
+<td style="text-align: left;">2022-11-01</td>
+<td style="text-align: right;">3243100</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Africa ()</td>
+<td style="text-align: left;">2022-11-01</td>
+<td style="text-align: right;">1527000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">European Union ()</td>
+<td style="text-align: left;">2022-11-01</td>
+<td style="text-align: right;">4243400</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">America ()</td>
+<td style="text-align: left;">2022-10-01</td>
+<td style="text-align: right;">6653900</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Asia ()</td>
+<td style="text-align: left;">2022-10-01</td>
+<td style="text-align: right;">40500800</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Europe ()</td>
+<td style="text-align: left;">2022-10-01</td>
+<td style="text-align: right;">5121500</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-</section>
-<section id="t2-table-merchandise-exports-by-regionmarket-monthly" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="t2-table-merchandise-exports-by-regionmarket-monthly"><span class="header-section-number">2.2</span> T2 table: Merchandise Exports By Region/Market, Monthly</h2>
+</div>
 <div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(T2, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<table class="table table-sm table-striped">
-<colgroup>
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 0%">
-<col style="width: 1%">
-<col style="width: 1%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Month</th>
-<th style="text-align: left;">Total Merchandise Exports (Thousand Dollars)</th>
-<th style="text-align: left;">America (Million Dollars)</th>
-<th style="text-align: left;">Asia (Million Dollars)</th>
-<th style="text-align: left;">Europe (Million Dollars)</th>
-<th style="text-align: left;">Oceania (Million Dollars)</th>
-<th style="text-align: left;">Africa (Million Dollars)</th>
-<th style="text-align: left;">European Union (Million Dollars)</th>
-<th style="text-align: left;">Belgium (Thousand Dollars)</th>
-<th style="text-align: left;">Denmark (Thousand Dollars)</th>
-<th style="text-align: left;">France (Thousand Dollars)</th>
-<th style="text-align: left;">Germany, Federal Republic Of (Thousand Dollars)</th>
-<th style="text-align: left;">Greece (Thousand Dollars)</th>
-<th style="text-align: left;">Ireland (Thousand Dollars)</th>
-<th style="text-align: left;">Italy (Thousand Dollars)</th>
-<th style="text-align: left;">Luxembourg (Thousand Dollars)</th>
-<th style="text-align: left;">Netherlands (Thousand Dollars)</th>
-<th style="text-align: left;">United Kingdom (Thousand Dollars)</th>
-<th style="text-align: left;">Portugal (Thousand Dollars)</th>
-<th style="text-align: left;">Spain (Thousand Dollars)</th>
-<th style="text-align: left;">Austria (Thousand Dollars)</th>
-<th style="text-align: left;">Finland (Thousand Dollars)</th>
-<th style="text-align: left;">Sweden (Thousand Dollars)</th>
-<th style="text-align: left;">Switzerland (Thousand Dollars)</th>
-<th style="text-align: left;">Malta (Thousand Dollars)</th>
-<th style="text-align: left;">Germany, Democratic Republic Of (Thousand Dollars)</th>
-<th style="text-align: left;">Hungary (Thousand Dollars)</th>
-<th style="text-align: left;">Poland (Thousand Dollars)</th>
-<th style="text-align: left;">Estonia (Thousand Dollars)</th>
-<th style="text-align: left;">Latvia (Thousand Dollars)</th>
-<th style="text-align: left;">Lithuania (Thousand Dollars)</th>
-<th style="text-align: left;">Slovenia (Thousand Dollars)</th>
-<th style="text-align: left;">Czech Republic (Thousand Dollars)</th>
-<th style="text-align: left;">Slovak Republic (Slovakia) (Thousand Dollars)</th>
-<th style="text-align: left;">Brunei Darussalam (Thousand Dollars)</th>
-<th style="text-align: left;">Indonesia (Thousand Dollars)</th>
-<th style="text-align: left;">Malaysia (Thousand Dollars)</th>
-<th style="text-align: left;">Philippines (Thousand Dollars)</th>
-<th style="text-align: left;">Thailand (Thousand Dollars)</th>
-<th style="text-align: left;">Myanmar (Thousand Dollars)</th>
-<th style="text-align: left;">Cambodia (Thousand Dollars)</th>
-<th style="text-align: left;">Laos People’s Democratic Republic (Thousand Dollars)</th>
-<th style="text-align: left;">Vietnam, Socialist Republic Of (Thousand Dollars)</th>
-<th style="text-align: left;">Japan (Thousand Dollars)</th>
-<th style="text-align: left;">Hong Kong (Thousand Dollars)</th>
-<th style="text-align: left;">Republic Of Korea (Thousand Dollars)</th>
-<th style="text-align: left;">Taiwan (Thousand Dollars)</th>
-<th style="text-align: left;">Macau (Thousand Dollars)</th>
-<th style="text-align: left;">Mainland China (Thousand Dollars)</th>
-<th style="text-align: left;">Afghanistan (Thousand Dollars)</th>
-<th style="text-align: left;">Bangladesh (Thousand Dollars)</th>
-<th style="text-align: left;">India (Thousand Dollars)</th>
-<th style="text-align: left;">Maldives, Republic Of (Thousand Dollars)</th>
-<th style="text-align: left;">Nepal (Thousand Dollars)</th>
-<th style="text-align: left;">Pakistan (Thousand Dollars)</th>
-<th style="text-align: left;">Sri Lanka (Thousand Dollars)</th>
-<th style="text-align: left;">Bahrain (Thousand Dollars)</th>
-<th style="text-align: left;">Cyprus (Thousand Dollars)</th>
-<th style="text-align: left;">Iran (Islamic Republic Of) (Thousand Dollars)</th>
-<th style="text-align: left;">Israel (Thousand Dollars)</th>
-<th style="text-align: left;">Jordan (Thousand Dollars)</th>
-<th style="text-align: left;">Kuwait (Thousand Dollars)</th>
-<th style="text-align: left;">Lebanon (Thousand Dollars)</th>
-<th style="text-align: left;">Oman (Thousand Dollars)</th>
-<th style="text-align: left;">Qatar (Thousand Dollars)</th>
-<th style="text-align: left;">Saudi Arabia (Thousand Dollars)</th>
-<th style="text-align: left;">Syrian Arab Republic (Thousand Dollars)</th>
-<th style="text-align: left;">United Arab Emirates (Thousand Dollars)</th>
-<th style="text-align: left;">Yemen (Thousand Dollars)</th>
-<th style="text-align: left;">Yemen Democratic (Thousand Dollars)</th>
-<th style="text-align: left;">Canada (Thousand Dollars)</th>
-<th style="text-align: left;">Puerto Rico (Thousand Dollars)</th>
-<th style="text-align: left;">United States (Thousand Dollars)</th>
-<th style="text-align: left;">Argentina (Thousand Dollars)</th>
-<th style="text-align: left;">Brazil (Thousand Dollars)</th>
-<th style="text-align: left;">Chile (Thousand Dollars)</th>
-<th style="text-align: left;">Colombia (Thousand Dollars)</th>
-<th style="text-align: left;">Ecuador (Thousand Dollars)</th>
-<th style="text-align: left;">Mexico (Thousand Dollars)</th>
-<th style="text-align: left;">Paraguay (Thousand Dollars)</th>
-<th style="text-align: left;">Peru (Thousand Dollars)</th>
-<th style="text-align: left;">Uruguay (Thousand Dollars)</th>
-<th style="text-align: left;">Venezuela (Thousand Dollars)</th>
-<th style="text-align: left;">Australia (Thousand Dollars)</th>
-<th style="text-align: left;">Fiji (Thousand Dollars)</th>
-<th style="text-align: left;">New Caledonia (Thousand Dollars)</th>
-<th style="text-align: left;">New Zealand (Thousand Dollars)</th>
-<th style="text-align: left;">Papua New Guinea (Thousand Dollars)</th>
-<th style="text-align: left;">French Polynesia (Thousand Dollars)</th>
-<th style="text-align: left;">Guam (Thousand Dollars)</th>
-<th style="text-align: left;">Solomon Islands (Thousand Dollars)</th>
-<th style="text-align: left;">Other Countries In Oceania (Thousand Dollars)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">2022 Dec</td>
-<td style="text-align: left;">55000084.0</td>
-<td style="text-align: left;">6217.5</td>
-<td style="text-align: left;">39734.8</td>
-<td style="text-align: left;">4924.4</td>
-<td style="text-align: left;">3034.8</td>
-<td style="text-align: left;">1088.6</td>
-<td style="text-align: left;">4137.1</td>
-<td style="text-align: left;">432376.0</td>
-<td style="text-align: left;">31084.0</td>
-<td style="text-align: left;">402218.0</td>
-<td style="text-align: left;">809343.0</td>
-<td style="text-align: left;">131220.0</td>
-<td style="text-align: left;">177243.0</td>
-<td style="text-align: left;">128641.0</td>
-<td style="text-align: left;">25910.0</td>
-<td style="text-align: left;">1243341.0</td>
-<td style="text-align: left;">360897.0</td>
-<td style="text-align: left;">123349.0</td>
-<td style="text-align: left;">46151.0</td>
-<td style="text-align: left;">49367.0</td>
-<td style="text-align: left;">71732.0</td>
-<td style="text-align: left;">14099.0</td>
-<td style="text-align: left;">311701.0</td>
-<td style="text-align: left;">243227.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">47775.0</td>
-<td style="text-align: left;">53076.0</td>
-<td style="text-align: left;">683.0</td>
-<td style="text-align: left;">7434.0</td>
-<td style="text-align: left;">1248.0</td>
-<td style="text-align: left;">4546.0</td>
-<td style="text-align: left;">23443.0</td>
-<td style="text-align: left;">1217.0</td>
-<td style="text-align: left;">75900.0</td>
-<td style="text-align: left;">3740306.0</td>
-<td style="text-align: left;">5154779.0</td>
-<td style="text-align: left;">1116549.0</td>
-<td style="text-align: left;">1790423.0</td>
-<td style="text-align: left;">449544.0</td>
-<td style="text-align: left;">195030.0</td>
-<td style="text-align: left;">4643.0</td>
-<td style="text-align: left;">1958783.0</td>
-<td style="text-align: left;">2271626.0</td>
-<td style="text-align: left;">7403998.0</td>
-<td style="text-align: left;">2865718.0</td>
-<td style="text-align: left;">2768573.0</td>
-<td style="text-align: left;">29319.0</td>
-<td style="text-align: left;">6374198.0</td>
-<td style="text-align: left;">214.0</td>
-<td style="text-align: left;">294037.0</td>
-<td style="text-align: left;">1703023.0</td>
-<td style="text-align: left;">27931.0</td>
-<td style="text-align: left;">18692.0</td>
-<td style="text-align: left;">183923.0</td>
-<td style="text-align: left;">134049.0</td>
-<td style="text-align: left;">24163.0</td>
-<td style="text-align: left;">48818.0</td>
-<td style="text-align: left;">510.0</td>
-<td style="text-align: left;">105746.0</td>
-<td style="text-align: left;">15012.0</td>
-<td style="text-align: left;">46086.0</td>
-<td style="text-align: left;">1729.0</td>
-<td style="text-align: left;">18234.0</td>
-<td style="text-align: left;">64520.0</td>
-<td style="text-align: left;">102899.0</td>
-<td style="text-align: left;">260.0</td>
-<td style="text-align: left;">625765.0</td>
-<td style="text-align: left;">566.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">113586.0</td>
-<td style="text-align: left;">4234.0</td>
-<td style="text-align: left;">4671228.0</td>
-<td style="text-align: left;">22119.0</td>
-<td style="text-align: left;">227374.0</td>
-<td style="text-align: left;">8570.0</td>
-<td style="text-align: left;">12036.0</td>
-<td style="text-align: left;">7249.0</td>
-<td style="text-align: left;">224874.0</td>
-<td style="text-align: left;">563.0</td>
-<td style="text-align: left;">11791.0</td>
-<td style="text-align: left;">3822.0</td>
-<td style="text-align: left;">39.0</td>
-<td style="text-align: left;">1711317.0</td>
-<td style="text-align: left;">71371.0</td>
-<td style="text-align: left;">32546.0</td>
-<td style="text-align: left;">397788.0</td>
-<td style="text-align: left;">84412.0</td>
-<td style="text-align: left;">2428.0</td>
-<td style="text-align: left;">41150.0</td>
-<td style="text-align: left;">6018.0</td>
-<td style="text-align: left;">691400.0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">2022 Nov</td>
-<td style="text-align: left;">54162780.0</td>
-<td style="text-align: left;">6394.2</td>
-<td style="text-align: left;">37973.2</td>
-<td style="text-align: left;">5025.2</td>
-<td style="text-align: left;">3243.1</td>
-<td style="text-align: left;">1527.0</td>
-<td style="text-align: left;">4243.4</td>
-<td style="text-align: left;">756814.0</td>
-<td style="text-align: left;">29250.0</td>
-<td style="text-align: left;">324451.0</td>
-<td style="text-align: left;">927112.0</td>
-<td style="text-align: left;">126740.0</td>
-<td style="text-align: left;">33157.0</td>
-<td style="text-align: left;">167460.0</td>
-<td style="text-align: left;">4663.0</td>
-<td style="text-align: left;">1190952.0</td>
-<td style="text-align: left;">322583.0</td>
-<td style="text-align: left;">74028.0</td>
-<td style="text-align: left;">23462.0</td>
-<td style="text-align: left;">40047.0</td>
-<td style="text-align: left;">19921.0</td>
-<td style="text-align: left;">18936.0</td>
-<td style="text-align: left;">328426.0</td>
-<td style="text-align: left;">245180.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">63588.0</td>
-<td style="text-align: left;">63246.0</td>
-<td style="text-align: left;">1005.0</td>
-<td style="text-align: left;">2792.0</td>
-<td style="text-align: left;">3033.0</td>
-<td style="text-align: left;">6222.0</td>
-<td style="text-align: left;">25261.0</td>
-<td style="text-align: left;">2481.0</td>
-<td style="text-align: left;">65457.0</td>
-<td style="text-align: left;">4082822.0</td>
-<td style="text-align: left;">5557119.0</td>
-<td style="text-align: left;">1118234.0</td>
-<td style="text-align: left;">1762557.0</td>
-<td style="text-align: left;">392738.0</td>
-<td style="text-align: left;">280992.0</td>
-<td style="text-align: left;">2950.0</td>
-<td style="text-align: left;">1568729.0</td>
-<td style="text-align: left;">2504491.0</td>
-<td style="text-align: left;">5302426.0</td>
-<td style="text-align: left;">2165065.0</td>
-<td style="text-align: left;">2667565.0</td>
-<td style="text-align: left;">42902.0</td>
-<td style="text-align: left;">6773005.0</td>
-<td style="text-align: left;">272.0</td>
-<td style="text-align: left;">339772.0</td>
-<td style="text-align: left;">1467219.0</td>
-<td style="text-align: left;">34754.0</td>
-<td style="text-align: left;">12037.0</td>
-<td style="text-align: left;">111265.0</td>
-<td style="text-align: left;">133349.0</td>
-<td style="text-align: left;">21034.0</td>
-<td style="text-align: left;">57791.0</td>
-<td style="text-align: left;">1091.0</td>
-<td style="text-align: left;">122699.0</td>
-<td style="text-align: left;">8410.0</td>
-<td style="text-align: left;">44896.0</td>
-<td style="text-align: left;">2798.0</td>
-<td style="text-align: left;">16674.0</td>
-<td style="text-align: left;">172041.0</td>
-<td style="text-align: left;">106397.0</td>
-<td style="text-align: left;">62.0</td>
-<td style="text-align: left;">901306.0</td>
-<td style="text-align: left;">1322.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">96999.0</td>
-<td style="text-align: left;">56271.0</td>
-<td style="text-align: left;">4787358.0</td>
-<td style="text-align: left;">20687.0</td>
-<td style="text-align: left;">170736.0</td>
-<td style="text-align: left;">8683.0</td>
-<td style="text-align: left;">13459.0</td>
-<td style="text-align: left;">6212.0</td>
-<td style="text-align: left;">277119.0</td>
-<td style="text-align: left;">626.0</td>
-<td style="text-align: left;">8651.0</td>
-<td style="text-align: left;">947.0</td>
-<td style="text-align: left;">482.0</td>
-<td style="text-align: left;">1794035.0</td>
-<td style="text-align: left;">55584.0</td>
-<td style="text-align: left;">15556.0</td>
-<td style="text-align: left;">573747.0</td>
-<td style="text-align: left;">80267.0</td>
-<td style="text-align: left;">17142.0</td>
-<td style="text-align: left;">49396.0</td>
-<td style="text-align: left;">7120.0</td>
-<td style="text-align: left;">650476.0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">2022 Oct</td>
-<td style="text-align: left;">56576348.0</td>
-<td style="text-align: left;">6653.9</td>
-<td style="text-align: left;">40500.8</td>
-<td style="text-align: left;">5121.5</td>
-<td style="text-align: left;">3114.5</td>
-<td style="text-align: left;">1185.6</td>
-<td style="text-align: left;">4298.1</td>
-<td style="text-align: left;">350565.0</td>
-<td style="text-align: left;">67327.0</td>
-<td style="text-align: left;">529962.0</td>
-<td style="text-align: left;">1035273.0</td>
-<td style="text-align: left;">121392.0</td>
-<td style="text-align: left;">117698.0</td>
-<td style="text-align: left;">155578.0</td>
-<td style="text-align: left;">6334.0</td>
-<td style="text-align: left;">1189965.0</td>
-<td style="text-align: left;">357153.0</td>
-<td style="text-align: left;">81811.0</td>
-<td style="text-align: left;">32247.0</td>
-<td style="text-align: left;">60000.0</td>
-<td style="text-align: left;">65311.0</td>
-<td style="text-align: left;">21361.0</td>
-<td style="text-align: left;">362032.0</td>
-<td style="text-align: left;">220098.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">39889.0</td>
-<td style="text-align: left;">47942.0</td>
-<td style="text-align: left;">1321.0</td>
-<td style="text-align: left;">7758.0</td>
-<td style="text-align: left;">4156.0</td>
-<td style="text-align: left;">5236.0</td>
-<td style="text-align: left;">43738.0</td>
-<td style="text-align: left;">11506.0</td>
-<td style="text-align: left;">67063.0</td>
-<td style="text-align: left;">4075989.0</td>
-<td style="text-align: left;">6233818.0</td>
-<td style="text-align: left;">1229078.0</td>
-<td style="text-align: left;">1965567.0</td>
-<td style="text-align: left;">461908.0</td>
-<td style="text-align: left;">594395.0</td>
-<td style="text-align: left;">7222.0</td>
-<td style="text-align: left;">1730554.0</td>
-<td style="text-align: left;">2406706.0</td>
-<td style="text-align: left;">5137172.0</td>
-<td style="text-align: left;">2330102.0</td>
-<td style="text-align: left;">3034201.0</td>
-<td style="text-align: left;">21959.0</td>
-<td style="text-align: left;">7810503.0</td>
-<td style="text-align: left;">345.0</td>
-<td style="text-align: left;">465380.0</td>
-<td style="text-align: left;">1395949.0</td>
-<td style="text-align: left;">21845.0</td>
-<td style="text-align: left;">13355.0</td>
-<td style="text-align: left;">66674.0</td>
-<td style="text-align: left;">93118.0</td>
-<td style="text-align: left;">121596.0</td>
-<td style="text-align: left;">62302.0</td>
-<td style="text-align: left;">2586.0</td>
-<td style="text-align: left;">78544.0</td>
-<td style="text-align: left;">7316.0</td>
-<td style="text-align: left;">40943.0</td>
-<td style="text-align: left;">1148.0</td>
-<td style="text-align: left;">45914.0</td>
-<td style="text-align: left;">99750.0</td>
-<td style="text-align: left;">242241.0</td>
-<td style="text-align: left;">116.0</td>
-<td style="text-align: left;">573275.0</td>
-<td style="text-align: left;">700.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">110044.0</td>
-<td style="text-align: left;">49109.0</td>
-<td style="text-align: left;">5070780.0</td>
-<td style="text-align: left;">23605.0</td>
-<td style="text-align: left;">202358.0</td>
-<td style="text-align: left;">7161.0</td>
-<td style="text-align: left;">16109.0</td>
-<td style="text-align: left;">6672.0</td>
-<td style="text-align: left;">282600.0</td>
-<td style="text-align: left;">987.0</td>
-<td style="text-align: left;">7898.0</td>
-<td style="text-align: left;">1885.0</td>
-<td style="text-align: left;">676.0</td>
-<td style="text-align: left;">1628700.0</td>
-<td style="text-align: left;">70864.0</td>
-<td style="text-align: left;">38811.0</td>
-<td style="text-align: left;">499540.0</td>
-<td style="text-align: left;">102466.0</td>
-<td style="text-align: left;">34617.0</td>
-<td style="text-align: left;">76617.0</td>
-<td style="text-align: left;">7749.0</td>
-<td style="text-align: left;">658085.0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">2022 Sep</td>
-<td style="text-align: left;">62507132.0</td>
-<td style="text-align: left;">7091.9</td>
-<td style="text-align: left;">45605.1</td>
-<td style="text-align: left;">5155.1</td>
-<td style="text-align: left;">3453.3</td>
-<td style="text-align: left;">1201.8</td>
-<td style="text-align: left;">4065.4</td>
-<td style="text-align: left;">386724.0</td>
-<td style="text-align: left;">44793.0</td>
-<td style="text-align: left;">358786.0</td>
-<td style="text-align: left;">912066.0</td>
-<td style="text-align: left;">150911.0</td>
-<td style="text-align: left;">61522.0</td>
-<td style="text-align: left;">125791.0</td>
-<td style="text-align: left;">7283.0</td>
-<td style="text-align: left;">1181847.0</td>
-<td style="text-align: left;">379348.0</td>
-<td style="text-align: left;">149219.0</td>
-<td style="text-align: left;">35478.0</td>
-<td style="text-align: left;">60601.0</td>
-<td style="text-align: left;">45266.0</td>
-<td style="text-align: left;">21764.0</td>
-<td style="text-align: left;">579719.0</td>
-<td style="text-align: left;">248160.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">60851.0</td>
-<td style="text-align: left;">53511.0</td>
-<td style="text-align: left;">2292.0</td>
-<td style="text-align: left;">9914.0</td>
-<td style="text-align: left;">2474.0</td>
-<td style="text-align: left;">2679.0</td>
-<td style="text-align: left;">40588.0</td>
-<td style="text-align: left;">11752.0</td>
-<td style="text-align: left;">81269.0</td>
-<td style="text-align: left;">4373980.0</td>
-<td style="text-align: left;">5884698.0</td>
-<td style="text-align: left;">1367212.0</td>
-<td style="text-align: left;">2241114.0</td>
-<td style="text-align: left;">509268.0</td>
-<td style="text-align: left;">1504662.0</td>
-<td style="text-align: left;">27116.0</td>
-<td style="text-align: left;">2375792.0</td>
-<td style="text-align: left;">2481370.0</td>
-<td style="text-align: left;">7405741.0</td>
-<td style="text-align: left;">2896148.0</td>
-<td style="text-align: left;">2875136.0</td>
-<td style="text-align: left;">18310.0</td>
-<td style="text-align: left;">7133642.0</td>
-<td style="text-align: left;">453.0</td>
-<td style="text-align: left;">547112.0</td>
-<td style="text-align: left;">1817817.0</td>
-<td style="text-align: left;">30156.0</td>
-<td style="text-align: left;">15734.0</td>
-<td style="text-align: left;">226902.0</td>
-<td style="text-align: left;">191920.0</td>
-<td style="text-align: left;">41003.0</td>
-<td style="text-align: left;">64638.0</td>
-<td style="text-align: left;">548.0</td>
-<td style="text-align: left;">111282.0</td>
-<td style="text-align: left;">7608.0</td>
-<td style="text-align: left;">42895.0</td>
-<td style="text-align: left;">1082.0</td>
-<td style="text-align: left;">19112.0</td>
-<td style="text-align: left;">95392.0</td>
-<td style="text-align: left;">310368.0</td>
-<td style="text-align: left;">85.0</td>
-<td style="text-align: left;">813202.0</td>
-<td style="text-align: left;">1464.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">134488.0</td>
-<td style="text-align: left;">74606.0</td>
-<td style="text-align: left;">5278523.0</td>
-<td style="text-align: left;">52858.0</td>
-<td style="text-align: left;">274320.0</td>
-<td style="text-align: left;">44538.0</td>
-<td style="text-align: left;">20157.0</td>
-<td style="text-align: left;">11642.0</td>
-<td style="text-align: left;">231403.0</td>
-<td style="text-align: left;">1297.0</td>
-<td style="text-align: left;">10393.0</td>
-<td style="text-align: left;">969.0</td>
-<td style="text-align: left;">64.0</td>
-<td style="text-align: left;">1923247.0</td>
-<td style="text-align: left;">89525.0</td>
-<td style="text-align: left;">29359.0</td>
-<td style="text-align: left;">528450.0</td>
-<td style="text-align: left;">114715.0</td>
-<td style="text-align: left;">2743.0</td>
-<td style="text-align: left;">50413.0</td>
-<td style="text-align: left;">9035.0</td>
-<td style="text-align: left;">708359.0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">2022 Aug</td>
-<td style="text-align: left;">63363749.0</td>
-<td style="text-align: left;">7931.0</td>
-<td style="text-align: left;">44106.2</td>
-<td style="text-align: left;">6109.6</td>
-<td style="text-align: left;">3608.4</td>
-<td style="text-align: left;">1608.5</td>
-<td style="text-align: left;">5020.5</td>
-<td style="text-align: left;">570824.0</td>
-<td style="text-align: left;">42761.0</td>
-<td style="text-align: left;">454328.0</td>
-<td style="text-align: left;">1291942.0</td>
-<td style="text-align: left;">191678.0</td>
-<td style="text-align: left;">68379.0</td>
-<td style="text-align: left;">126344.0</td>
-<td style="text-align: left;">9801.0</td>
-<td style="text-align: left;">1512800.0</td>
-<td style="text-align: left;">498657.0</td>
-<td style="text-align: left;">100757.0</td>
-<td style="text-align: left;">41036.0</td>
-<td style="text-align: left;">36414.0</td>
-<td style="text-align: left;">30590.0</td>
-<td style="text-align: left;">18788.0</td>
-<td style="text-align: left;">440859.0</td>
-<td style="text-align: left;">229646.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">80433.0</td>
-<td style="text-align: left;">48436.0</td>
-<td style="text-align: left;">2590.0</td>
-<td style="text-align: left;">4005.0</td>
-<td style="text-align: left;">3363.0</td>
-<td style="text-align: left;">2361.0</td>
-<td style="text-align: left;">53328.0</td>
-<td style="text-align: left;">8491.0</td>
-<td style="text-align: left;">101311.0</td>
-<td style="text-align: left;">4684693.0</td>
-<td style="text-align: left;">6150507.0</td>
-<td style="text-align: left;">1654932.0</td>
-<td style="text-align: left;">2254888.0</td>
-<td style="text-align: left;">455447.0</td>
-<td style="text-align: left;">1087906.0</td>
-<td style="text-align: left;">3719.0</td>
-<td style="text-align: left;">2259090.0</td>
-<td style="text-align: left;">2311824.0</td>
-<td style="text-align: left;">6466344.0</td>
-<td style="text-align: left;">2412712.0</td>
-<td style="text-align: left;">2621213.0</td>
-<td style="text-align: left;">26644.0</td>
-<td style="text-align: left;">7548001.0</td>
-<td style="text-align: left;">232.0</td>
-<td style="text-align: left;">534857.0</td>
-<td style="text-align: left;">1593916.0</td>
-<td style="text-align: left;">32331.0</td>
-<td style="text-align: left;">16029.0</td>
-<td style="text-align: left;">132621.0</td>
-<td style="text-align: left;">121017.0</td>
-<td style="text-align: left;">48485.0</td>
-<td style="text-align: left;">70390.0</td>
-<td style="text-align: left;">810.0</td>
-<td style="text-align: left;">138756.0</td>
-<td style="text-align: left;">9380.0</td>
-<td style="text-align: left;">34121.0</td>
-<td style="text-align: left;">1380.0</td>
-<td style="text-align: left;">68168.0</td>
-<td style="text-align: left;">101056.0</td>
-<td style="text-align: left;">119219.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">975155.0</td>
-<td style="text-align: left;">1463.0</td>
-<td style="text-align: left;">0.0</td>
-<td style="text-align: left;">131512.0</td>
-<td style="text-align: left;">32665.0</td>
-<td style="text-align: left;">6094432.0</td>
-<td style="text-align: left;">43246.0</td>
-<td style="text-align: left;">258914.0</td>
-<td style="text-align: left;">12651.0</td>
-<td style="text-align: left;">17219.0</td>
-<td style="text-align: left;">10004.0</td>
-<td style="text-align: left;">258392.0</td>
-<td style="text-align: left;">283.0</td>
-<td style="text-align: left;">9050.0</td>
-<td style="text-align: left;">2100.0</td>
-<td style="text-align: left;">136.0</td>
-<td style="text-align: left;">2060828.0</td>
-<td style="text-align: left;">49089.0</td>
-<td style="text-align: left;">39826.0</td>
-<td style="text-align: left;">471479.0</td>
-<td style="text-align: left;">75179.0</td>
-<td style="text-align: left;">4153.0</td>
-<td style="text-align: left;">73882.0</td>
-<td style="text-align: left;">13854.0</td>
-<td style="text-align: left;">823524.0</td>
-</tr>
-</tbody>
-</table>
+
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Pay Attention
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Using callouts is an effective way to highlight content that your reader give special consideration or attention.</p>
 </div>
 </div>
 
