@@ -467,5 +467,12 @@
     "title": "In-class Exercise 7",
     "section": "",
     "text": "Geometric data -> polygon, point, line\neach geographic is used to represent building, location\nDifferent representation (i.e. point, polygon, polyline) will be used differently. Point has only 1 dimension and will limit the parameter that we could visual i.e. size, color\nAlso depend on the data you have\nWhen working with the geographic data, you must know your data first what are available.\n\n\n\nCoordinate system will ensure how the map will be referenced together. However there are many types of coordinate system\n\nGeographic coordinate system (similar to our mobile phone, navigation satellite) called WGS84. Latitude/Longtitude is used as a reference. Not good for measure distance because the measure is on surface of the sphere.\nprojected coordinate system Different country has different projection system. Vietnam which the country is long has 2 projection systems. As well as Indonesia which is wide also has 2 projection systems.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHands-on lab"
+  },
+  {
+    "objectID": "indexInclass.html#in-class-exercise-07-25-feb-2023",
+    "href": "indexInclass.html#in-class-exercise-07-25-feb-2023",
+    "title": "In-class Exercise",
+    "section": "In-class Exercise 07 (25 Feb 2023)",
+    "text": "In-class Exercise 07 (25 Feb 2023)"
   }
 ]
