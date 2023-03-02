@@ -1,0 +1,98 @@
+---
+title: "In-class Exercise 7"
+author: "Tasaporn Visawameteekul"
+date: 25 February 2023
+date-modified: "`r Sys.Date()`"
+execute: 
+  echo: true
+  eval: true
+  warning: false
+format: html
+toc: true
+editor: visual
+---
+
+# Lesson7: VisGeo
+
+## Lecture
+
+-   Geometric data -\> polygon, point, line
+-   each geographic is used to represent building, location
+-   Different representation (i.e. point, polygon, polyline) will be used differently. Point has only 1 dimension and will limit the parameter that we could visual i.e. size, color
+-   Also depend on the data you have
+-   When working with the geographic data, you must know your data first what are available.
+
+### Geographic Coordinate system
+
+Coordinate system will ensure how the map will be referenced together. However there are many types of coordinate system
+
+-   **Geographic coordinate system** (similar to our mobile phone, navigation satellite) called WGS84. Latitude/Longtitude is used as a reference. Not good for measure distance because the measure is on surface of the sphere.
+-   **projected coordinate system** Different country has different projection system. Vietnam which the country is long has 2 projection systems. As well as Indonesia which is wide also has 2 projection systems.
+
+![](images/image-1888874250.png){fig-align="center" width="494"}
+
+### Proportional Symbol Map
+
+![](images/image-16916778.png)
+
+### Choropleth Map
+
+![](images/image-791909308.png)
+
+### Geofacet
+
+![](images/image-111773521.png){width="488"}
+
+## Hands-on Tableau
+
+![](images/image-386047869.png){width="450"}
+
+![](images/image-656058057.png){width="445"}
+
+![](images/image-2031513621.png){width="443"}
+
+![](images/image-507877591.png){width="440"}
+
+![](images/image-45158841.png){width="232"}![](images/image-1145079679.png){width="584"}
+![](images/image-907754977.png){width="275"}![](images/image-489756010.png){width="264"}
+
+![](images/image-566587973.png){width="538"}
+
+![](images/image-281582168.png){width="539"}
+
+## Hands-on R
+
+```{r}
+pacman::p_load(sf, tmap, tidyverse)
+```
+
+Read data
+
+```{r, warning=FALSE, message=FALSE}
+sgpools <- read_csv("data/aspatial/SGPools_svy21.csv")
+```
+
+```{r, warning=FALSE, message=FALSE}
+list(sgpools) 
+```
+
+```{r}
+sgpools_sf <- st_as_sf(sgpools, 
+                       coords = c("XCOORD", "YCOORD"),
+                       crs= 3414)
+```
+
+```{r}
+list(sgpools_sf)
+```
+
+```{r, message=FALSE, warning=FALSE}
+tmap_mode("view")
+tm_shape(sgpools_sf)+
+tm_bubbles(col = "red",
+           size = 1,
+           border.col = "black",
+           border.lwd = 1)
+```
+
+## 

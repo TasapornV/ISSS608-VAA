@@ -1,0 +1,1700 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20224.22.1117.1841                               -->
+<workbook original-version='18.1' source-build='2022.4.0 (20224.22.1117.1841)' source-platform='win' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <_.fcp.AnimationOnByDefault.true...AnimationOnByDefault />
+    <MapboxVectorStylesAndLayers />
+    <_.fcp.MarkAnimation.true...MarkAnimation />
+    <_.fcp.ObjectModelEncapsulateLegacy.true...ObjectModelEncapsulateLegacy />
+    <_.fcp.ObjectModelTableType.true...ObjectModelTableType />
+    <_.fcp.SchemaViewerObjectModel.true...SchemaViewerObjectModel />
+    <SheetIdentifierTracking />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <_.fcp.AnimationOnByDefault.false...style>
+    <_.fcp.AnimationOnByDefault.false..._.fcp.MarkAnimation.true...style-rule element='animation'>
+      <_.fcp.AnimationOnByDefault.false...format attr='animation-on' value='ao-on' />
+    </_.fcp.AnimationOnByDefault.false..._.fcp.MarkAnimation.true...style-rule>
+  </_.fcp.AnimationOnByDefault.false...style>
+  <datasources>
+    <datasource caption='ResidentialTransaction20220826195250' inline='true' name='federated.1vjuxgr12gmbn21a9lymy1si7m60' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='ResidentialTransaction20220826195250' name='textscan.0b0eon91gkr7c91ajmlnv1kaxc18'>
+            <connection class='textscan' directory='E:/ISSS608_VisualAnalytics/ISSS608-VAA/In-class_Ex/In-class_Ex07/data/aspatial' filename='ResidentialTransaction20220826195250.csv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <_.fcp.ObjectModelEncapsulateLegacy.false...relation all='true' name='ResidentialTransaction20220826195250.csv+' type='union'>
+          <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+            <column datatype='string' name='Project Name' />
+            <column datatype='integer' name='Transacted Price ($)' />
+            <column datatype='real' name='Area (SQFT)' />
+            <column datatype='integer' name='Unit Price ($ PSF)' />
+            <column datatype='string' name='Sale Date' />
+            <column datatype='string' name='Address' />
+            <column datatype='string' name='Type of Sale' />
+            <column datatype='string' name='Type of Area' />
+            <column datatype='real' name='Area (SQM)' />
+            <column datatype='integer' name='Unit Price ($ PSM)' />
+            <column datatype='string' name='Nett Price($)' />
+            <column datatype='string' name='Property Type' />
+            <column datatype='integer' name='Number of Units' />
+            <column datatype='string' name='Tenure' />
+            <column datatype='string' name='Completion Date' />
+            <column datatype='string' name='Purchaser Address Indicator' />
+            <column datatype='integer' name='Postal Code' />
+            <column datatype='integer' name='Postal District' />
+            <column datatype='integer' name='Postal Sector' />
+            <column datatype='string' name='Planning Region' />
+            <column datatype='string' name='Planning Area' />
+            <column datatype='string' name='Table Name' />
+          </columns>
+          <relation connection='textscan.0b0eon91gkr7c91ajmlnv1kaxc18' name='ResidentialTransaction20220826195250.csv' table='[ResidentialTransaction20220826195250#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+              <column datatype='string' name='Project Name' ordinal='0' />
+              <column datatype='integer' name='Transacted Price ($)' ordinal='1' />
+              <column datatype='real' name='Area (SQFT)' ordinal='2' />
+              <column datatype='integer' name='Unit Price ($ PSF)' ordinal='3' />
+              <column datatype='date' name='Sale Date' ordinal='4' />
+              <column datatype='string' name='Address' ordinal='5' />
+              <column datatype='string' name='Type of Sale' ordinal='6' />
+              <column datatype='string' name='Type of Area' ordinal='7' />
+              <column datatype='real' name='Area (SQM)' ordinal='8' />
+              <column datatype='integer' name='Unit Price ($ PSM)' ordinal='9' />
+              <column datatype='string' name='Nett Price($)' ordinal='10' />
+              <column datatype='string' name='Property Type' ordinal='11' />
+              <column datatype='integer' name='Number of Units' ordinal='12' />
+              <column datatype='string' name='Tenure' ordinal='13' />
+              <column datatype='string' name='Completion Date' ordinal='14' />
+              <column datatype='string' name='Purchaser Address Indicator' ordinal='15' />
+              <column datatype='integer' name='Postal Code' ordinal='16' />
+              <column datatype='integer' name='Postal District' ordinal='17' />
+              <column datatype='integer' name='Postal Sector' ordinal='18' />
+              <column datatype='string' name='Planning Region' ordinal='19' />
+              <column datatype='string' name='Planning Area' ordinal='20' />
+            </columns>
+          </relation>
+          <relation connection='textscan.0b0eon91gkr7c91ajmlnv1kaxc18' name='ResidentialTransaction20220826195420.csv' table='[ResidentialTransaction20220826195420#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+              <column datatype='string' name='Project Name' ordinal='0' />
+              <column datatype='integer' name='Transacted Price ($)' ordinal='1' />
+              <column datatype='real' name='Area (SQFT)' ordinal='2' />
+              <column datatype='integer' name='Unit Price ($ PSF)' ordinal='3' />
+              <column datatype='date' name='Sale Date' ordinal='4' />
+              <column datatype='string' name='Address' ordinal='5' />
+              <column datatype='string' name='Type of Sale' ordinal='6' />
+              <column datatype='string' name='Type of Area' ordinal='7' />
+              <column datatype='real' name='Area (SQM)' ordinal='8' />
+              <column datatype='integer' name='Unit Price ($ PSM)' ordinal='9' />
+              <column datatype='string' name='Nett Price($)' ordinal='10' />
+              <column datatype='string' name='Property Type' ordinal='11' />
+              <column datatype='integer' name='Number of Units' ordinal='12' />
+              <column datatype='string' name='Tenure' ordinal='13' />
+              <column datatype='string' name='Completion Date' ordinal='14' />
+              <column datatype='string' name='Purchaser Address Indicator' ordinal='15' />
+              <column datatype='integer' name='Postal Code' ordinal='16' />
+              <column datatype='integer' name='Postal District' ordinal='17' />
+              <column datatype='integer' name='Postal Sector' ordinal='18' />
+              <column datatype='string' name='Planning Region' ordinal='19' />
+              <column datatype='string' name='Planning Area' ordinal='20' />
+            </columns>
+          </relation>
+          <relation connection='textscan.0b0eon91gkr7c91ajmlnv1kaxc18' name='ResidentialTransaction20220826195551.csv' table='[ResidentialTransaction20220826195551#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+              <column datatype='string' name='Project Name' ordinal='0' />
+              <column datatype='integer' name='Transacted Price ($)' ordinal='1' />
+              <column datatype='real' name='Area (SQFT)' ordinal='2' />
+              <column datatype='integer' name='Unit Price ($ PSF)' ordinal='3' />
+              <column datatype='date' name='Sale Date' ordinal='4' />
+              <column datatype='string' name='Address' ordinal='5' />
+              <column datatype='string' name='Type of Sale' ordinal='6' />
+              <column datatype='string' name='Type of Area' ordinal='7' />
+              <column datatype='real' name='Area (SQM)' ordinal='8' />
+              <column datatype='integer' name='Unit Price ($ PSM)' ordinal='9' />
+              <column datatype='string' name='Nett Price($)' ordinal='10' />
+              <column datatype='string' name='Property Type' ordinal='11' />
+              <column datatype='integer' name='Number of Units' ordinal='12' />
+              <column datatype='string' name='Tenure' ordinal='13' />
+              <column datatype='string' name='Completion Date' ordinal='14' />
+              <column datatype='string' name='Purchaser Address Indicator' ordinal='15' />
+              <column datatype='integer' name='Postal Code' ordinal='16' />
+              <column datatype='integer' name='Postal District' ordinal='17' />
+              <column datatype='integer' name='Postal Sector' ordinal='18' />
+              <column datatype='string' name='Planning Region' ordinal='19' />
+              <column datatype='string' name='Planning Area' ordinal='20' />
+            </columns>
+          </relation>
+          <relation connection='textscan.0b0eon91gkr7c91ajmlnv1kaxc18' name='ResidentialTransaction20230113214835.csv' table='[ResidentialTransaction20230113214835#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+              <column datatype='string' name='Project Name' ordinal='0' />
+              <column datatype='integer' name='Transacted Price ($)' ordinal='1' />
+              <column datatype='real' name='Area (SQFT)' ordinal='2' />
+              <column datatype='integer' name='Unit Price ($ PSF)' ordinal='3' />
+              <column datatype='date' name='Sale Date' ordinal='4' />
+              <column datatype='string' name='Address' ordinal='5' />
+              <column datatype='string' name='Type of Sale' ordinal='6' />
+              <column datatype='string' name='Type of Area' ordinal='7' />
+              <column datatype='real' name='Area (SQM)' ordinal='8' />
+              <column datatype='integer' name='Unit Price ($ PSM)' ordinal='9' />
+              <column datatype='string' name='Nett Price($)' ordinal='10' />
+              <column datatype='string' name='Property Type' ordinal='11' />
+              <column datatype='integer' name='Number of Units' ordinal='12' />
+              <column datatype='string' name='Tenure' ordinal='13' />
+              <column datatype='string' name='Completion Date' ordinal='14' />
+              <column datatype='string' name='Purchaser Address Indicator' ordinal='15' />
+              <column datatype='integer' name='Postal Code' ordinal='16' />
+              <column datatype='integer' name='Postal District' ordinal='17' />
+              <column datatype='integer' name='Postal Sector' ordinal='18' />
+              <column datatype='string' name='Planning Region' ordinal='19' />
+              <column datatype='string' name='Planning Area' ordinal='20' />
+            </columns>
+          </relation>
+          <relation connection='textscan.0b0eon91gkr7c91ajmlnv1kaxc18' name='ResidentialTransaction20230113215003.csv' table='[ResidentialTransaction20230113215003#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+              <column datatype='string' name='Project Name' ordinal='0' />
+              <column datatype='integer' name='Transacted Price ($)' ordinal='1' />
+              <column datatype='real' name='Area (SQFT)' ordinal='2' />
+              <column datatype='integer' name='Unit Price ($ PSF)' ordinal='3' />
+              <column datatype='string' name='Sale Date' ordinal='4' />
+              <column datatype='string' name='Address' ordinal='5' />
+              <column datatype='string' name='Type of Sale' ordinal='6' />
+              <column datatype='string' name='Type of Area' ordinal='7' />
+              <column datatype='real' name='Area (SQM)' ordinal='8' />
+              <column datatype='integer' name='Unit Price ($ PSM)' ordinal='9' />
+              <column datatype='string' name='Nett Price($)' ordinal='10' />
+              <column datatype='string' name='Property Type' ordinal='11' />
+              <column datatype='integer' name='Number of Units' ordinal='12' />
+              <column datatype='string' name='Tenure' ordinal='13' />
+              <column datatype='string' name='Completion Date' ordinal='14' />
+              <column datatype='string' name='Purchaser Address Indicator' ordinal='15' />
+              <column datatype='integer' name='Postal Code' ordinal='16' />
+              <column datatype='integer' name='Postal District' ordinal='17' />
+              <column datatype='integer' name='Postal Sector' ordinal='18' />
+              <column datatype='string' name='Planning Region' ordinal='19' />
+              <column datatype='string' name='Planning Area' ordinal='20' />
+            </columns>
+          </relation>
+          <relation connection='textscan.0b0eon91gkr7c91ajmlnv1kaxc18' name='ResidentialTransaction20230113215052.csv' table='[ResidentialTransaction20230113215052#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+              <column datatype='string' name='Project Name' ordinal='0' />
+              <column datatype='integer' name='Transacted Price ($)' ordinal='1' />
+              <column datatype='real' name='Area (SQFT)' ordinal='2' />
+              <column datatype='integer' name='Unit Price ($ PSF)' ordinal='3' />
+              <column datatype='date' name='Sale Date' ordinal='4' />
+              <column datatype='string' name='Address' ordinal='5' />
+              <column datatype='string' name='Type of Sale' ordinal='6' />
+              <column datatype='string' name='Type of Area' ordinal='7' />
+              <column datatype='real' name='Area (SQM)' ordinal='8' />
+              <column datatype='integer' name='Unit Price ($ PSM)' ordinal='9' />
+              <column datatype='string' name='Nett Price($)' ordinal='10' />
+              <column datatype='string' name='Property Type' ordinal='11' />
+              <column datatype='integer' name='Number of Units' ordinal='12' />
+              <column datatype='string' name='Tenure' ordinal='13' />
+              <column datatype='string' name='Completion Date' ordinal='14' />
+              <column datatype='string' name='Purchaser Address Indicator' ordinal='15' />
+              <column datatype='integer' name='Postal Code' ordinal='16' />
+              <column datatype='integer' name='Postal District' ordinal='17' />
+              <column datatype='integer' name='Postal Sector' ordinal='18' />
+              <column datatype='string' name='Planning Region' ordinal='19' />
+              <column datatype='string' name='Planning Area' ordinal='20' />
+            </columns>
+          </relation>
+        </_.fcp.ObjectModelEncapsulateLegacy.false...relation>
+        <_.fcp.ObjectModelEncapsulateLegacy.true...relation all='true' name='ResidentialTransaction20220826195250.csv+' type='union'>
+          <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+            <column datatype='string' name='Project Name' />
+            <column datatype='integer' name='Transacted Price ($)' />
+            <column datatype='real' name='Area (SQFT)' />
+            <column datatype='integer' name='Unit Price ($ PSF)' />
+            <column datatype='string' name='Sale Date' />
+            <column datatype='string' name='Address' />
+            <column datatype='string' name='Type of Sale' />
+            <column datatype='string' name='Type of Area' />
+            <column datatype='real' name='Area (SQM)' />
+            <column datatype='integer' name='Unit Price ($ PSM)' />
+            <column datatype='string' name='Nett Price($)' />
+            <column datatype='string' name='Property Type' />
+            <column datatype='integer' name='Number of Units' />
+            <column datatype='string' name='Tenure' />
+            <column datatype='string' name='Completion Date' />
+            <column datatype='string' name='Purchaser Address Indicator' />
+            <column datatype='integer' name='Postal Code' />
+            <column datatype='integer' name='Postal District' />
+            <column datatype='integer' name='Postal Sector' />
+            <column datatype='string' name='Planning Region' />
+            <column datatype='string' name='Planning Area' />
+            <column datatype='string' name='Table Name' />
+          </columns>
+          <relation connection='textscan.0b0eon91gkr7c91ajmlnv1kaxc18' name='ResidentialTransaction20220826195250.csv' table='[ResidentialTransaction20220826195250#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+              <column datatype='string' name='Project Name' ordinal='0' />
+              <column datatype='integer' name='Transacted Price ($)' ordinal='1' />
+              <column datatype='real' name='Area (SQFT)' ordinal='2' />
+              <column datatype='integer' name='Unit Price ($ PSF)' ordinal='3' />
+              <column datatype='date' name='Sale Date' ordinal='4' />
+              <column datatype='string' name='Address' ordinal='5' />
+              <column datatype='string' name='Type of Sale' ordinal='6' />
+              <column datatype='string' name='Type of Area' ordinal='7' />
+              <column datatype='real' name='Area (SQM)' ordinal='8' />
+              <column datatype='integer' name='Unit Price ($ PSM)' ordinal='9' />
+              <column datatype='string' name='Nett Price($)' ordinal='10' />
+              <column datatype='string' name='Property Type' ordinal='11' />
+              <column datatype='integer' name='Number of Units' ordinal='12' />
+              <column datatype='string' name='Tenure' ordinal='13' />
+              <column datatype='string' name='Completion Date' ordinal='14' />
+              <column datatype='string' name='Purchaser Address Indicator' ordinal='15' />
+              <column datatype='integer' name='Postal Code' ordinal='16' />
+              <column datatype='integer' name='Postal District' ordinal='17' />
+              <column datatype='integer' name='Postal Sector' ordinal='18' />
+              <column datatype='string' name='Planning Region' ordinal='19' />
+              <column datatype='string' name='Planning Area' ordinal='20' />
+            </columns>
+          </relation>
+          <relation connection='textscan.0b0eon91gkr7c91ajmlnv1kaxc18' name='ResidentialTransaction20220826195420.csv' table='[ResidentialTransaction20220826195420#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+              <column datatype='string' name='Project Name' ordinal='0' />
+              <column datatype='integer' name='Transacted Price ($)' ordinal='1' />
+              <column datatype='real' name='Area (SQFT)' ordinal='2' />
+              <column datatype='integer' name='Unit Price ($ PSF)' ordinal='3' />
+              <column datatype='date' name='Sale Date' ordinal='4' />
+              <column datatype='string' name='Address' ordinal='5' />
+              <column datatype='string' name='Type of Sale' ordinal='6' />
+              <column datatype='string' name='Type of Area' ordinal='7' />
+              <column datatype='real' name='Area (SQM)' ordinal='8' />
+              <column datatype='integer' name='Unit Price ($ PSM)' ordinal='9' />
+              <column datatype='string' name='Nett Price($)' ordinal='10' />
+              <column datatype='string' name='Property Type' ordinal='11' />
+              <column datatype='integer' name='Number of Units' ordinal='12' />
+              <column datatype='string' name='Tenure' ordinal='13' />
+              <column datatype='string' name='Completion Date' ordinal='14' />
+              <column datatype='string' name='Purchaser Address Indicator' ordinal='15' />
+              <column datatype='integer' name='Postal Code' ordinal='16' />
+              <column datatype='integer' name='Postal District' ordinal='17' />
+              <column datatype='integer' name='Postal Sector' ordinal='18' />
+              <column datatype='string' name='Planning Region' ordinal='19' />
+              <column datatype='string' name='Planning Area' ordinal='20' />
+            </columns>
+          </relation>
+          <relation connection='textscan.0b0eon91gkr7c91ajmlnv1kaxc18' name='ResidentialTransaction20220826195551.csv' table='[ResidentialTransaction20220826195551#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+              <column datatype='string' name='Project Name' ordinal='0' />
+              <column datatype='integer' name='Transacted Price ($)' ordinal='1' />
+              <column datatype='real' name='Area (SQFT)' ordinal='2' />
+              <column datatype='integer' name='Unit Price ($ PSF)' ordinal='3' />
+              <column datatype='date' name='Sale Date' ordinal='4' />
+              <column datatype='string' name='Address' ordinal='5' />
+              <column datatype='string' name='Type of Sale' ordinal='6' />
+              <column datatype='string' name='Type of Area' ordinal='7' />
+              <column datatype='real' name='Area (SQM)' ordinal='8' />
+              <column datatype='integer' name='Unit Price ($ PSM)' ordinal='9' />
+              <column datatype='string' name='Nett Price($)' ordinal='10' />
+              <column datatype='string' name='Property Type' ordinal='11' />
+              <column datatype='integer' name='Number of Units' ordinal='12' />
+              <column datatype='string' name='Tenure' ordinal='13' />
+              <column datatype='string' name='Completion Date' ordinal='14' />
+              <column datatype='string' name='Purchaser Address Indicator' ordinal='15' />
+              <column datatype='integer' name='Postal Code' ordinal='16' />
+              <column datatype='integer' name='Postal District' ordinal='17' />
+              <column datatype='integer' name='Postal Sector' ordinal='18' />
+              <column datatype='string' name='Planning Region' ordinal='19' />
+              <column datatype='string' name='Planning Area' ordinal='20' />
+            </columns>
+          </relation>
+          <relation connection='textscan.0b0eon91gkr7c91ajmlnv1kaxc18' name='ResidentialTransaction20230113214835.csv' table='[ResidentialTransaction20230113214835#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+              <column datatype='string' name='Project Name' ordinal='0' />
+              <column datatype='integer' name='Transacted Price ($)' ordinal='1' />
+              <column datatype='real' name='Area (SQFT)' ordinal='2' />
+              <column datatype='integer' name='Unit Price ($ PSF)' ordinal='3' />
+              <column datatype='date' name='Sale Date' ordinal='4' />
+              <column datatype='string' name='Address' ordinal='5' />
+              <column datatype='string' name='Type of Sale' ordinal='6' />
+              <column datatype='string' name='Type of Area' ordinal='7' />
+              <column datatype='real' name='Area (SQM)' ordinal='8' />
+              <column datatype='integer' name='Unit Price ($ PSM)' ordinal='9' />
+              <column datatype='string' name='Nett Price($)' ordinal='10' />
+              <column datatype='string' name='Property Type' ordinal='11' />
+              <column datatype='integer' name='Number of Units' ordinal='12' />
+              <column datatype='string' name='Tenure' ordinal='13' />
+              <column datatype='string' name='Completion Date' ordinal='14' />
+              <column datatype='string' name='Purchaser Address Indicator' ordinal='15' />
+              <column datatype='integer' name='Postal Code' ordinal='16' />
+              <column datatype='integer' name='Postal District' ordinal='17' />
+              <column datatype='integer' name='Postal Sector' ordinal='18' />
+              <column datatype='string' name='Planning Region' ordinal='19' />
+              <column datatype='string' name='Planning Area' ordinal='20' />
+            </columns>
+          </relation>
+          <relation connection='textscan.0b0eon91gkr7c91ajmlnv1kaxc18' name='ResidentialTransaction20230113215003.csv' table='[ResidentialTransaction20230113215003#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+              <column datatype='string' name='Project Name' ordinal='0' />
+              <column datatype='integer' name='Transacted Price ($)' ordinal='1' />
+              <column datatype='real' name='Area (SQFT)' ordinal='2' />
+              <column datatype='integer' name='Unit Price ($ PSF)' ordinal='3' />
+              <column datatype='string' name='Sale Date' ordinal='4' />
+              <column datatype='string' name='Address' ordinal='5' />
+              <column datatype='string' name='Type of Sale' ordinal='6' />
+              <column datatype='string' name='Type of Area' ordinal='7' />
+              <column datatype='real' name='Area (SQM)' ordinal='8' />
+              <column datatype='integer' name='Unit Price ($ PSM)' ordinal='9' />
+              <column datatype='string' name='Nett Price($)' ordinal='10' />
+              <column datatype='string' name='Property Type' ordinal='11' />
+              <column datatype='integer' name='Number of Units' ordinal='12' />
+              <column datatype='string' name='Tenure' ordinal='13' />
+              <column datatype='string' name='Completion Date' ordinal='14' />
+              <column datatype='string' name='Purchaser Address Indicator' ordinal='15' />
+              <column datatype='integer' name='Postal Code' ordinal='16' />
+              <column datatype='integer' name='Postal District' ordinal='17' />
+              <column datatype='integer' name='Postal Sector' ordinal='18' />
+              <column datatype='string' name='Planning Region' ordinal='19' />
+              <column datatype='string' name='Planning Area' ordinal='20' />
+            </columns>
+          </relation>
+          <relation connection='textscan.0b0eon91gkr7c91ajmlnv1kaxc18' name='ResidentialTransaction20230113215052.csv' table='[ResidentialTransaction20230113215052#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+              <column datatype='string' name='Project Name' ordinal='0' />
+              <column datatype='integer' name='Transacted Price ($)' ordinal='1' />
+              <column datatype='real' name='Area (SQFT)' ordinal='2' />
+              <column datatype='integer' name='Unit Price ($ PSF)' ordinal='3' />
+              <column datatype='date' name='Sale Date' ordinal='4' />
+              <column datatype='string' name='Address' ordinal='5' />
+              <column datatype='string' name='Type of Sale' ordinal='6' />
+              <column datatype='string' name='Type of Area' ordinal='7' />
+              <column datatype='real' name='Area (SQM)' ordinal='8' />
+              <column datatype='integer' name='Unit Price ($ PSM)' ordinal='9' />
+              <column datatype='string' name='Nett Price($)' ordinal='10' />
+              <column datatype='string' name='Property Type' ordinal='11' />
+              <column datatype='integer' name='Number of Units' ordinal='12' />
+              <column datatype='string' name='Tenure' ordinal='13' />
+              <column datatype='string' name='Completion Date' ordinal='14' />
+              <column datatype='string' name='Purchaser Address Indicator' ordinal='15' />
+              <column datatype='integer' name='Postal Code' ordinal='16' />
+              <column datatype='integer' name='Postal District' ordinal='17' />
+              <column datatype='integer' name='Postal Sector' ordinal='18' />
+              <column datatype='string' name='Planning Region' ordinal='19' />
+              <column datatype='string' name='Planning Area' ordinal='20' />
+            </columns>
+          </relation>
+        </_.fcp.ObjectModelEncapsulateLegacy.true...relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[ResidentialTransaction20220826195250.csv+]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Project Name</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Project Name]</local-name>
+            <parent-name>[ResidentialTransaction20220826195250.csv+]</parent-name>
+            <remote-alias>Project Name</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_3D7AE47C4ED34CE6BC9D7FE3D52B14FD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Transacted Price ($)</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Transacted Price ($)]</local-name>
+            <parent-name>[ResidentialTransaction20220826195250.csv+]</parent-name>
+            <remote-alias>Transacted Price ($)</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_3D7AE47C4ED34CE6BC9D7FE3D52B14FD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Area (SQFT)</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Area (SQFT)]</local-name>
+            <parent-name>[ResidentialTransaction20220826195250.csv+]</parent-name>
+            <remote-alias>Area (SQFT)</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_3D7AE47C4ED34CE6BC9D7FE3D52B14FD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Unit Price ($ PSF)</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Unit Price ($ PSF)]</local-name>
+            <parent-name>[ResidentialTransaction20220826195250.csv+]</parent-name>
+            <remote-alias>Unit Price ($ PSF)</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_3D7AE47C4ED34CE6BC9D7FE3D52B14FD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Sale Date</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Sale Date]</local-name>
+            <parent-name>[ResidentialTransaction20220826195250.csv+]</parent-name>
+            <remote-alias>Sale Date</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_3D7AE47C4ED34CE6BC9D7FE3D52B14FD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Address</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Address]</local-name>
+            <parent-name>[ResidentialTransaction20220826195250.csv+]</parent-name>
+            <remote-alias>Address</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_3D7AE47C4ED34CE6BC9D7FE3D52B14FD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Type of Sale</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Type of Sale]</local-name>
+            <parent-name>[ResidentialTransaction20220826195250.csv+]</parent-name>
+            <remote-alias>Type of Sale</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_3D7AE47C4ED34CE6BC9D7FE3D52B14FD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Type of Area</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Type of Area]</local-name>
+            <parent-name>[ResidentialTransaction20220826195250.csv+]</parent-name>
+            <remote-alias>Type of Area</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_3D7AE47C4ED34CE6BC9D7FE3D52B14FD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Area (SQM)</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Area (SQM)]</local-name>
+            <parent-name>[ResidentialTransaction20220826195250.csv+]</parent-name>
+            <remote-alias>Area (SQM)</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_3D7AE47C4ED34CE6BC9D7FE3D52B14FD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Unit Price ($ PSM)</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Unit Price ($ PSM)]</local-name>
+            <parent-name>[ResidentialTransaction20220826195250.csv+]</parent-name>
+            <remote-alias>Unit Price ($ PSM)</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_3D7AE47C4ED34CE6BC9D7FE3D52B14FD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Nett Price($)</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Nett Price($)]</local-name>
+            <parent-name>[ResidentialTransaction20220826195250.csv+]</parent-name>
+            <remote-alias>Nett Price($)</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_3D7AE47C4ED34CE6BC9D7FE3D52B14FD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Property Type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Property Type]</local-name>
+            <parent-name>[ResidentialTransaction20220826195250.csv+]</parent-name>
+            <remote-alias>Property Type</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_3D7AE47C4ED34CE6BC9D7FE3D52B14FD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Number of Units</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Number of Units]</local-name>
+            <parent-name>[ResidentialTransaction20220826195250.csv+]</parent-name>
+            <remote-alias>Number of Units</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_3D7AE47C4ED34CE6BC9D7FE3D52B14FD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Tenure</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Tenure]</local-name>
+            <parent-name>[ResidentialTransaction20220826195250.csv+]</parent-name>
+            <remote-alias>Tenure</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_3D7AE47C4ED34CE6BC9D7FE3D52B14FD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Completion Date</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Completion Date]</local-name>
+            <parent-name>[ResidentialTransaction20220826195250.csv+]</parent-name>
+            <remote-alias>Completion Date</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_3D7AE47C4ED34CE6BC9D7FE3D52B14FD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Purchaser Address Indicator</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Purchaser Address Indicator]</local-name>
+            <parent-name>[ResidentialTransaction20220826195250.csv+]</parent-name>
+            <remote-alias>Purchaser Address Indicator</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_3D7AE47C4ED34CE6BC9D7FE3D52B14FD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Postal Code</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Postal Code]</local-name>
+            <parent-name>[ResidentialTransaction20220826195250.csv+]</parent-name>
+            <remote-alias>Postal Code</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_3D7AE47C4ED34CE6BC9D7FE3D52B14FD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Postal District</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Postal District]</local-name>
+            <parent-name>[ResidentialTransaction20220826195250.csv+]</parent-name>
+            <remote-alias>Postal District</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_3D7AE47C4ED34CE6BC9D7FE3D52B14FD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Postal Sector</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Postal Sector]</local-name>
+            <parent-name>[ResidentialTransaction20220826195250.csv+]</parent-name>
+            <remote-alias>Postal Sector</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_3D7AE47C4ED34CE6BC9D7FE3D52B14FD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Planning Region</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Planning Region]</local-name>
+            <parent-name>[ResidentialTransaction20220826195250.csv+]</parent-name>
+            <remote-alias>Planning Region</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_3D7AE47C4ED34CE6BC9D7FE3D52B14FD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Planning Area</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Planning Area]</local-name>
+            <parent-name>[ResidentialTransaction20220826195250.csv+]</parent-name>
+            <remote-alias>Planning Area</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_3D7AE47C4ED34CE6BC9D7FE3D52B14FD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Table Name</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Table Name]</local-name>
+            <parent-name>[ResidentialTransaction20220826195250.csv+]</parent-name>
+            <remote-alias>Table Name</remote-alias>
+            <ordinal>21</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_3D7AE47C4ED34CE6BC9D7FE3D52B14FD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column aggregation='Sum' datatype='integer' default-format='*00000' name='[Postal Code]' role='dimension' semantic-role='[ZipCode].[Name]' type='ordinal' />
+      <_.fcp.ObjectModelTableType.true...column caption='ResidentialTransaction20220826195250.csv+' datatype='table' name='[__tableau_internal_object_id__].[_3D7AE47C4ED34CE6BC9D7FE3D52B14FD]' role='measure' type='quantitative' />
+      <layout _.fcp.SchemaViewerObjectModel.false...dim-percentage='0.5' _.fcp.SchemaViewerObjectModel.false...measure-percentage='0.4' dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;Singapore&quot;' />
+      </semantic-values>
+      <date-options start-of-week='monday' />
+      <_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+        <objects>
+          <object caption='ResidentialTransaction20220826195250.csv+' id='_3D7AE47C4ED34CE6BC9D7FE3D52B14FD'>
+            <properties context=''>
+              <relation all='true' name='ResidentialTransaction20220826195250.csv+' type='union'>
+                <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+                  <column datatype='string' name='Project Name' />
+                  <column datatype='integer' name='Transacted Price ($)' />
+                  <column datatype='real' name='Area (SQFT)' />
+                  <column datatype='integer' name='Unit Price ($ PSF)' />
+                  <column datatype='string' name='Sale Date' />
+                  <column datatype='string' name='Address' />
+                  <column datatype='string' name='Type of Sale' />
+                  <column datatype='string' name='Type of Area' />
+                  <column datatype='real' name='Area (SQM)' />
+                  <column datatype='integer' name='Unit Price ($ PSM)' />
+                  <column datatype='string' name='Nett Price($)' />
+                  <column datatype='string' name='Property Type' />
+                  <column datatype='integer' name='Number of Units' />
+                  <column datatype='string' name='Tenure' />
+                  <column datatype='string' name='Completion Date' />
+                  <column datatype='string' name='Purchaser Address Indicator' />
+                  <column datatype='integer' name='Postal Code' />
+                  <column datatype='integer' name='Postal District' />
+                  <column datatype='integer' name='Postal Sector' />
+                  <column datatype='string' name='Planning Region' />
+                  <column datatype='string' name='Planning Area' />
+                  <column datatype='string' name='Table Name' />
+                </columns>
+                <relation connection='textscan.0b0eon91gkr7c91ajmlnv1kaxc18' name='ResidentialTransaction20220826195250.csv' table='[ResidentialTransaction20220826195250#csv]' type='table'>
+                  <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+                    <column datatype='string' name='Project Name' ordinal='0' />
+                    <column datatype='integer' name='Transacted Price ($)' ordinal='1' />
+                    <column datatype='real' name='Area (SQFT)' ordinal='2' />
+                    <column datatype='integer' name='Unit Price ($ PSF)' ordinal='3' />
+                    <column datatype='date' name='Sale Date' ordinal='4' />
+                    <column datatype='string' name='Address' ordinal='5' />
+                    <column datatype='string' name='Type of Sale' ordinal='6' />
+                    <column datatype='string' name='Type of Area' ordinal='7' />
+                    <column datatype='real' name='Area (SQM)' ordinal='8' />
+                    <column datatype='integer' name='Unit Price ($ PSM)' ordinal='9' />
+                    <column datatype='string' name='Nett Price($)' ordinal='10' />
+                    <column datatype='string' name='Property Type' ordinal='11' />
+                    <column datatype='integer' name='Number of Units' ordinal='12' />
+                    <column datatype='string' name='Tenure' ordinal='13' />
+                    <column datatype='string' name='Completion Date' ordinal='14' />
+                    <column datatype='string' name='Purchaser Address Indicator' ordinal='15' />
+                    <column datatype='integer' name='Postal Code' ordinal='16' />
+                    <column datatype='integer' name='Postal District' ordinal='17' />
+                    <column datatype='integer' name='Postal Sector' ordinal='18' />
+                    <column datatype='string' name='Planning Region' ordinal='19' />
+                    <column datatype='string' name='Planning Area' ordinal='20' />
+                  </columns>
+                </relation>
+                <relation connection='textscan.0b0eon91gkr7c91ajmlnv1kaxc18' name='ResidentialTransaction20220826195420.csv' table='[ResidentialTransaction20220826195420#csv]' type='table'>
+                  <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+                    <column datatype='string' name='Project Name' ordinal='0' />
+                    <column datatype='integer' name='Transacted Price ($)' ordinal='1' />
+                    <column datatype='real' name='Area (SQFT)' ordinal='2' />
+                    <column datatype='integer' name='Unit Price ($ PSF)' ordinal='3' />
+                    <column datatype='date' name='Sale Date' ordinal='4' />
+                    <column datatype='string' name='Address' ordinal='5' />
+                    <column datatype='string' name='Type of Sale' ordinal='6' />
+                    <column datatype='string' name='Type of Area' ordinal='7' />
+                    <column datatype='real' name='Area (SQM)' ordinal='8' />
+                    <column datatype='integer' name='Unit Price ($ PSM)' ordinal='9' />
+                    <column datatype='string' name='Nett Price($)' ordinal='10' />
+                    <column datatype='string' name='Property Type' ordinal='11' />
+                    <column datatype='integer' name='Number of Units' ordinal='12' />
+                    <column datatype='string' name='Tenure' ordinal='13' />
+                    <column datatype='string' name='Completion Date' ordinal='14' />
+                    <column datatype='string' name='Purchaser Address Indicator' ordinal='15' />
+                    <column datatype='integer' name='Postal Code' ordinal='16' />
+                    <column datatype='integer' name='Postal District' ordinal='17' />
+                    <column datatype='integer' name='Postal Sector' ordinal='18' />
+                    <column datatype='string' name='Planning Region' ordinal='19' />
+                    <column datatype='string' name='Planning Area' ordinal='20' />
+                  </columns>
+                </relation>
+                <relation connection='textscan.0b0eon91gkr7c91ajmlnv1kaxc18' name='ResidentialTransaction20220826195551.csv' table='[ResidentialTransaction20220826195551#csv]' type='table'>
+                  <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+                    <column datatype='string' name='Project Name' ordinal='0' />
+                    <column datatype='integer' name='Transacted Price ($)' ordinal='1' />
+                    <column datatype='real' name='Area (SQFT)' ordinal='2' />
+                    <column datatype='integer' name='Unit Price ($ PSF)' ordinal='3' />
+                    <column datatype='date' name='Sale Date' ordinal='4' />
+                    <column datatype='string' name='Address' ordinal='5' />
+                    <column datatype='string' name='Type of Sale' ordinal='6' />
+                    <column datatype='string' name='Type of Area' ordinal='7' />
+                    <column datatype='real' name='Area (SQM)' ordinal='8' />
+                    <column datatype='integer' name='Unit Price ($ PSM)' ordinal='9' />
+                    <column datatype='string' name='Nett Price($)' ordinal='10' />
+                    <column datatype='string' name='Property Type' ordinal='11' />
+                    <column datatype='integer' name='Number of Units' ordinal='12' />
+                    <column datatype='string' name='Tenure' ordinal='13' />
+                    <column datatype='string' name='Completion Date' ordinal='14' />
+                    <column datatype='string' name='Purchaser Address Indicator' ordinal='15' />
+                    <column datatype='integer' name='Postal Code' ordinal='16' />
+                    <column datatype='integer' name='Postal District' ordinal='17' />
+                    <column datatype='integer' name='Postal Sector' ordinal='18' />
+                    <column datatype='string' name='Planning Region' ordinal='19' />
+                    <column datatype='string' name='Planning Area' ordinal='20' />
+                  </columns>
+                </relation>
+                <relation connection='textscan.0b0eon91gkr7c91ajmlnv1kaxc18' name='ResidentialTransaction20230113214835.csv' table='[ResidentialTransaction20230113214835#csv]' type='table'>
+                  <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+                    <column datatype='string' name='Project Name' ordinal='0' />
+                    <column datatype='integer' name='Transacted Price ($)' ordinal='1' />
+                    <column datatype='real' name='Area (SQFT)' ordinal='2' />
+                    <column datatype='integer' name='Unit Price ($ PSF)' ordinal='3' />
+                    <column datatype='date' name='Sale Date' ordinal='4' />
+                    <column datatype='string' name='Address' ordinal='5' />
+                    <column datatype='string' name='Type of Sale' ordinal='6' />
+                    <column datatype='string' name='Type of Area' ordinal='7' />
+                    <column datatype='real' name='Area (SQM)' ordinal='8' />
+                    <column datatype='integer' name='Unit Price ($ PSM)' ordinal='9' />
+                    <column datatype='string' name='Nett Price($)' ordinal='10' />
+                    <column datatype='string' name='Property Type' ordinal='11' />
+                    <column datatype='integer' name='Number of Units' ordinal='12' />
+                    <column datatype='string' name='Tenure' ordinal='13' />
+                    <column datatype='string' name='Completion Date' ordinal='14' />
+                    <column datatype='string' name='Purchaser Address Indicator' ordinal='15' />
+                    <column datatype='integer' name='Postal Code' ordinal='16' />
+                    <column datatype='integer' name='Postal District' ordinal='17' />
+                    <column datatype='integer' name='Postal Sector' ordinal='18' />
+                    <column datatype='string' name='Planning Region' ordinal='19' />
+                    <column datatype='string' name='Planning Area' ordinal='20' />
+                  </columns>
+                </relation>
+                <relation connection='textscan.0b0eon91gkr7c91ajmlnv1kaxc18' name='ResidentialTransaction20230113215003.csv' table='[ResidentialTransaction20230113215003#csv]' type='table'>
+                  <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+                    <column datatype='string' name='Project Name' ordinal='0' />
+                    <column datatype='integer' name='Transacted Price ($)' ordinal='1' />
+                    <column datatype='real' name='Area (SQFT)' ordinal='2' />
+                    <column datatype='integer' name='Unit Price ($ PSF)' ordinal='3' />
+                    <column datatype='string' name='Sale Date' ordinal='4' />
+                    <column datatype='string' name='Address' ordinal='5' />
+                    <column datatype='string' name='Type of Sale' ordinal='6' />
+                    <column datatype='string' name='Type of Area' ordinal='7' />
+                    <column datatype='real' name='Area (SQM)' ordinal='8' />
+                    <column datatype='integer' name='Unit Price ($ PSM)' ordinal='9' />
+                    <column datatype='string' name='Nett Price($)' ordinal='10' />
+                    <column datatype='string' name='Property Type' ordinal='11' />
+                    <column datatype='integer' name='Number of Units' ordinal='12' />
+                    <column datatype='string' name='Tenure' ordinal='13' />
+                    <column datatype='string' name='Completion Date' ordinal='14' />
+                    <column datatype='string' name='Purchaser Address Indicator' ordinal='15' />
+                    <column datatype='integer' name='Postal Code' ordinal='16' />
+                    <column datatype='integer' name='Postal District' ordinal='17' />
+                    <column datatype='integer' name='Postal Sector' ordinal='18' />
+                    <column datatype='string' name='Planning Region' ordinal='19' />
+                    <column datatype='string' name='Planning Area' ordinal='20' />
+                  </columns>
+                </relation>
+                <relation connection='textscan.0b0eon91gkr7c91ajmlnv1kaxc18' name='ResidentialTransaction20230113215052.csv' table='[ResidentialTransaction20230113215052#csv]' type='table'>
+                  <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+                    <column datatype='string' name='Project Name' ordinal='0' />
+                    <column datatype='integer' name='Transacted Price ($)' ordinal='1' />
+                    <column datatype='real' name='Area (SQFT)' ordinal='2' />
+                    <column datatype='integer' name='Unit Price ($ PSF)' ordinal='3' />
+                    <column datatype='date' name='Sale Date' ordinal='4' />
+                    <column datatype='string' name='Address' ordinal='5' />
+                    <column datatype='string' name='Type of Sale' ordinal='6' />
+                    <column datatype='string' name='Type of Area' ordinal='7' />
+                    <column datatype='real' name='Area (SQM)' ordinal='8' />
+                    <column datatype='integer' name='Unit Price ($ PSM)' ordinal='9' />
+                    <column datatype='string' name='Nett Price($)' ordinal='10' />
+                    <column datatype='string' name='Property Type' ordinal='11' />
+                    <column datatype='integer' name='Number of Units' ordinal='12' />
+                    <column datatype='string' name='Tenure' ordinal='13' />
+                    <column datatype='string' name='Completion Date' ordinal='14' />
+                    <column datatype='string' name='Purchaser Address Indicator' ordinal='15' />
+                    <column datatype='integer' name='Postal Code' ordinal='16' />
+                    <column datatype='integer' name='Postal District' ordinal='17' />
+                    <column datatype='integer' name='Postal Sector' ordinal='18' />
+                    <column datatype='string' name='Planning Region' ordinal='19' />
+                    <column datatype='string' name='Planning Area' ordinal='20' />
+                  </columns>
+                </relation>
+              </relation>
+            </properties>
+          </object>
+        </objects>
+      </_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+    </datasource>
+  </datasources>
+  <mapsources>
+    <mapsource name='Tableau' />
+  </mapsources>
+  <worksheets>
+    <worksheet name='Sheet 1'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='ResidentialTransaction20220826195250' name='federated.1vjuxgr12gmbn21a9lymy1si7m60' />
+          </datasources>
+          <mapsources>
+            <mapsource name='Tableau' />
+          </mapsources>
+          <datasource-dependencies datasource='federated.1vjuxgr12gmbn21a9lymy1si7m60'>
+            <column datatype='integer' name='[Number of Units]' role='measure' type='quantitative' />
+            <column aggregation='Sum' datatype='integer' default-format='*00000' name='[Postal Code]' role='dimension' semantic-role='[ZipCode].[Name]' type='ordinal' />
+            <column datatype='string' name='[Project Name]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Property Type]' role='dimension' type='nominal' />
+            <column datatype='integer' name='[Unit Price ($ PSM)]' role='measure' type='quantitative' />
+            <column-instance column='[Number of Units]' derivation='Median' name='[med:Number of Units:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Unit Price ($ PSM)]' derivation='Median' name='[med:Unit Price ($ PSM):qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Postal Code]' derivation='None' name='[none:Postal Code:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Project Name]' derivation='None' name='[none:Project Name:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Property Type]' derivation='None' name='[none:Property Type:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.1vjuxgr12gmbn21a9lymy1si7m60].[none:Property Type:nk]'>
+            <groupfilter function='level-members' level='[none:Property Type:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.1vjuxgr12gmbn21a9lymy1si7m60].[none:Property Type:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.1vjuxgr12gmbn21a9lymy1si7m60].[Longitude (generated)]' field-type='quantitative' max='11583065.236374987' min='11531580.057037715' projection='EPSG:3857' range-type='fixed' scope='cols' type='space' />
+            <encoding attr='space' class='0' field='[federated.1vjuxgr12gmbn21a9lymy1si7m60].[Latitude (generated)]' field-type='quantitative' max='164795.95083746442' min='135101.00620334526' projection='EPSG:3857' range-type='fixed' scope='rows' type='space' />
+          </style-rule>
+          <style-rule element='mark'>
+            <encoding attr='color' field='[federated.1vjuxgr12gmbn21a9lymy1si7m60].[med:Unit Price ($ PSM):qk]' palette='red_blue_white_diverging_10_0' symmetric='false' type='interpolated' />
+          </style-rule>
+          <style-rule element='map'>
+            <format attr='washout' value='0.0' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <color column='[federated.1vjuxgr12gmbn21a9lymy1si7m60].[med:Unit Price ($ PSM):qk]' />
+              <size column='[federated.1vjuxgr12gmbn21a9lymy1si7m60].[med:Number of Units:qk]' />
+              <lod column='[federated.1vjuxgr12gmbn21a9lymy1si7m60].[none:Postal Code:ok]' />
+              <lod column='[federated.1vjuxgr12gmbn21a9lymy1si7m60].[none:Project Name:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='3.4806630611419678' />
+                <format attr='mark-transparency' value='142' />
+                <format attr='has-stroke' value='false' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.1vjuxgr12gmbn21a9lymy1si7m60].[Latitude (generated)]</rows>
+        <cols>[federated.1vjuxgr12gmbn21a9lymy1si7m60].[Longitude (generated)]</cols>
+      </table>
+      <simple-id uuid='{4D6FBCBA-9695-4FD0-B1D3-1F4E3A5B2A0D}' />
+    </worksheet>
+  </worksheets>
+  <windows saved-dpi-scale-factor='1.25' source-height='37'>
+    <window class='worksheet' maximized='true' name='Sheet 1'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[federated.1vjuxgr12gmbn21a9lymy1si7m60].[none:Property Type:nk]' type='filter' />
+            <card pane-specification-id='2' param='[federated.1vjuxgr12gmbn21a9lymy1si7m60].[med:Number of Units:qk]' type='size' />
+            <card pane-specification-id='2' param='[federated.1vjuxgr12gmbn21a9lymy1si7m60].[med:Unit Price ($ PSM):qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.1vjuxgr12gmbn21a9lymy1si7m60].[med:Unit Price ($ PSM):qk]</field>
+            <field>[federated.1vjuxgr12gmbn21a9lymy1si7m60].[none:Postal Code:ok]</field>
+            <field>[federated.1vjuxgr12gmbn21a9lymy1si7m60].[none:Project Name:nk]</field>
+            <field>[federated.1vjuxgr12gmbn21a9lymy1si7m60].[none:Property Type:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{8EBCA60E-39D3-4853-8797-3CA51DC16141}' />
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='192' name='Sheet 1' width='192'>
+      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
+      /pR2MdhtEcKbByByY0jr5LhFVisIpWg6bk9tB452o9BhEatRozM8htvdTVqtFtVGE7tWQ7ou
+      sUaZZr2O227RqdcQzTrZcJhGu02jXmNsfILV5WXMg12WCwekkkmGUkmMeIKDcJzaYZVYNIrI
+      DlNstqlUKuTHxs7vAmmLqpu/B/l2b5ua1Fv4SaKVo1qtnuoy6GvV9Cw6S2Kapu9KKKV89mqd
+      OhyUHg6yWp8mWtEH4X765ThF01N5ghVpnQg4Sdrttp8y/eCDD3CUSzQWpbq1Av/ffwDbQCwu
+      gjAwM70NNpZhdgNgF8Rgt/GsUBMnkWYy5cWJz58/p9VqcfnyZd8oKaVwh8eQ1QoqFIhDpMQQ
+      injUwt1cZrdcxFq4wl6hzJRdJ50eodBwudDaY70jWK1UGJNgrjzjyuQs+8CrUJLh/CwKjxZn
+      KDPkk7ZdmJtDvnh4vjqArlZ2Oh2+//57bt++7Vuv4IN/F/QnmUzm2KBVi07FnpVlOogrUkr5
+      I4+CGKZ3Kf2xQxDgNmjHOK9o7tFWq9VTMdaFvkgk4i++ar3m8bHu7WH9X/8HocwYhuHQuPO7
+      hJbee+1agqjddyVCeFOBnjx5QqVS8Y89NTVFJpPpAQn6z2d7ncj2Cm5qiMboJKt7+1ycm8Us
+      bKPqNUQ8iVGtsCXjDDcOCHUatEancHJ52h3PSFTKFR81W6vV+OCDD7zd/rz9ANr3KxQK/pCI
+      oL+robz939E3dB5pNBpn8vU1yelZFl21WiWZTPru0KBUYTBIexcM2frv4HjToGv0NgqmrahW
+      9ON2EYBEzCu2WeMTVH/y+yRSSfiHv6L0xa9Jz1wk0kef8i4VH0A0apilAp3xWRYXF18zOA++
+      +oJrN27iGIYXa7ebuFYYMkOol4+xys+xNl4hah0OOw2GUkmE9MiErfI+uVgHkR1CvHiIiiZx
+      c2PI7vvLjeQQCB49esQnn3ziJ1AceU44tFaMnZ0df0RQ/4PqT0+eJ70XFM0EfZJoBdJ1gtOs
+      +FkUrh/qrP/P56V8A0aLIIo0CKd+lzDu0+5LCEE8FkOhKE/Ps7VVgGaTSKdN/B0xA54kyrSQ
+      9UNks+EnSfQf13VZW17myQ8/0KhUqD59SPiLfyD83W8wy/vIcAjZLV6l8uNkpmYpVg6RVph2
+      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
+    </thumbnail>
+  </thumbnails>
+</workbook>

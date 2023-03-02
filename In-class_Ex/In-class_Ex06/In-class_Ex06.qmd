@@ -1,0 +1,55 @@
+---
+title: "In-class Exercise 6"
+author: "Tasaporn Visawameteekul"
+date: 18 February 2023
+date-modified: "`r Sys.Date()`"
+execute: 
+  echo: true
+  eval: true
+  warning: false
+format: html
+toc: true
+editor: visual
+---
+
+# **It's About Time: Time-series in Tableau**
+
+## Data
+
+Arrivals_by_air
+
+1.  The data is wide and short
+
+2.  Highlight all the countries and select Pivot. Rename the column to Country and Arrivals
+
+![](1.png)
+
+Pull the Month-Year to Columns and Arrivals to Rows and Country to Filters.
+
+![](2.png)
+
+![](3.png)
+
+## Cycle plot : To see how the seasonality change over period
+
+![](images/image-435061760.png)
+
+This plot reveals the pattern in the separate month. For the plot above, we observe that the August of every year always have high arrivals but the number is particular high in 2018.
+
+![](6.png)
+
+![]()
+
+## Calendar Heatmap
+
+![](9.png)
+
+## Slopegraphs
+
+Good to see how the ranking change over time in comparison with other group.
+
+![](images/image-40584885.png)
+
+### Animated bubble plot
+
+![](images/image-56813184.png)

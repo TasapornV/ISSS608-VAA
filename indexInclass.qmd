@@ -21,3 +21,11 @@ format:
 ## In-class Exercise 05 (11 Feb 2023)
 
 [![](In-class_Ex/In-class_Ex05/In-class_Ex05.jpg)](In-class_Ex/In-class_Ex05/In-class_Ex05.html)
+
+## In-class Exercise 06 (19 Feb 2023)
+
+[![](In-class_Ex/In-class_Ex06/7.png)](In-class_Ex/In-class_Ex06/In-class_Ex06.html)
+
+## In-class Exercise 07 (25 Feb 2023)
+
+[![](In-class_Ex/In-class_Ex07/In-class_Ex07.png)](In-class_Ex/In-class_Ex07/In-class_Ex07.html)
