@@ -29,3 +29,5 @@ format:
 ## In-class Exercise 07 (25 Feb 2023)
 
 [![](In-class_Ex/In-class_Ex07/In-class_Ex07.png)](In-class_Ex/In-class_Ex07/In-class_Ex07.html)
+
+## In-class Exercise 08 (11 Mar 2023)

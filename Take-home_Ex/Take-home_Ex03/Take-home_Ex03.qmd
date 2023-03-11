@@ -6,11 +6,7 @@ date: "06 Feb 2023"
 affiliation: "SMU MITB"
 format: 
   html:
-    mainfont: system-ui
-    fontsize: smaller
-    code-fold: false
-    code-overflow: wrap
-    highlight-style: solarized
+    code-fold: true
     page-layout: full
     toc: true
     toc_float: 
@@ -29,11 +25,29 @@ The write-up of the take-home exercise should include but not limited to the fol
 -   A reproducible description of the procedures used to prepare the analytical visualisation. Please refer to the peer submission I shared.
 -   A write-up of not more than 100 words to discuss the patterns reveal by each analytical visualisation prepared.
 
-### 2. Packages
+### 2. Data
+
+The original dataset '*Resale flat princes based on registration date from Jan-2017 onwards'* was obtained from [Data.gov.sg](https://data.gov.sg/). This dataset provides information on all resale HDB flat transactions from 2017 to 2023.
+The notable features in this dataset are as follows:\
+i) **town**: the town of the associated HDB flat\
+ii) **flat_type**: the type of flat of the associated HDB flat. In Singapore, there are 1-room flats up to 5-room flats, as well as executive flats, which are slightly bigger than 5-room flats. (The remaining flat type: Multi-generational flats, are few and far between)\
+iii) **block**: the block of the associated HDB flat\
+iv) **street**: the street of the associated HDB flat\
+v) **storey_range**: the storey range of the associated HDB flat. In this dataset, the storey range is given in a range of 3 (e.g. 10 to 12 , which means the flat is based on the 10th to 12th storey).\
+vi) **floor_area_sqm**: the floor area of the associated HDB flat in square meters\
+vii) **remaining_lease**: the remaining lease of the associated HDB flat in months and years\
+viii) **resale_price**: the resale price of the assocaited HDB flat
+
+### 3. Design Consideration
+
+### 4. Step to create plot in R
+
+#### 1. Installing and loading the required libraries
 
 The code chunk below is used to install and load the required packages onto RStudio.
 
--   **tidyverse:** A collection of core packages designed for data science, used extensively for data preparation and wrangling. (*readr, ggplot2, dplyr, purrr, tidyr, tibble*)
+-   **tidyverse** : A collection of core packages designed for data science, used extensively for data preparation and wrangling. (*readr, ggplot2, dplyr, purrr, tidyr, tibble*)
+-   **ggstatplot:** an extension of ggplot2 package for creating graphics with details from statistical tests included in the plots themselves and targeted primarily at behavioral sciences community to provide a one-line code to produce information-rich plots.
 -   **psych:** A general purpose toolbox for personality, psychometric theory and experimental psychology. Functions are primarily for multivariate analysis and scale construction using factor analysis, principal component analysis, cluster analysis and reliability analysis, although others provide basic descriptive statistics.
 -   **lubridate:** Provides tools that make it easier to parse and manipulate dates. These tools are grouped below by common purpose.
 -   **ggrepel:** This package contains extra geoms for **ggplot2**.
@@ -48,468 +62,166 @@ for(p in packages){
 }
 ```
 
-### 3. Data
+#### 2. Importing the dataset
 
-The original dataset **'*Resale flat princes based on registration date from Jan-2017 onwards'*** was obtained from [Data.gov.sg](https://data.gov.sg/). This dataset provides information on all resale HDB flat transactions from 2017 to 2023. The notable features in this dataset are as follows:\
-i) **town**: the town of the associated HDB flat\
-ii) **flat_type**: the type of flat of the associated HDB flat. In Singapore, there are 1-room flats up to 5-room flats, as well as executive flats, which are slightly bigger than 5-room flats. (The remaining flat type: Multi-generational flats, are few and far between)\
-iii) **block**: the block of the associated HDB flat\
-iv) **street**: the street of the associated HDB flat\
-v) **storey_range**: the storey range of the associated HDB flat. In this dataset, the storey range is given in a range of 3 (e.g. 10 to 12 , which means the flat is based on the 10th to 12th storey).\
-vi) **floor_area_sqm**: the floor area of the associated HDB flat in square meter.\
-vii) **lease_commence_date**: The month and year from when the lease (i.e., 99-year lease, 999-year lease, or freehold) on the property starts.\
-vii) **remaining_lease**: the remaining lease of the associated HDB flat in months and years\
-viii) **resale_price**: the resale price of the assocaited HDB flat
+The source file is in csv format, hence read_csv of **readr** package is used to import the dataset. From the result below, we will see that our original data has 146,215 rows with 11 columns ( 8 categorical fields and 3 numeric fields).
 
-#### Data Preparation
-
-The source file is in csv format, hence read_csv of **readr** package is used to import the dataset. Then we use **summary** function to see the statistical summary of our original data set. From te result below, we will see that our original data has 146,215 rows with 11 columns ( 8 categorical fields and 3 numeric fields).
-
-```{r, message=FALSE}
-#| code-fold: true
-# Read data 
-data_raw <- read_csv("data/resale-flat-prices-based-on-registration-date-from-jan-2017-onwards.csv")
-
-# show data summary
-summary(data_raw)
+```{r, message=FALSE, }
+Resale_raw <- read_csv("Data/resale-flat-prices-based-on-registration-date-from-jan-2017-onwards.csv")
+glimpse(Resale_raw)
 ```
 
 Use **head** command to see the first 5 rows of the data.
 
-```{r, message=FALSE}
-#| code-fold: true
-#| column: page
-knitr::kable(
-  head(data_raw,5)
-  )
+```{r}
+head(Resale_raw,5)
 ```
 
-```{r, message=FALSE}
-# Create field "quarter", "month", and "year
-data <- data_raw %>%
-  mutate(quarter = quarter(ym(month))) %>%
-  mutate(Month = month(ym(month))) %>%
-  mutate(Year = year(ym(month))) %>% 
-  mutate(month = as.Date(paste(month, "-01", sep=""), format="%Y -%m -%d")) %>% 
-  rename("YM" = "month")
+#### 3. Wrangling data
 
-# Change format of price to represent in kSGD
-data <- data %>% 
-  mutate("resale_price_kSGD" = resale_price/1000)
+##### 3.1 Select interested fields
 
-# Filter flat types 3-Room, 4-Room, 5-Room and filter only Year of 2022
-data_2022 <- data %>% 
-  filter(flat_type %in% c("3 ROOM","4 ROOM", "5 ROOM")) %>%
+```{r}
+Resale <-Resale_raw %>%
+  select("month", "town", "flat_type", "storey_range", "floor_area_sqm", "lease_commence_date", "remaining_lease", "resale_price")
+```
+
+##### 3.2 Filter the analyzing year of 2022
+
+Separating column *month* using separate(). Filter only Year of 2022.
+
+```{r}
+Resale <-Resale %>%
+  mutate(quarter = quarter(ym(month)))
+```
+
+```{r}
+Resale <-Resale %>%
+  separate(`month`, into = c("Year", "Month"), sep = "-") %>% 
   filter(Year == "2022")
+```
+
+##### 3.3 Filter flat types 3-Room, 4-Room, 5-Room
+
+```{r}
+Resale <- Resale %>% 
+  filter(flat_type %in% c("3 ROOM","4 ROOM", "5 ROOM"))
+```
+
+##### 3.4 Change format of price to represent in kSGD
+
+```{r}
+Resale <- Resale %>%
+  mutate(resale_price=resale_price/1000) %>% 
+  rename('resale_price_kSGD' = 'resale_price')
+```
+
+##### 3.5 Change format of remaining lease to represent in years
+
+```{r, warning=FALSE}
+# library(stringr)
+Resale <-Resale %>%
+  separate(`remaining_lease`, into = "remaining_lease", sep = " years") %>% 
+  mutate(remaining_lease = as.numeric(remaining_lease))
 ```
 
 Here, we can see that our data now only has 24,374 rows left after filter year and flat type.
 
-```{r, echo=FALSE}
-summary(data_2022)
+```{r}
+Resale
 ```
 
-Our data is now ready for visualization.
+#### 4. Exploratory Data Analysis
 
-```{r, echo=FALSE}
-#| column: page
-knitr::kable(
-  head(data_2022 ,5)
-  )
-```
-
-### 4. Exploratory Data Analysis and Visualization
-
-Using the **describe()** function on the continuous variables, you can get a sense-check of the data and see if there were any errors in the feature engineering. These are the summary statistics that were observed:
+Using the describe() function, you can get a sense-check of the data and see if there were any errors in the feature engineering. These are the summary statistics that were observed:
 
 1.  **Resale Price** --- The prices of the flats range between \$200K to \$1,418K with a mean of \$536K
 2.  **Floor Area** --- The sizes of the flats range between 51sqm to 159sqm, with a mean of 94.07sqm
 3.  **Remaining Lease** --- The lease commence date of the flats range between 43 years to 96 years
 
 ```{r}
-#| code-fold: true
-#| column: page
-
-knitr:: kable(
-  data_2022 %>% 
-    select(floor_area_sqm, remaining_lease, resale_price) %>%
-    na.omit() %>% 
-    describe()
-)
+describe(Resale)
 ```
 
-As graphical summaries can reveal issues that are not obvious from numerical statistics, we will use visualization approaches to convey the underlying insights in this project.
+#### 5. Visualizations
 
-#### **Comparison of resale price per sqm among different types of flats**
+##### 5.1 Plotting histogram of resale price
 
-We would like to compare price per sqm among 3 types of flat i.e. 3-ROOM, 4-ROOM, and 5-ROOM. To confirm the validity of the hypothesis that the average resale price per sqm are the same among 3 flat types, we the following null hypothesis will be tested.
+Findings:
 
-H0: The average resale price per sqm among 3 flat types are the same\
-H1: The average resale price per sqm among 3 flat types are different
+1.  Right-skewed distribtion plot has a mean of \$527k resale price.
+2.  The mode (peak) for resale price hover around \$420000 mark having a count of nearing 750 transactions.
+3.  The right tail is longer.
+4.  This gives a distribution pattern of frequency on transaction prices generally falls under.
 
-To begin the confirmatory data analysis, we would like to test the normality assumption for the distribution of the average resale price per sqm for each type of flat. We use a ridge plot to visualize the distribution of three distinct types simultaneously. All three categories have a right-skewed distribution in the outcome plot.
-
-```{r ggridge, message=FALSE, warning=FALSE}
-#| code-fold: true
-library(ggstatsplot)
-library(ggplot2)
-library(ggridges)
-
-dist <- data_2022 %>%
-  group_by(flat_type) %>%
-  mutate(price_per_sqm = resale_price/floor_area_sqm)
-
-ggplot(dist, aes(x=price_per_sqm, y=flat_type)) +
-  geom_density_ridges(fill = "steelblue", alpha = 0.5)+
-  labs(title = "Distribution of Price per sqm", 
-       x = "Price per sqm", 
-       y = "Flat Type")+
-  theme_minimal()
-
+```{r}
+gghistostats(
+  data = Resale,
+  x = 'resale_price_kSGD',
+  type = "bayes",
+  test.value = 60,
+  xlab = "resale_price (kSGD)" ) +
+  ggtitle("What is the overall Resale price distribution?")
 ```
 
-Nevertheless, visual examination alone is insufficient. A significance test comparing the sample distribution to a normal distribution can be used to determine whether or not data exhibit a significant deviation from normality. Therefore, Shapiro-test Wilk's method is chosen for the normality test confirmation. Shapiro-test Wilk's test statistics suggest that there is enough statistically evidence to reject the null hypothesis that the distribution of price per sqm are normally distributed. Therefore, we will use non-parametric test to prove our hypothesis.
+##### 5.2 Plotting histogram of floor area
 
-```{r, echo=FALSE}
-shapiro.test(sample(dist$price_per_sqm,5000))
+```{r}
+gghistostats(
+  data = Resale,
+  x = 'floor_area_sqm',
+  type = "bayes",
+  test.value = 60,
+  xlab = "floor_area_sqm" ) +
+  ggtitle("What is the overall floor area distribution?")
 ```
 
-The following packages are required for this visualization
+##### 5.3 Two sample mean test on resale price between flat types
 
--   **ggstatplot:** an extension of ggplot2 package for creating graphics with details from statistical tests included in the plots themselves and targeted primarily at behavioral sciences community to provide a one-line code to produce information-rich plots.
-
-As we are comparing between more than 2 groups, ANOVA is automatically selected by the function. As the p-value for each pair is less than the 0.05 threshold, there is sufficient statistical evidence to reject the null hypothesis. Thus, we may conclude that the average resale price per sqm for three distinct types of apartments are different.
-
-```{r anova, message=FALSE,warning=FALSE}
-ggbetweenstats(dist,
-               x = "flat_type",
-               y = "price_per_sqm",
-               type = 'np'
-               ) +
-  ggtitle("Comparison of resale price per sqm among different types of flats")
+```{r}
+ggbetweenstats(
+  data = Resale,
+  x = 'flat_type', 
+  y = 'resale_price_kSGD',
+  type = "np",
+  messages = FALSE) +
+  ggtitle("What is the difference in resale price between different types of flats?")
 ```
 
-#### **Significant Test of Correlation between resale price and floor area**
+##### 5.4 Box plot of resale price by flat types
 
-Scatterplots illustrate the relationship between two numerical variables. Each dot stands for an observation. The position of the two variables along the X (horizontal) and Y (vertical) axes represents their respective values. In this scenario, we evaluate the relationship between price and floor area using a scatter plot.We complement the scatter points with the linear model of a straight line. The various angles of the line reflect the various relationships between price and area in each town. This figure also shows that the relationship in some towns, such as CENTRAL AREA, might not seems linear, although it is linear in others, such as BUKIT TIMAH.
+A boxplot was also used to understand the relationship between the flat types and resale prices. It can be seen that there are quite a number of outliers in all 3 flat types.
 
-```{r scatter plot, message=FALSE, warning=FALSE}
-#| fig-height: 10
-#| column: screen
+```{r, message=FALSE, warning=FALSE}
+p<-ggplot(Resale, aes(x=flat_type, y=resale_price_kSGD, fill=flat_type)) +
+  geom_boxplot() +
+  stat_summary(fun.y=mean, geom="point", color="red") +
+  theme(legend.position="none") +
+  ggtitle("Boxplot of resale price by flat type")
+# Remove legend
+#| fig-height: 12
 #| fig-width: 12
-#| code-fold: true
-g <- ggscatterstats(
-  data = data_2022,
-  x = floor_area_sqm,
-  y = resale_price,
-  marginal = FALSE,
-  point.args = list(size = 0.5, stroke = 0, color = "steelblue"),
-  smooth.line.args = list(linewidth = 0.5, color = "grey", method = "lm", formula = y ~ x)) +  facet_wrap (~ town, nrow = 6, ncol = 6) +
-  xlab("floor area") +
-  scale_y_continuous(breaks = c(0,3000,6000,9000,12000), name = "Resale price") +
-  labs(title = "Correlation between resale price and floor area") 
-
-ggplotly(g)
+p
 ```
 
-#### **Checking for normality and linearity**
+##### 5.5 Box plot of resale price by town
 
-Before drawing conclusions, plotting the correlations will allow us to confirm that they are linear. Here is some code to determine if our data is normally distributed or bell-shaped.
-
-The result demonstrates that our data are not normally distributed, as the p-value of the Shapiro-Wilk test is less than 0.05. The scatter falls outside the shaded area, reflecting the same conclusion as the Shapiro-Wilk test. The shaded gray area in the plot represents the quantile confidence bands at 95%. A pattern of observed quantiles in which some points fall outside of these borders suggests an out-of-the-ordinary sample if drawn from a Normal distribution.
-
-```{r, warning=FALSE, message=FALSE}
-#| layout-nrow: 1
-library(ggpubr)
-ggqqplot(data_2022$floor_area_sqm)
-ggqqplot(data_2022$resale_price_kSGD)
+```{r, message=FALSE}
+Resale %>%
+  mutate(class = fct_reorder(town, resale_price_kSGD, .fun='mean')) %>%
+  ggplot( aes(x=reorder(town, resale_price_kSGD), y=resale_price_kSGD)) +
+  geom_boxplot() +
+  stat_summary(fun.y=mean, geom="point", color="red") +
+  theme(legend.position="none") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  ggtitle("Boxplot of resale price by town")
 ```
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-#| layout-nrow: 1
-shapiro.test(sample(data_2022$floor_area_sqm,5000))
-shapiro.test(sample(data_2022$resale_price_kSGD,5000))
-```
-
-Since our data are not normally distributed, we will use a Spearman correlation that is non-parametric. In addition, we detected some outliers (\>3), hence we will employ the Robust correlation technique to decrease the influence of outliers.
-
-```{r scatter, warning = FALSE, message=FALSE}
-#| column: screen-inset-shaded
-#| layout-nrow: 1
-#| code-fold: true
-ggscatterstats(data = data_2022 |> filter(town == "CENTRAL AREA"), 
-                           x = floor_area_sqm, y = resale_price_kSGD,
-                           type = "robust") + 
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +
-  labs(title = "CENTRAL AREA", 
-       x = "floor area (sqm)", y = "resale price(kSGD)") +
-  scale_x_continuous(limits = c(50, 150)) +
-  scale_y_continuous(limits = c(0, 1500)) 
-
-ggscatterstats(data = data_2022 |> filter(town == "CHOA CHU KANG"), 
-                           x = floor_area_sqm, y = resale_price_kSGD,
-                           type = "robust") + 
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +
-  labs(title = "CHOA CHU KANG", 
-       x = "floor area (sqm)", y = "resale price(kSGD)")+
-  scale_x_continuous(limits = c(50, 150)) +
-  scale_y_continuous(limits = c(0, 1500))
-```
-
--   our very low P-value shows a very strong evidence against the null hypothesis, that there is no correlation between our variables, in favor of the alternative hypothesis, that floor area and resale price are correlated for both town selected.
--   The presence of a positive winsorised correlation coefficient value in both CENTRAL AREA and CHOA CHU KANG indicates that increasing the floor area (sqm) of flats raises the resale price. In other words,the larger the floor area, the higher the price of the flat.
--   The correlation coefficient indicates the effect size and ranges from -1 to 1. CENTRAL AREA has a correlation value of 0.83, which is higher than CHOA CHU KANG's correlation coefficient of 0.52, indicating a stronger correlation between the floor area and price in CENTRAL AREA.
-
-#### Prices shifted in 2022 for different flat types
-
-We display a quarterly boxplot to illustrate the price trend over time for different types of flats. There are numerous outliers with extremely high resale prices in 3, 4, and 5 ROOM.
-
-```{r box plot, message=FALSE, warning=FALSE}
-#| code-fold: true
-data_2022 %>%
-  group_by(flat_type) %>%
-  ggplot(mapping = aes(x = flat_type, y = resale_price_kSGD)) +
-  # Make grouped boxplot
-  geom_boxplot(aes(fill = as.factor(quarter)), color = "grey") +
-    stat_summary(fun=mean, geom="point", color="red") +
-  theme_minimal() +
-  theme(legend.position = "top") +
-  scale_fill_viridis_d(option = "C") +
-  # Adjust lables and add title
-  labs(title = "Resale prices in 2022 by quarter", y="Resale price (kSGD)", x="", fill = "Quarter")
-```
-
-We utilize Wilcoxon rank sum test to confirm our hypothesis that there is a pricing difference between Quarter 1 and Quarter 4. Nonparametric Friedman test is selected as residuals are not-normally distributed.
-
-In Wilcoxon rank sum test, medians are only used to better describe not-normally distributed data, but medians are not used to compare groups. In fact the difference in ranks can be significant even when medians are identical.
-
-```{r wilcoxon}
-#| column: screen-inset-shaded
-#| layout-nrow: 1
-#| code-fold: true
-# 3 ROOM
-three <- data_2022 %>% 
-  filter(quarter %in% c("1", "4")) %>% 
-  filter(flat_type == "3 ROOM")
-  
-ggbetweenstats(three,
-               x = "quarter",
-               y = "resale_price_kSGD",
-               type = 'np'
-               ) +
-  ggtitle("3 ROOM")
-
-# 4 ROOM
-four <- data_2022 %>% 
-  filter(quarter %in% c("1", "4")) %>% 
-  filter(flat_type == "4 ROOM")
-  
-  
-ggbetweenstats(four,
-               x = "quarter",
-               y = "resale_price_kSGD",
-               type = 'np'
-               ) +
-  ggtitle("4 ROOM")
-
-# 5 ROOM
-five <- data_2022 %>% 
-  filter(quarter %in% c("1", "4")) %>% 
-  filter(flat_type == "5 ROOM")
-  
-  
-ggbetweenstats(five,
-               x = "quarter",
-               y = "resale_price_kSGD",
-               type = 'np'
-               ) +
-  ggtitle("5 ROOM")
-```
-
--   our very low P-value shows a very strong evidence against the null hypothesis (H~0~), in favor of the alternative hypothesis (H~Alt~), that sample-medians are different. That tells us that the price in Q4 is significantly increased from Q1.
--   P-value only tells that there is an effect from training, but not how strong this effect is. {ggwithinstats} provides the measure of the **Effect Size** for Repeated Measures ANOVA, which shows that training effect of -0.21 and -0.22.
--   The Wilcoxon rank sum test with continuity correction testing the difference in ranks between price and area. The result suggests that the effects are negative, statistically significant.
-
-#### **Flat type transaction proportion**
-
-We're curious about the proportion of transacted flat types in each area. As a result, a stacked bar graph is used, in which the length or height of each bar is proportionally equivalent to the data that it depicts. This type of chart has the flaw of representing bar height in relative terms, which does not reflect the actual quantity. However, it has the advantage of making proportion visualization easier for small groups e.g. Bukit Timah. The stacked bar chart below shows a relatively low number of 3-ROOM type transactions in PUNGGOL and a high proportion of 5-ROOM type transactions in PASIR RIS.
-
-```{r proportional bar, warning=FALSE, message = FALSE}
-#| column: screen-inset-shaded
-#| layout-nrow: 1
-
-# Proportional stacked bar chart
-ggplot(data_2022, aes(y=town, fill=flat_type)) +
-  geom_bar(position = "fill") +
-  scale_fill_viridis_d(option = "E") +
-  labs(title = "Flat type transaction proportion", fill = "Flat type",
-       x = "", y = "")
-
-# Stacked bar chart
-ggplot(data_2022, aes(y=town, fill = flat_type))+
-  geom_bar()+
-    scale_fill_viridis_d(option = "E") +
-  labs(title = "Flat type transaction", fill = "Flat type",
-       x = "", y = "")
-
-```
-
-We will utilize ggbarstats function which provide us the statistic result.
+##### 5.6 HDB resale prices in 2022 by town
 
 ```{r}
-#| column: screen
-#| fig-width: 17
-#| fig-height: 8
-ggbarstats(
-  data             = data_2022,
-  x                = flat_type,
-  y                = town,
-  title            = "Flat type transaction proportion",
-  xlab             = "",
-
-  ggplot.component = list(ggplot2::scale_x_discrete(guide = ggplot2::guide_axis(n.dodge = 2))),
-  palette          = "Set3",
-  coord.flip   = TRUE
-)  + theme(axis.text.x = element_text(size = 10, angle = 90))
-```
-
-ggbarstats function goes one step further and displays percentages of flat type inside of every town as stacked-bars, where counts are identical to the previous plot, but every town category as one 100 percent.
-
-#### Trend of Singapore Resale flat prices in 2022
-
-The geofacet package was chosen to provide a high-level data visualization based on their location. Price trends for each room type are depicted by town using multiple line plots of varying colors to identify each room type. The geofacet maps, which plot based on its geographical position, make it easier to compare areas nearby.
-
-The geofacet package requireds a grid file that will be used to assign row and column positions to each area. Thus, it is crucial to ensure that the name in the grid file corresponds to the name of our data area.
-
-The following packages are required for plotting geofacet.
-
--   **geofacet:** The geofacet R package provides a way to flexibly visualize data for different geographical regions by providing a ggplot2 faceting function `facet_geo()` which works just like ggplot2's built-in faceting, except that the resulting arrangement of panels follows a grid that mimics the original geographic topology as closely as possible.
-
-To generate a geofacet plot, we first import our data and Singapore's grid table. The case of the grid area names is changed to uppercase. In our data, KALLANG is referred to as KALLANG/WHAMPOA, whereas the grid refers to CENTRAL AREA as DOWNTOWN CORE. After correcting these mismatches, we combine the tables to add the column and row fields to our primary data.
-
-```{r, warning = FALSE, message= FALSE}
-#| code-fold: true
-
-# Import data 
-geofacet <- data_2022
-
-# Recode town name to match with area grid
-geofacet <- geofacet %>% 
-  mutate(town = fct_collapse(town, "KALLANG" = "KALLANG/WHAMPOA"))
-
-# Import the area grid data.
-area_grid <- read_csv("data/areagrid.csv")
-
-# Recode name to match with geofacet data
-area_grid$name <- toupper(area_grid$name)
-
-area_grid <- area_grid %>% 
-  mutate(name = fct_collapse(name, "CENTRAL AREA" = "DOWNTOWN CORE"))
-
-geofacet <- geofacet %>%
-  group_by(YM, town, flat_type) %>%
-  summarise(avgprice = mean(resale_price, na.rm = TRUE),
-            medprice = median(resale_price, na.rm = TRUE))%>%
-  ungroup()
-
-# merge table with town name
-geofacet_price <- inner_join(geofacet, area_grid,
-                      by = c("town" = "name"))
-
-common_grid <- area_grid[area_grid$name %in% unique(geofacet$town),]
-```
-
-This is how the data used for plotting geofacet look likes.
-
-```{r, echo = FALSE, message = FALSE, warning = FALSE}
-#| column: page
-
-knitr:: kable(head(geofacet_price,5))
-```
-
-According to the plot, the resale price trend in the Central area, particularly room types 4-room and 5-room, is much greater than the other locations with a rising trends in Q4. In the first quarter, the average price of a 5-room type swing increased significantly. We observe a low and consistent pricing trend at the country's border, which is distant from the central region.
-
-```{r geofacet plot, warning=FALSE, message=FALSE}
-#| fig-height: 10
-#| fig-width: 17
-#| column: page
-library(geofacet)
-
-ggplot(geofacet_price, aes(x = YM, y = avgprice)) +
-  geom_line(aes(color = as.factor(flat_type))) +
-  scale_x_date(date_labels = "%b") +
-  facet_geo(~ town, grid = common_grid) +
-  labs(title = "Singapore Resale flat price trends") +
-  scale_y_continuous(breaks = c(250000, 500000, 750000, 1000000, 1250000)) +
-  theme(plot.title = element_text(size=22),
-        axis.text.x = element_text(size = 10, angle = 45),
-        axis.text.y = element_text(size = 10),
-        strip.text = element_text(size = 10),
-        legend.position = "top")
-  
-```
-
-#### **Resale flat type by town**
-
-As we look for a way to display multiple continuous variables concurrently, the bubble chart is our first choice. The primary purpose of a bubble chart is to illustrate the relationships between numerical variables, and it can represent two to four dimensions. The first two dimensions represent coordinates, while the third represents color and the fourth represents size. In our case, we select 3 variables for this visualization i.e. average price, average housing age, and average floor area.
-
-ggplot2 package is used to create the bubble chart.
-
--   **ggplot2:** A system for 'declaratively' creating graphics, based on "The Grammar of Graphics".
-
-According to the graph below, the average age of resale apartments in MARINE PARADE is above 45 years, while the average price is in the middle of the price range. CENTRAL AREA has the highest average price, an average age of approximately 30 years, and the smallest average floor area. Whereas, the new flats are located in PUNGGOL, SEMBAWANG, and SENGKANG and have a comparatively large floor area.
-
-```{r bubble chart}
-#| column: screen
-#| fig-height: 6
-#| fig-width: 13
-data_2022 %>%
-  group_by(town) %>%
-  # Calculate housing age
-  mutate(housing_age = 2022 - lease_commence_date) %>%
-  summarise(average_price = mean(resale_price_kSGD), average_housing_age = mean(housing_age), average_area = mean(floor_area_sqm)) %>%
-  ggplot(mapping = aes(x=average_housing_age, y=average_price, size = average_area)) +
-  geom_count(aes(color = average_housing_age), alpha = 0.6) +
-  # Change size of count points
-
-  # Add lables next to count points
-  geom_text_repel(aes(label = town),size = 2.0) +
-  scale_size(range = c(.1, 24), name="Average floor area")+
-  scale_y_continuous( limits = c(400, 800)) +
-  scale_x_continuous( limits = c(0, 50)) +
-  theme_minimal() +
-  theme(legend.position = "top") +
-  scale_color_viridis_c(option = "C")
-```
-
-#### **Prices per area for each storey range**
-
-A heatmap is a graphical representation of data that uses colors to represent the individual values in a matrix. The price per area of each storey range in each town is shown here.This visualization is useful for providing a quick overview, but it is difficult to translate a hue into a specific number. From the plot, we can see that some storey ranges in certain areas cost much higher prices per square foot than other ranges, such as the 4-6 storey range in BUKIT PANJANG.
-
-```{r heat map, warning=FALSE, message=FALSE}
-#| fig-height: 6
-library(ggplot2)
-library(hrbrthemes)
-
-heatmap <- data_2022 %>%
-  group_by(flat_type) %>%
-  mutate(price_per_sqm = resale_price/floor_area_sqm)
-
-p <-  ggplot(heatmap , aes(town, storey_range, fill= price_per_sqm, text = price_per_sqm)) +
-  scale_fill_distiller(palette = "RdPu") +
-  theme_ipsum() + 
-  geom_tile() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 1.5, hjust=1))+
-  labs(title = "Price per area for each storey range", x="", y="") 
-
-ggplotly(p, tooltip= "text")
-```
-
-#### Group Box plot : Resale prices in 2022 by town
-
-```{r}
-data_2022 %>%
-  group_by(flat_type) %>%
+Resale %>% 
+  group_by(flat_type) %>% 
   # Extract quarter and price per sqm
   mutate(price_per_sqm = resale_price_kSGD/floor_area_sqm) %>%
   ggplot(mapping = aes(x = town, y = price_per_sqm)) +
@@ -519,19 +231,92 @@ data_2022 %>%
   theme(legend.position = "top") +
   scale_fill_viridis_d(option = "C") +
   # Adjust lables and add title
-  labs(title = "HDB resale prices in 2022 by town", y="Price per square metre (SGD)", fill = "flat_type") +
+  labs(title = "HDB resale prices in 2022 by town", y="Price per square metre (SGD)", fill = "flat_type")+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 ```
 
-### 5. References
+##### 5.7 **Significant Test of Correlation: *ggscatterstats()***
 
-<https://xang1234.github.io/pyramidgeofacet/>
+```{r}
+ggscatterstats(
+  data = Resale,
+  x = floor_area_sqm,
+  y = resale_price_kSGD,
+  marginal = FALSE
+  )
+```
 
-<https://yuzar-blog.netlify.app/posts/2021-12-29-correlationinr/>
+```{r, message=FALSE}
+p <- ggscatterstats(
+  data = Resale,
+  x = floor_area_sqm,
+  y = resale_price_kSGD,
+  marginal = FALSE,
+  point.args = list(size = 0.5, alpha = 0.1, stroke = 0, color = "red"),
+  smooth.line.args = list(linewidth = 0.5, color = "blue", method = "lm", formula = y ~
+    x)
+  )
+      
+p1 <- p +  facet_wrap (~ town, nrow = 6, ncol = 6) + 
+            xlab("floor area") +
+            scale_y_continuous(breaks = c(0,3000,6000,9000,12000), name = "Resale price(kSGD)")
+
+ggplotly(p1)
+```
+
+##### 5.8 
+
+```{r}
+ggplot(data = Resale, mapping = aes(y=town, fill=flat_type)) +
+  theme_minimal() +
+  geom_bar(position = "fill") +
+  scale_fill_viridis_d(option = "C") +
+  labs(title = "Flat type proportion by town", fill = "Flat type", 
+       x = "Count", y = "")
+```
+
+##### 5.9 How have prices fluctuated in 2022 for different flat types?
+
+We display a quarterly boxplot to illustrate the price trend over time. As room count increases, the average price per square meter drops. There are numerous outliers with extremely high prices per square meter in 3, 4, and 5 ROOM. The type of flat with the highest.
+
+```{r}
+Resale %>% 
+  group_by(flat_type) %>% 
+  # Extract quarter and price per sqm
+  mutate(price_per_sqm = resale_price_kSGD/floor_area_sqm) %>%
+  ggplot(mapping = aes(x = flat_type, y = price_per_sqm)) +
+  # Make grouped boxplot
+  geom_boxplot(aes(fill = as.factor(quarter)), color = "black") +
+  theme_minimal() +
+  theme(legend.position = "top") +
+  scale_fill_viridis_d(option = "C") +
+  # Adjust lables and add title
+  labs(title = "HDB resale prices in 2022 by flat type", y="Price per square metre (SGD)", fill = "Quarter")
+```
+
+##### 5.10 Resale flat type by town
+
+```{r}
+Resale %>% 
+  group_by(town) %>% 
+  # Calculate housing age
+  mutate(housing_age = 2023 - lease_commence_date) %>% 
+  summarise(average_price = mean(resale_price_kSGD), average_housing_age = mean(housing_age), average_area = mean(floor_area_sqm)) %>% 
+  ggplot(mapping = aes(x=average_housing_age, y=average_price)) +
+  geom_count(aes(color = average_area), alpha = 0.6) +
+  # Change size of count points
+  scale_size_area(max_size = 10) +
+  # Add lables next to count points
+  geom_text_repel(aes(label = town),size = 2.7) +
+  scale_y_continuous( limits = c(400, 800)) +
+  theme_minimal() +
+  theme(legend.position = "top") +
+  scale_color_viridis_c(option = "C")
+```
+
+### 5. Reference
 
 <https://r4ds.had.co.nz/index.html>
-
-<https://rpubs.com/tskam/Choropleth_Mapping>
 
 <https://r-graph-gallery.com/267-reorder-a-variable-in-ggplot2.html>
 

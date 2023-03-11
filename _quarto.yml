@@ -44,8 +44,8 @@ website:
         href: "In-class_Ex/In-class_Ex06/In-class_Ex06.html"
       - text: "In-class Exercise 7"
         href: "In-class_Ex/In-class_Ex07/In-class_Ex07.html"
-      # - text: "In-class Exercise 8"
-      # href: "In-class_Ex/In-class_Ex08/In-class_Ex08.html"
+      - text: "In-class Exercise 8"
+        href: "In-class_Ex/In-class_Ex08/In-class_Ex08.html"
 
     - text: "Hands-on Exercise"
       menu:
@@ -61,10 +61,10 @@ website:
         href: "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html"
       - text: "Hands-on Exercise 6"
         href: "Hands-on_Ex/Hands-on_Ex06/Hands-on_Ex06.html"
-      # - text: "Hands-on Exercise 7"
-      #   href: "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html"
-      # - text: "Hands-on Exercise 8"
-      #   href: "Hands-on_Ex/Hands-on_Ex08/Hands-on_Ex08.html"
+      - text: "Hands-on Exercise 7"
+        href: "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html"
+      - text: "Hands-on Exercise 8"
+        href: "Hands-on_Ex/Hands-on_Ex08/Hands-on_Ex08.html"
 
     - text: "Take-home Exercise"
       menu:
@@ -76,14 +76,7 @@ website:
         href: "Take-home_Ex/Take-home_Ex03/Take-home_Ex03.html"
       - text: "Take-home Exercise 4 (R)"
         href: "Take-home_Ex/Take-home_Ex04/Take-home_Ex04.html"
-      # - text: "Take-home Exercise 5"
-      #   href: "Take-home_Ex/Take-home_Ex05/Take-home_Ex05.html"
-      # - text: "Take-home Exercise 6"
-      #   href: "Take-home_Ex/Take-home_Ex06/Take-home_Ex06.html"
-      # - text: "Take-home Exercise 7"
-      #   href: "Take-home_Ex/Take-home_Ex07/Take-home_Ex07.html"
-      # - text: "Take-home Exercise 8"
-      #   href: "Take-home_Ex/Take-home_Ex08/Take-home_Ex08.html"
+      
     - text: "Group Project"
       href: "https://isss608-ay2022-23t2g9.netlify.app/"
     right:
