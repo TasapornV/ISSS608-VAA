@@ -31,3 +31,5 @@ format:
 [![](In-class_Ex/In-class_Ex07/In-class_Ex07.png)](In-class_Ex/In-class_Ex07/In-class_Ex07.html)
 
 ## In-class Exercise 08 (11 Mar 2023)
+
+[![](images/image-1518861109.png)](In-class_Ex/In-class_Ex08/In-class_Ex08.html)
