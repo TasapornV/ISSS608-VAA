@@ -1,0 +1,33 @@
+---
+title: "In-class Exercise 8"
+author: "Tasaporn Visawameteekul"
+date: 11 March 2023
+date-modified: "`r Sys.Date()`"
+execute: 
+  echo: true
+  eval: true
+  warning: false
+format: html
+toc: true
+editor: visual
+---
+
+# Lesson9: **Information Dashboard Design: R methods**
+
+## Lecture
+
+-   Don't put everything on dashboard. We should be selective
+-   There are different types of dashboard. Typically categorized into 3 groups
+    -   Operation dashboard - operation centric
+    -   Strategic dashboard
+    -   Analytics dashboard
+
+We can set up the visualize workshop to gather the requirement and show the use case to the user.
+
+We are not using the show case from the same industry but instead show other industry so that they don't limit themselves to the visual existing in that domain.
+
+Then in the next step we can focus on the use case from the same industry and gather the data they have.
+
+Make it the iteration that you involve the client in the process.
+
+We try to work on the separate plot and get the feedback from the user part by part
