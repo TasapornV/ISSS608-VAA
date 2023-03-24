@@ -35,90 +35,90 @@ We try to work on the separate plot and get the feedback from the user part by p
 ## Hands-on
 
 ```{r}
-pacman::p_load(lubridate, ggthemes, reactable,
-reactablefmtr, gt, gtExtras, tidyverse)
+# pacman::p_load(lubridate, ggthemes, reactable,
+# reactablefmtr, gt, gtExtras, tidyverse)
 ```
 
 ```{r}
-library(RODBC)
-con <- odbcConnectAccess('data/Coffee Chain.mdb')
-coffeechain <- sqlFetch(con, 'CoffeeChain Query')
-write_rds(coffeechain, "data/CoffeeChain.rds")
-odbcClose(con)
+# library(RODBC)
+# con <- odbcConnectAccess('data/Coffee Chain.mdb')
+# coffeechain <- sqlFetch(con, 'CoffeeChain Query')
+# write_rds(coffeechain, "data/CoffeeChain.rds")
+# odbcClose(con)
 ```
 
 ```{r}
-coffeechain <- read_rds("data/CoffeeChain.rds")
+# coffeechain <- read_rds("data/CoffeeChain.rds")
 ```
 
 ```{r}
-product <- coffeechain %>%
-  group_by(`Product`) %>%
-  summarise(`target` = sum(`Budget Sales`),
-            `current` = sum(`Sales`)) %>%
-  ungroup()
+# product <- coffeechain %>%
+#   group_by(`Product`) %>%
+#   summarise(`target` = sum(`Budget Sales`),
+#             `current` = sum(`Sales`)) %>%
+#   ungroup()
 ```
 
 ```{r}
-ggplot(product, aes(Product, current)) + 
-  geom_col(aes(Product, max(target) * 1.01),
-           fill="grey85", width=0.85) +
-  geom_col(aes(Product, target * 0.75),
-           fill="grey60", width=0.85) +
-  geom_col(aes(Product, target * 0.5),
-           fill="grey50", width=0.85) +
-  geom_col(aes(Product, current), 
-           width=0.35,
-           fill = "black") + 
-  geom_errorbar(aes(y = target,
-                    x = Product, 
-                    ymin = target,
-                    ymax= target), 
-                width = .4,
-                colour = "red",
-                size = 1) +
-  coord_flip()
+# ggplot(product, aes(Product, current)) + 
+#   geom_col(aes(Product, max(target) * 1.01),
+#            fill="grey85", width=0.85) +
+#   geom_col(aes(Product, target * 0.75),
+#            fill="grey60", width=0.85) +
+#   geom_col(aes(Product, target * 0.5),
+#            fill="grey50", width=0.85) +
+#   geom_col(aes(Product, current), 
+#            width=0.35,
+#            fill = "black") + 
+#   geom_errorbar(aes(y = target,
+#                     x = Product, 
+#                     ymin = target,
+#                     ymax= target), 
+#                 width = .4,
+#                 colour = "red",
+#                 size = 1) +
+#   coord_flip()
 ```
 
 ```{r}
-sales_report <- coffeechain %>%
-  filter(Date >= "2013-01-01") %>%
-  mutate(Month = month(Date)) %>%
-  group_by(Month, Product) %>%
-  summarise(Sales = sum(Sales)) %>%
-  ungroup() %>%
-  select(Month, Product, Sales)
+# sales_report <- coffeechain %>%
+#   filter(Date >= "2013-01-01") %>%
+#   mutate(Month = month(Date)) %>%
+#   group_by(Month, Product) %>%
+#   summarise(Sales = sum(Sales)) %>%
+#   ungroup() %>%
+#   select(Month, Product, Sales)
 ```
 
 ```{r}
-mins <- group_by(sales_report, Product) %>% 
-  slice(which.min(Sales))
-maxs <- group_by(sales_report, Product) %>% 
-  slice(which.max(Sales))
-ends <- group_by(sales_report, Product) %>% 
-  filter(Month == max(Month))
+# mins <- group_by(sales_report, Product) %>% 
+#   slice(which.min(Sales))
+# maxs <- group_by(sales_report, Product) %>% 
+#   slice(which.max(Sales))
+# ends <- group_by(sales_report, Product) %>% 
+#   filter(Month == max(Month))
 ```
 
 ```{r}
-quarts <- sales_report %>%
-  group_by(Product) %>%
-  summarise(quart1 = quantile(Sales, 
-                              0.25),
-            quart2 = quantile(Sales, 
-                              0.75)) %>%
-  right_join(sales_report)
+# quarts <- sales_report %>%
+#   group_by(Product) %>%
+#   summarise(quart1 = quantile(Sales, 
+#                               0.25),
+#             quart2 = quantile(Sales, 
+#                               0.75)) %>%
+#   right_join(sales_report)
 ```
 
 ```{r}
-report <- coffeechain %>%
-  mutate(Year = year(Date)) %>%
-  filter(Year == "2013") %>%
-  mutate (Month = month(Date, 
-                        label = TRUE, 
-                        abbr = TRUE)) %>%
-  group_by(Product, Month) %>%
-  summarise(Sales = sum(Sales)) %>%
-  ungroup()
+# report <- coffeechain %>%
+#   mutate(Year = year(Date)) %>%
+#   filter(Year == "2013") %>%
+#   mutate (Month = month(Date, 
+#                         label = TRUE, 
+#                         abbr = TRUE)) %>%
+#   group_by(Product, Month) %>%
+#   summarise(Sales = sum(Sales)) %>%
+#   ungroup()
 ```
 
 ```{r}
