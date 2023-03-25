@@ -32,8 +32,8 @@ website:
       menu:
       - text: "In-class Exercise 1"
         href: "https://public.tableau.com/app/profile/tasaporn.visawameteekul6790/viz/In-class_Ex01_16736930308190/SalesandProfitSummary"
-      # - text: "In-class Exercise 2"
-        # href: "In-class_Ex/In-class_Ex02/In-class_Ex02.html"
+      - text: "In-class Exercise 2"
+        href: "In-class_Ex/In-class_Ex02/In-class_Ex02.html"
       - text: "In-class Exercise 3"
         href: "https://public.tableau.com/views/In-class_Ex03_16748826143570/Dashboard1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link"
       - text: "In-class Exercise 4"
