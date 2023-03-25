@@ -1,7 +1,7 @@
 ---
-title: "In-class Exercise 8"
+title: "In-class Exercise 10"
 author: "Tasaporn Visawameteekul"
-date: 11 March 2023
+date: 25 March 2023
 date-modified: "`r Sys.Date()`"
 execute: 
   echo: true
