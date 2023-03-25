@@ -33,3 +33,9 @@ format:
 ## In-class Exercise 08 (11 Mar 2023)
 
 [![](images/image-1518861109.png)](In-class_Ex/In-class_Ex08/In-class_Ex08.html)
+
+## In-class Exercise 10 (25 Mar 23)
+
+[![](In-class_Ex/In-class_Ex10/Dashboard%201.png)](https://public.tableau.com/views/in-classexercise10/Dashboard1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link)
+
+[![](images/image-207197401.png)](In-class_Ex/In-class_Ex10/In-class_Ex10.html)
