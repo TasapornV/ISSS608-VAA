@@ -214,6 +214,18 @@ knitr::kable(head(long, 5))
 
 We begin with a ribbon plot to illustrate the overall pattern of Singapore international trade over time. The function ggbraid helps distinguish between trade surplus and trade deficit by filling the region between two alternating lines with two different colors.
 
+This code is related to creating a line plot of Singapore's bi-lateral trade trend from 2016 to 2022.
+
+First, the **`wide`** dataset is subsetted to select only the total merchandise imports and exports for Singapore at the country level. The resulting data is grouped by month and year.
+
+Next, the **`singaporeribbon`** dataset is created by selecting and gathering the necessary columns from the **`singapore`** dataset. The **`drop_na()`** function is used to remove any rows with missing values.
+
+Then, the **`hues`** variable is defined to assign colors for the line plot. A **`ggplot`** object **`p`** is created and **`geom_line()`** is used to plot the lines representing the import and export values. The **`labs()`** function is used to add a title, subtitle, and axis labels. The **`annotate()`** function is used to add vertical lines and text for significant events in the plot.
+
+Next, the **`geom_braid()`** function is used to add ribbons to the plot showing the difference between imports and exports for each month. The resulting plot is stored in **`p1`**.
+
+Lastly, **`ggplotly()`** function is used to convert the **`ggplot`** object **`p`** to an interactive plotly plot.
+
 **Step 1. Prepare data for line plot of Singapore**
 
 ```{r singaporetrend1}
@@ -279,7 +291,11 @@ ggplotly(p)
 ::: callout-tip
 **As a result of the COVID-19 epidemic, Singapore's international commerce dropped in 2020**
 
-Singapore has a positive trade balance, or a trade surplus, according to the bilateral trend from 2016 to 2022. Prior to the start of the COVID-19 pandemic in 2020, Singapore's international trade growth was robust from 2016 to 2019, but it began to weaken in 2019. Due to the outbreak of the COVID-19 pandemic in May 2020, the rate drops dramatically before quickly returning.
+As per the analysis of the bilateral trend from 2016 to 2022, it can be observed that Singapore has a positive trade balance or trade surplus. This indicates that Singapore has been exporting more goods than it has been importing during this period. The trend was observed to be stable and strong from 2016 to 2019, where Singapore experienced a healthy growth in international trade. However, the growth began to weaken in 2019.
+
+The year 2020 witnessed a significant decline in Singapore's trade growth due to the outbreak of the COVID-19 pandemic in May. The pandemic had a profound impact on Singapore's international trade as it caused disruptions in the supply chains, restrictions on the movement of goods and services, and a decline in consumer demand. As a result, the trade growth rate dropped dramatically before quickly returning to pre-pandemic levels.
+
+Despite the pandemic's impact, Singapore's trade balance remained positive, indicating that the country continued to export more goods than it imported. It is noteworthy that Singapore has been taking measures to mitigate the impact of the pandemic on its trade activities, such as exploring new trade opportunities with emerging markets and increasing investment in technological advancements to enhance its trade capabilities. These efforts demonstrate Singapore's resilience and commitment to sustaining a positive trade balance and driving its economic growth forward.
 :::
 
 ## Merchandise trade performance with major trading partners
@@ -289,6 +305,16 @@ To illustrate the trade balance with all of Singapore's trading partners, the bu
 The size of the bubbles indicates the total value of Singapore's merchandise trade with the trading partner. If the bubble's center point rises below the line, Singapore's imports from the trade partner exceed Singapore's exports. If the bubble's center point falls beyond the line, Singapore's exports to the trading partner exceed Singapore's imports.
 
 The graph is animated to emphasize the fluctuating equilibrium over time. Only major trading partners are depicted on the graph to reflect the effect of the key contributors.
+
+This code is used to create an animated scatter plot that shows the merchandise trade performance between Singapore and its major trading partners, namely China, Malaysia, Taiwan, Hong Kong, and Indonesia from 2016 to 2022.
+
+First, the data is filtered to include only the relevant countries using the **`subset()`** function. Then, the **`plot_ly()`** function from the **`plotly`** package is used to create the scatter plot. The x-axis represents the import value and the y-axis represents the export value. The color of each data point represents the country, and the size of each data point is proportional to the total trade value.
+
+Next, the **`dline()`** function is defined to create a diagonal line that represents equal import and export values. The **`layout()`** function is then used to customize the plot's title, subtitle, hover label, legend, x-axis, y-axis, width, and height. The **`showlegend`** argument is set to **`FALSE`** to hide the legend because the color of each data point already represents the country.
+
+The **`animation_opts()`** function is used to define the duration and easing of the animation. The **`animation_slider()`** function is used to add a slider that allows the user to select the month-year to display.
+
+Finally, the plot is stored in the **`fig`** object and can be displayed using **`fig`**. The plot can also be saved as an HTML file using the **`htmlwidgets::saveWidget()`** function.
 
 **Step 1. Create scatter plot with plotly**
 
@@ -369,13 +395,9 @@ fig
 ::: callout-tip
 **China's import and export volume declined sharply in the beginning of 2020**
 
-China bubble declines along the diagonal from December 2019 until February 2020. This implies a significant decline in both imports and exports from China within the specified time frame. But, it returned shortly thereafter.
+During December 2019 to February 2020, the China bubble shows a decline along the diagonal axis which suggests a substantial drop in both imports and exports from China within the specified period. However, it quickly bounced back thereafter. Similarly, Malaysia's bubble followed a similar path to China's, starting from December 2019, but it continued to decline until mid-2020. In May 2020, the impact of Indonesia is evident as there was a significant 25% reduction in overall trade volume.
 
-With a similar trajectory to China, the bubble of Malaysia in December 2019 proceeded diagonally downward. Yet, it continued to decline until mid-2020. 
-
-In May of 2020, the impact of Indonesia is clearly seen by a 25% decline in overall volume.
-
-Unlike exports to other partners, Singapore's exports to Hong Kong do not appear to be as affected. However, a faster increase in exports to Hong Kong is observed in 2021.
+When compared to other trading partners, the decline in Singapore's exports to Hong Kong seems to be less affected. However, a rapid increase in exports to Hong Kong is evident in 2021.
 :::
 
 We employ the ribbon chart once again to assess the impact of Covid-19 on Singapore's most major trading partners.
@@ -581,6 +603,16 @@ Imports and exports with Indonesia decreased significantly at the beginning of 2
 
 The slope graph allows us to see how each country's import and export dynamics change in relation to the other countries over time.
 
+This code creates two slope plots to display the total import and export values for five countries (China, Malaysia, Taiwan, Hong Kong, and Indonesia) from 2016 to 2022.
+
+The first step for both plots is to subset the original data frame to only include the five countries of interest, and then add columns for month and year extracted from the "MonthYear" column. The resulting data frame is then grouped by country and year, and the total import or export value is calculated for each group using the **`summarise()`** function.
+
+After this, the data frame is manipulated to ensure that the "Year" column is ordered correctly and is a factor variable.
+
+For the import plot, the **`newggslopegraph()`** function is used to create a slope plot with the year on the x-axis and the total import value on the y-axis. The plot is titled "Total Import per Year" with a subtitle of "2016-2022", and the **`annotate()`** function is used to add a yellow rectangle highlighting the period from 2020 to 2022.
+
+The same process is repeated for the export plot, with the only differences being the function and plot titles, and the addition of a yellow rectangle to highlight the same period from 2020 to 2022.
+
 **Step 1. Prepare data for slope graph**
 
 ```{r slopegraph1, warning=FALSE, message=FALSE}
@@ -651,12 +683,28 @@ p2 + annotate("rect",
 ::: callout-tip
 **Trade dynamic of Singapore's major trading** **partners in relative**
 
-There is no change in rank for import. China has consistently ranked #1 in terms of imports. Singapore has expanded its imports from three nations, including China, Malaysia, and Taiwan, beginning in 2020.
+The import rankings have remained unchanged, with China maintaining its top position consistently. However, Singapore has increased its imports from three countries, including China, Malaysia, and Taiwan, since 2020.
 
-Likewise, there is no change in rank on the export side. China has continuously topped the exporting rankings. Similar to Hong Kong, although China's export rate slowed in 2019, growth accelerated in 2021. Malaysia and Indonesia's export volumes dropped drastically in 2020 before rebounding in 2021.
+On the export side, the ranking has also remained steady, with China remaining the top exporter. While China experienced a slowdown in export growth in 2019, it showed accelerated growth in 2021, much like Hong Kong. Malaysia and Indonesia, on the other hand, saw a significant drop in export volumes in 2020 before bouncing back in 2021.
 :::
 
 ## Observing the dynamic of trade balance based on location
+
+This code is creating an animated choropleth map using the **`tmap`** package in R.
+
+First, the **`World`** data set is loaded, which contains the geographic information for countries. The **`select`** function is used to keep only the columns **`iso_a3`**, **`name`**, **`sovereignt`**, and **`geometry`**. The resulting data frame is stored in the **`map`** variable.
+
+Then, the **`name`** and **`sovereignt`** columns in **`map`** are converted to character type using **`as.character`**.
+
+Next, the **`full_join`** function is used to combine the **`map`** data with the **`wide`** data by matching the **`sovereignt`** column in **`map`** with the **`Country`** column in **`wide`**. The resulting data frame is stored in **`data_map_area`**. The **`drop_na`** function is then used to remove any rows with missing values.
+
+The **`tmap_mode("view")`** sets the mode to view mode to enable interactive viewing of the map.
+
+The **`tm_shape`** function is used to create a **`tmap`** object from the **`data_map_area`** data frame. The **`tm_polygons`** function is used to create the choropleth map by mapping the **`Diff`** variable to the color of the polygons.
+
+The **`tm_facets`** function is used to create an animated map by grouping the data by the **`MonthYear`** column and setting **`free.coords = FALSE`** to keep the same scale across all frames.
+
+Finally, the **`tmap_animation`** function is used to create an animated GIF of the choropleth map with a delay of 50 milliseconds between frames. The resulting GIF is saved as **`choropleth.gif`**.
 
 **Step 1. Prepare data for Choropleth map**
 
@@ -742,9 +790,9 @@ girafe(
 ::: callout-tip
 **Insights from heatmap**
 
-The difference in color tone between Hong Kong and the other countries stand out as the trading relationship between Singapore and Hong Kong is highly surplus. The darker blue color of Hong Kong, which began in early 2021, reflects the quicker rise of export volume in comparison to import volume.
+The contrast in color shade between Hong Kong and other countries is noticeable due to the significant surplus in trading between Singapore and Hong Kong. Hong Kong's darker blue hue, which began in early 2021, indicates the faster growth in export volume relative to import volume.
 
-Contrary to Hong Kong, Taiwan reflects the outstanding deficit balance. The gradual darkening of the red shade over time for Taiwan represents the continuing increase of import volume over export.
+On the other hand, Taiwan displays a marked deficit balance. The gradual deepening of the red shade over time for Taiwan illustrates the steady rise in import volume compared to exports.
 :::
 
 ## Singapore-China trading pattern
